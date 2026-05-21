@@ -1,1 +1,56 @@
+local credits = {}
 
+function credits.show(activity, bgm1Path, bgm2Path)
+  isTransitioning = true 
+  playBGM(bgm1Path) 
+  
+  local layoutC = {
+    ScrollView,
+    layout_width="fill",
+    layout_height="fill",
+    background="#111111",
+    {
+      LinearLayout,
+      orientation="vertical",
+      layout_width="fill",
+      gravity="center",
+      padding="25dp",
+      {TextView, text="CREDITS", textSize="25sp", textColor="#FFD700", gravity="center", layout_marginBottom="20dp"},
+      {TextView, text="this pRoject is created by YouTube production Studio", textSize="16sp", textColor="#00E5FF", gravity="center"},
+      {TextView, text="where passion meets the world.", textSize="14sp", textColor="#00E5FF", gravity="center", layout_marginBottom="15dp"},
+      {TextView, text=" Here you can see the names of those who helped create this project and made the project better and better", textSize="13sp", textColor="#AAAAAA", gravity="center", layout_marginBottom="25dp"},
+      {TextView, text="developed by.", textSize="12sp", textColor="#FFFFFF", gravity="center"},
+      {TextView, text="muzammil muneer", textSize="18sp", textColor="#00FF00", gravity="center", layout_marginBottom="15dp"},
+      {TextView, text="helped in development.", textSize="12sp", textColor="#FFFFFF", gravity="center"},
+      {TextView, text="bilawal pirzada", textSize="18sp", textColor="#00E5FF", gravity="center", layout_marginBottom="15dp"},
+      {TextView, text="sound designed by.", textSize="12sp", textColor="#FFFFFF", gravity="center"},
+      {TextView, text="irtiza hassan", textSize="18sp", textColor="#FF69B4", gravity="center", layout_marginBottom="15dp"},
+      {TextView, text="Tested by.", textSize="12sp", textColor="#FFFFFF", gravity="center", layout_marginBottom="5dp"},
+      {TextView, text="muhammad shuraim", textSize="17sp", textColor="#FFD700", gravity="center"},
+      {TextView, text="muhammad hussain", textSize="17sp", textColor="#FFD700", gravity="center"},
+      {TextView, text="irtiza hassan", textSize="17sp", textColor="#FFD700", gravity="center"},
+      {TextView, text="bilawal pirzada", textSize="17sp", textColor="#FFD700", gravity="center", layout_marginBottom="30dp"},
+      {TextView, text="thanks for playing", textSize="15sp", textColor="#FFFFFF", gravity="center", layout_marginBottom="20dp"},
+      {Button, id="closeCreditsBtn", text="Back", layout_width="fill"},
+    }
+  }
+  
+  local vc = loadlayout(layoutC)
+  styleButton(closeCreditsBtn)
+  
+  local dc = AlertDialog.Builder(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen).create()
+  dc.setView(vc)
+  dc.show()
+  isTransitioning = false 
+  
+  local function exitCredits()
+    dc.dismiss()
+    playBGM(bgm2Path)
+  end
+  
+  wrapClick(closeCreditsBtn, function() exitCredits() end)
+  dc.setOnCancelListener({onCancel=function() playBGM(bgm2Path) end})
+  dc.setOnDismissListener({onDismiss=function() playBGM(bgm2Path) end})
+end
+
+return credits
