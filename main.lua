@@ -644,9 +644,14 @@ function mainUI()
   wrapClick(exitBtn, function() showExitDialog() end)
 end
 
-if prefs.contains("username") then
-  mainUI()
-else
-  editor.putBoolean("first_run", true).apply()
-  welcome1()
+-- NEW FUNCTION: Sif update system isko direct call karega jab update check complete ho jayegi
+function startAppUiFlow()
+  if prefs.getBoolean("first_run", true) or not prefs.contains("username") then
+    editor.putBoolean("first_run", true).apply()
+    welcome1()
+  else
+    mainUI()
+  end
 end
+
+local update = require "update"
