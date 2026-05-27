@@ -1,1 +1,101 @@
-=IA50n4xrH8QBAQ1ct+leFFNsvWpV74JYRX+bf0EplHz/mxvXyWyT2X5mJoAmG6AAHsO2RHQ3cdp2LYaFxNvbhlcH+SOpUdISGOEhaS4u6NGF2FzSwRPc72dGApXcp2oNdwtT++DIyAoKUpi5Hz6PYBp0tdzT1kU8qRm9NtMxdTZBHp5HUaG7NANVBjEVeNEM2ZFtJVt/Rk+xDHMB7l5COE3uPHKRRpRmdS1IDF3sEXfUyjxWg7rGaiZkLdgwzJNR9ig0sd6Nru1cdYOlbhstldKIVongbxdUSyHRR3N/0ZrgD1Kqqzb5iIqnoiUz9NnsPj1WI2Dkhw3JCsJDfb3Sqn6jgR6SFQf2Y9BcjQbEejTiB4olQRtqTfim4TmK/doK0O1wagMN1JW0Yh9un0g9itCzsx16AGzYSWmndu2PhyybfYv/Fu/wFhH/5xF4yxTQHvaz03QcYmv6kOV5VOUXyvdD71f7oJR5DSKZwlTyuM/CsblNWP30PAmpz3S4hiqwhXokVpcLWhvWItuRKLeK4o+0x0aoJU6/mquC/EKGQ7/YJdQ1qgQXlhvqJwkzmK81tE8BRIzYAMTxGlOp1tRIboksbjjI1K7o1ie1JeSxBoKrtnBv/IN+gWtyqpBRH7LZJZ/2ozcfJPWHsoH5zAZQdHQXhKy2kDFawCTvI4DRyxuZn5pKmKhxzY6TCxqcSuni2YhAOJgFG5VGUkI+d5p2+i6YqNDofgmbqrN9nkYkViEq+dw5d7J7ujxVror4VGX1osywwPGQDbmmK/u1SD6mW7uJyJu89nUnCEADtA/2Aa4sOCA9DLCIwUMfuFaC2IgNniWkbWHS0oFtrTWlgwehHNl3lBowJKCelFwZV/D8UED6D/tDAAWBSSy/jsT9BiIrN8jNzfU+rmjtXW5odrHPQhFLwe1cz91Ti0YbI9yOc9sduCdeZ6m5Htr5LhG0MeU5W1M6+v8bwHllreIpyxNcD/HydROInrP0ziEKR3CyFbFuh+0PuG7coKF3qPWB3eCBURrli9XXO8gIFXsH/0P1mUJ1TciRTKCfck0k6TqBY9qtofun8r+5vVK4dmo5cuABNIQEvwn0stmWtOi/57ilOgfcb1ss5w2v5UBKtfyKC15xxYs6qWMuC6YfSIIScKLq9aLNNkJPcG4JhWaRZOZ1IgqyeIbmTC7azaAdMhiLDzihzskVLe2P6dyo+q/ZdkP0P2RGMqc/JtvCC8GilQ+xTMH2AjUjpgaqmM+UR029+wW2rrrHe4hv7Fg21w9Wda04BFPb2Q8S1iJTxRN4WDVgKJpzAz3/PdW6xC3SYHPCIS/idVP9oFvQF/IufuLX+RaHFffgx7Emtm3qUPbQL4P5RVcwcYOjbny+jtM1nVCuFzr6lUseTbJrOBWmn9j4DXIIopDRqkfCu6fd/xKW4KCibzjLbtb8qycgD/qqTuhfS54FPcxNfge+ARynZWf2kL8KaKB+eRJSETWk77AtrgPwryiY18quuiyhX7h66awWc8D38XnANsgAMnZiwzx7x7SShRUSK/mw4KG6GY+4RaRPT2meVxFtnZ194h0h8RU33bhxBFgeDYtm78BhRnT2lsdigGZFFqOgXFKTHVAEAk0R2Tm/snS0OxT/4CIlLxjl3kX0ZGv5XZ7abvc4OO4iOlx441N2N/xPRFyRpWEEmoXblT4DBM/+hkQHYVnGc0dTlMA/QyZdDmpdSnfm5BSJmWuO90Kj2aCG/mbMBoM+9BEkqwShw+QWJLZuS7cUJSoBwHKPgyhjTccvIcHHPJ26S38tSw83JHA7EkBOQ6eoCevtFV1RQvjaZIzBGsARfm5iXk2iO1LDOcDDXDrNL6rg7xyE+XOKVpmDDp7dcjlB0WQnkjvx+KfYlRxZB5rCiAF8XQWVxPRWx6ICEK4IsAS8g81RtshKWCGcr9RoHNmL/JqCpqP+e1+6nNMX9wUwCqtHJ6Zs9mj7d52LlaZ0oms1jMlHD1zwVsfkLdPeYg6tHPISTacpXxwcLGmWgu5A3dLDTbtsN3Bzaybs0u9TwkwwlxIITmBoTwP85BRDI3Cy5TwxFx9NtKTm6KwCWGwpFSBlMjTpm8iuXf0UrM2OWvTfYHNBf5N8EmhCgQ5PeL7KIAYS05xAN7V7y7S6NuimhSca0EctOhwkoJc2cQVHSrFW0YGStQ/yRwBFmoTg8ZqCk0tD8YniuMsASPZdTyRRiqJ2MWdv9MSFW5TnDzgM0JGb5u/Us3i3tSv89Ub/yS1oxFT5vmqalN93AKqFxotL4nUQ3ZWC5Z8ajiuPa/wKuXUoBJtO+SEoaWFGAJe0NfuMM9tEAn5C4V7uwZiSZ1ezKHsrp7SKR+QUtUI/7ml25UEPkSdSOid4jUtvANTldVOEUuaYYVxMtc84ltG81jSH04lpOZltZeU5TG1fBUxP9RZBAY4R4JQ7VlX4d5AzgQhoeGJft7TuKVxxHL7sNy2+BfalVroCjb5H1kPYOPT15s6DHJCo8dppFufSnif1jH7xlshxl/or4QoH6g9O60Qw6uLhvGgOwwW6IjwjfRFvy6u+08SXzuTGSOJ/9ztlNH4Tn44mTm8tcIbziKjM9X46kqrJ9+E+1lOXaAKa6IAED3b0AcqlvEOUO2KRxgQV5kmlfj9kvaCAS+NedX7hslY8OPUTEugKIO+vXwRBHDtEOCU57lG80jsJQoZaZ2/SOtuBNSP8XJBP8DfaxR9VPNc0CTfiV6eFPdBxTlgEZ++eogmxZy0CCF4Iu1L4CUJaecgsU6hPy+soE6rf5w+HjPOiMygBPkBRLVvacEDuX4MIngXXZMLSSCQ+0bEToZO9E+Dnec1RXrjzOVBTWXUsPFO68Bs5KZ1b4kuzV1joAze8XnhHec5FIHeRPkyTYrzeUl+xdikG3qbKKYk4yBiMUenGYLk3m5/QLU8Cao/pnwoMT1gaGZzign07BLGTCpqhtawtnuqVZL5RpwAFielWTm6840uOMatRNNjC/aTx7gE/JXqPb0Jb7rvHKSqjZ5hPj1pANVVs6mxGBI+q7afGBnzU2Nz27VJFJdlodWqRWUTUpeEuLlnczVQN3upH08jhOckg/W7UWMF76elrLduZYU3Z2Bick8ZSvZiVDtC9g29uVyGQtjijDB1YjGvKiVVcHaXHueB8ZcWzOfShf30l6NqzVmqBDb26UyR2VYhLVChdeS3xubSEJietveayQFVBhHd9HNCY7uBSvNN3IvyBvIacXLbUquBdQxkhNcIxC6JfbRIK5lT9CGGQiDRnTmYiutgd7X9uftclj+zVh8EMbmUE4r4dBVnVA/K6KMUVWscCZHsPFtK58RhFy/wvA0gwK3hhqUTScOfnwsslUzWHon1E7yuh1nKyh8VHsVGei5+LHOtHYRM6GlhWqx7mhdfUKcn+G+IrTbmkLqgNpqLc5BeIcJlsr4jotueEyS3MF+9Snwna9aGK8gKmLeJqJBC/ElvEMCupWMeDAlqUgqp2JcEA1I57vtv4mlwcGPHnW9rB1UMd2XDsuz0YAzW5cOng+85+58WxrpWW1/LU6+GG2FiqlrixNMiDkbiXEBUtjb57IJMUOTiSNEZ9JkDeLSDc3v9IYqYQ47pSiNsgm+KePyjvDX4s5TZsZuX1xHXEzwwo1zf7O5CSg6mYOARffNTXJdVEDavneIucQyi4bYAG2e1RaZMVlA/HEFUMb59Yv9u2DOAb7KC68Ua4nqgfEP8fNUZY41jn4BR1PklKwGx0pos1A4wkRnEUMLllOnajImlkWzC06DrLbvIXW38glQDWSGx3F28PsZXKW651GV7GFe7+Dy4v9mFO+kUxifPnTpbXiSEyEb47gLzqK3p4IX5mP8G8OsQnc8sh0Zo4VuXgwf9xvzBb5rO/kP7kJqbDeJy1wS8S807NcPYQ8/FMEiSh8weqXFSGNww+853a+ol/Ycghdee3QeJJeFt8okhUypD21GaQyzHGeumr3w1PFk2CS/yLk21saB8H1RlM+Q9q/hP2fc2rFUj0qxnxhIRlqwZoJcFwWah6l0WRmBA5O7UuD9DTLb6jsI+7IhhNu3vJoZvvEL/e94Bx4hq8gPJgS8H51xA/xALv45mWaOa4Scym3D2PWGcANIimSO99WiEUzztLbkHegpT5B7fv/RGyGKl7UIiqnetc65BHPW0jTl0pFaIbTMDC5G3y6M9Ij/g6ZpIQyblq/1GUoT6wbY9W9r/nO8yI1vnpXu2lkDKQpDuYjeygne88AHEmhIZ1rLV7Uodw7pIVXdrRrBOp4PXwp6qGqpTGxQ20Pi76crl/YiwRmh/+F0IkWP4S0ChlEPWAf4FPHsf7Od5XH3Cs4VQPtlhLiT8eq7F0mDbMZEoSi6w5FQQXm/Dhk3Qrh8H9yAOBLHNRuqMqPgv6UqVBXSOGA3eFL3EWcWjy7jjbSa4xxIL9J8e9rzIpj2tIza2LXPUxPLG3ycA5uJuEKFnaB+JjJuq0LtAx7iwi3/AzZhLrZr1KTmwuVQJFua6RN2berf1G6oPw/3luiUVPTeoUq4bwBCTTKjCx+cR+/OcpN8e0rq6RgaMRfya7zSCSRafFvDuuQxl+GL0z4lihc6ka3+d/7dbuqkjCc6XSTC/06aXBg8S4FmKt4FOvyBwYJAbDZ39kgs7T24XxzVCQb17g0e7g/VKZxKhVzZ0zaRKgRlMgpDKnr2t+86zfAdxyXZj+WoSWAL3omHO5v2UMubkzMRUN6tEAkdh7+vm+NZF65kBSU1TnYV2XLbRgP8uKpoyKT1pT6IDJqzaTFC8dHgtpU9SGkFlbMtEjwvlaTe2ZYcHwj1U+wzWN9t1mb9Exmd0Qs4Mmj9Ol/WhPnfEFjrSpxnchMpCsO2igB0ZXosBpsFv2UHYKdRDhN+FIGb1H4WpvMZ3WScASwVFFXPve4m+ylG9gInRLoznhPwAnmDVHsnwMyuE170vN4PfHyz92By0RF4It8YDYqH3kW6cJU1AGjV7Zkt2pLb/N0V9wUd9rLUjgUpT4Bq1mAfCPGg0g7ZHKTzSM6Gm/49xtrZ0/Iw1eFnU5GFxtyFUI5wxSDD7st5rkEK92cguuAGXpjuTHtJgh+x3odGrbx8axYI26AGXVyDQAztkv+soERRv6vzfIo8Lu/imZdV0IJSbEdad+nwqr/aGXVqx4altYNFQaAkt6zRlaCgtq8iFxYWp04s+CMV3DTuXGvX1fVmuxAc0Itx2duxjYnzyocoQENUPbVEUBMkeKNIj/lj/FVti4BppDY0WZLuwcXeCsNZeLrrxzOQoyIUhP/wLbKQNvXgWMqNLbCkAKiBXtGjONXJ5rxCcvIvEvcvDh3oXNq2gMgEPMwGSx++RTaEVm6ilL+/96IwHyGjFTZcdDWB0sRFq6S1BvGdsQmLMlCChnW1E4A7klkfl7yQ8owePu4YbWq/892tuUeKeoEM2lPF3QRwUtX9red0w3qrox0f7q2p/JDFJne4qBheOzEOCwnXj6im0nhNLUrkN0FNAOuNfxSVc40rG9ZOyyiasndu6cvWAGA6BBBJcN6xtrWHiJlQzSelojJgeKkGgyv3lRj+CH/D13iHwuOH5jbmXXfFD7jyyYSHXG7pyXmIjGDBw+PZnGutTzeSk+h8rubNBW6maPRlnTxT0AwIoqnKls2LClP2ucZ20aY/9vutyRMhkjUAOQ4iVv38IiI7YwHe9flRmOOjN1cSKT9Foeg7VuXCwoa/kSZOo1/q3q2D10anaewmUqqsBBfjfn9aqU5Z/aKmzY+1GbejG3NLmhr6JWB8ZEYAm5QgzNZFFIt5HSNgD2yrjW0pPpl0yKsx/g/CHk54yJYknziwsR4J5Hq4GCuifSyHs4Gw4+q3eFGj4BT09jEqjb9fk2zf/hXr4k+xSzRbOQFJqy+Ps+oLT1vXw1yzr34z2bebOfXwCXlyjoLvbS/P9rb9DRQ73kX2sUcyGkFn+7dhLmi3sxmvmvT6vuRsp/J6KYCt0MmEvom39ktpWL21vDH3Ke3HQzPejo8EAa5ZV+Q90v+IcVhg+qzZGQWtvRYNO7yN3KEmoFmOh82foSqyw2y5J6Iprodg+padiRQrlN8M8FSuX4qMwh/cLSq1c5dVP4jhY1TItSEDh1JfdHckYrxNtdxVZUc65jjE6U/48SjoLF6PJKPo94bbVwdgKyDWPambzSzLojpNXNgbseSpB6EhapiBEdQLa3StuCqc33eJYl+pS40qO5KX1cW+Ui/d8D/4Rx+GhuV4wm7kIKMrPrF0L8CG+SNq1/bz/ldHH911DBY9PcN2qm7P+Fgf+7iidpqOkGv2DeaN0V6vq9kvAjlX7HVdppuI8snlh9ZDSLzB4bWFb95GueSbOyZo55fVUgQBmnzmRJegAfbRdMzbG5pdcSuyDXCIgSN2kEIOsEt4HhuDKabzzz2u9Rm5i60CTos4ljfQgCgweK2vsqszCRlMnWMCqViMDiPjuVDxZTrdgGybI0SDjo2qtPYu7D9azojHJ2kamAr9hYSioAuBUWCctVbc7aILOy4qMFUtudrVuUQPWzBh7tOZl9ZLXIenHtxVBLvMGi51dWoc6o6BQ3NXkR6bxv1L9f0UqtSakuaHB4qxHWhViltoEN0nfUM8+v11iauUZ/6/+K4Kp2eWNUlbpNpGl2sUq9h204YFznirbMFceV5vsKBGRZNwmxFmDyoqSxj5FOJtztmMEOZOEYDJdwXPpKrC1FAAvFJyRHV9dIg+HvZx9PPlNUjXA0cByNUkOAEuRcGg1IE0bROYpzOXpYPDWKAW7eGy8GA51dZiCgk2aqSbG+JDNSQWFjFPqXrcc/ZGcXVnDkwRYgI3NyS+fA3x4DLw58yCSZFe+hW4FIuMdguISPkkGgmYP011GG1SBAplOhGIGXrqLQazNL4MluX0I5B6OFX475FkxsSa6udUJ3rOimQT24Xrw8OcCLAy1ao8AXh5gRmICQDjUT/YjXiV8UeJMH3OQYyHSY5AlOOHBA+EvgvOJJzwFxiDbMKxEYMKJcZXtfJHRr2CS39/ItO+TPZAK9NDshllSggHEJjY07o7gu9PEOtSmdTFgw/4R6Aks0xs/RUtX6yL2QQlUvItQXdajTiksqCbG+ZsWZ9VmwEjDF68h33z8VTLoG06f/P6Qu7Uq+YWmun1x4G2sabsVdWCDhvVfvqGLfZ5jl08HzXA54N4Y5rJScjKSchJd42VolvsRdD4F2gYemDGx5gF2j2zAZyJMzByl5aEONV7lCZ9jBAejBF5IkBfnD8uurWk+PH7UPj7K4d7RqwXf7N0CV8370Rj1JuduxUtIchOh4s0hCK8Yb/G1vic/olAzSiZJBpgfgsBctgUmJKTYhoPQlO8ftBwOI38O42FCRvbKuHN0b+nuMyUMX574EubVkcFkuc3bAxqnsrswvpGuHjD59I3hOaSzgbL+f365lka6BbWR8NHUbvNzP3ClxCUzGGeEHbq6y2hR0avUQC9qxalgXJXte8tIQ6jOI6taGRor04Dy7P5fhDEu12lWa1qCNetgR2H2iOXchlWfsvjiqeksKCneHp6Ci1izBg+Tl+1D15bBsfP/iXC/o09xbIcxSi3NxMMBXBSePPCFauUZgjl5o+paur2dUcyya+mjAg/QWuiOLc4rtcSvb6DHxNx/lNtPosXUTP9dIlc0XN/0k2syQ41n+UgZx+z0f5P8b5voyykwX5mAmP8Y6yvJMFiWlOX8T/L/VZphUb66JKlGkYpUP6c4qUcwysvbG20/gzMj6JmOdmtbCIy0cChbFquOWwi7wG4Byli7t6KiwdjZCF6SkHJNyViK4o1jMXn41zLCLP3sEbDRXH5jIJpTmzeks+7kalROq5JjjowonZi9qMrTCOpedqKk8H0SdDYZpehr5wsQk5kHF28MbPDjnZELOp4K6tuE688r7WvW/+iHq6tOhPdBfJTNn35KbTodoDEKAy1qqKVTUunfbKwzoeTwOZQZk01GAFi28oS0IvZ1
+local ReplyManager = {}
+
+import "android.view.View"
+import "android.widget.LinearLayout"
+import "android.widget.TextView"
+import "android.graphics.Color"
+import "android.graphics.drawable.GradientDrawable"
+import "android.text.Html"
+
+local containerView = nil
+local previewTextView = nil
+
+-- Reply UI views ko initialize karne ke liye
+function ReplyManager.init(replyContainer, replyTextPreview)
+    containerView = replyContainer
+    previewTextView = replyTextPreview
+end
+
+-- Reply active karne ke liye (Long Press par)
+function ReplyManager.setReply(sender, text)
+    _G.AppState.replyTo = {sender = sender, text = text}
+    if containerView and previewTextView then
+        containerView.setVisibility(View.VISIBLE)
+        previewTextView.setText("Replying to " .. sender .. ":\n" .. text)
+    end
+end
+
+-- Reply cancel karne ke liye
+function ReplyManager.cancelReply()
+    _G.AppState.replyTo = nil
+    if containerView and previewTextView then
+        containerView.setVisibility(View.GONE)
+        previewTextView.setText("")
+    end
+end
+
+-- Bubble ke andar reply text format karne ke liye
+function ReplyManager.formatReplyHtml(replySender, replyText)
+    local safeReply = replyText:gsub("<", "&lt;"):gsub(">", "&gt;"):gsub("\\n", "<br>"):gsub("\n", "<br>")
+    return Html.fromHtml(string.format("<font color='#00a884'><b>Replying to %s:</b></font><br>%s", replySender, safeReply))
+end
+
+-- Outgoing payload mein reply data attach karne ke liye
+function ReplyManager.handleOutgoing(payloadObj)
+    if _G.AppState.replyTo then
+        payloadObj.put("reply_to_sender", tostring(_G.AppState.replyTo.sender))
+        payloadObj.put("reply_to_text", tostring(_G.AppState.replyTo.text))
+        ReplyManager.cancelReply()
+    end
+end
+
+-- Bubble ka UI structure dynamically yahan banaya gaya hai
+function ReplyManager.buildBubbleUI(act, bubbleView)
+    local bubbleEnv = {}
+
+    -- CONTAINER 1 (TOP): Main message jo hum bhej rahe hain (Accessibility reads this first)
+    local mainContainer = LinearLayout(act)
+    mainContainer.setOrientation(LinearLayout.VERTICAL)
+    mainContainer.setLayoutParams(LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+
+    local msgTv = TextView(act)
+    msgTv.setTextColor(Color.parseColor("#e9edef"))
+    msgTv.setTextSize(15)
+    msgTv.setFocusable(true) -- Accessibility focus enabled
+    msgTv.setLayoutParams(LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+    
+    mainContainer.addView(msgTv)
+    bubbleView.addView(mainContainer)
+    bubbleEnv.msgTv = msgTv
+
+    -- CONTAINER 2 (BOTTOM): Original message jisko humne reply kiya hai (Accessibility reads this second)
+    local replyContainer = LinearLayout(act)
+    replyContainer.setOrientation(LinearLayout.VERTICAL)
+    local bottomLp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    bottomLp.setMargins(0, 12, 0, 0) -- Top margin to separate from main message
+    replyContainer.setLayoutParams(bottomLp)
+    
+    local replyBg = GradientDrawable()
+    replyBg.setShape(GradientDrawable.RECTANGLE)
+    replyBg.setColor(Color.parseColor("#182229"))
+    replyBg.setCornerRadius(8)
+    replyContainer.setBackground(replyBg)
+    replyContainer.setPadding(24, 16, 24, 16)
+    replyContainer.setVisibility(View.GONE)
+
+    local replyTv = TextView(act)
+    replyTv.setTextColor(Color.parseColor("#8696a0"))
+    replyTv.setTextSize(13)
+    replyTv.setFocusable(true) -- Accessibility focus enabled
+    replyTv.setLayoutParams(LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+    
+    replyContainer.addView(replyTv)
+    bubbleView.addView(replyContainer)
+    
+    bubbleEnv.replyTv = replyTv
+    bubbleEnv.replyContainerView = replyContainer
+
+    return bubbleEnv
+end
+
+return ReplyManager
