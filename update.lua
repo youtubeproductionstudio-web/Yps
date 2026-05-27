@@ -1,1 +1,355 @@
-=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
+-- music fixed auto update
+require "import"
+import "com.androlua.Http"
+import "android.widget.Toast"
+import "android.app.AlertDialog"
+import "android.view.WindowManager"
+import "android.os.Handler"
+import "android.os.Looper"
+import "java.io.File"
+import "android.widget.ScrollView"
+import "android.widget.LinearLayout"
+import "android.widget.TextView"
+import "android.util.Log"
+import "android.content.DialogInterface"
+activity.getActionBar().hide()
+
+-- Yahan YouTube Production Studio walay VALID links lagaye gaye hain
+local baseUrl = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/main/"
+local updateURL = baseUrl .. "Version.txt" -- Version check ke liye file
+local notesURL = baseUrl .. "Notes.txt" 
+   -- Update notes ke liye file
+
+
+-- Multi-file list: Yeh saari files update hongi
+local filesToUpdate = {
+{name = "main.lua", url = baseUrl .. "main.lua"},
+    {name = "about.lua", url = baseUrl .. "about.lua"},
+    {name = "beggar_my_neighbor.lua", url = baseUrl .. "beggar_my_neighbor.lua"},
+    {name = "credits.lua", url = baseUrl .. "credits.lua"},
+{name = "welcome.lua", url = baseUrl .. "welcome.lua"},
+{name = "sound.lua", url = baseUrl .. "sound.lua"},
+    {name = "gamemenu.lua", url = baseUrl .. "gamemenu.lua"},
+    {name = "moreoption.lua", url = baseUrl .. "moreoption.lua"},
+    {name = "profile.lua", url = baseUrl .. "profile.lua"},
+    {name = "public_chat.lua", url = baseUrl .. "public_chat.lua"},
+    {name = "receive_data.lua", url = baseUrl .. "receive_data.lua"},
+    {name = "reply_manager.lua", url = baseUrl .. "reply_manager.lua"},
+    {name = "send_data.lua", url = baseUrl .. "send_data.lua"},
+    {name = "store.lua", url = baseUrl .. "store.lua"},
+    {name = "memory.lua", url = baseUrl .. "memory.lua"},
+    {name = "update.lua", url = baseUrl .. "update.lua"},
+{name = "settings.lua", url = baseUrl .. "settings.lua"},
+{name = "init.lua", url = baseUrl .. "init.lua"},
+
+
+}
+
+if service then
+    service.speak("Checking for updates!, please wait...")
+else 
+    return "Please turn on Jieshuo Accessibility service first to use this tool"
+end
+
+local TAG = "LuaUpdater"
+local currentVersion = "1.1"
+
+local currentPath = ...
+local currentDir = nil
+
+if currentPath and type(currentPath) == "string" then
+    currentDir = currentPath:match("(.*/)")
+end
+
+if not currentDir then
+    if activity then
+        currentDir = tostring(activity.getLuaDir()) .. "/"
+    elseif service then
+        currentDir = tostring(service.getLuaDir()) .. "/"
+    else
+        currentDir = "/storage/emulated/0/解说/Tools/Card games version 1.1./"
+    end
+end
+
+if currentDir and not currentDir:find("/$") then
+    currentDir = currentDir .. "/"
+end
+
+local mainPath = currentDir .. "update.lua"
+
+Log.i(TAG, "Environment Path Auditing Logs")
+
+local oldMainDialog = nil
+local currentUpdateDialog = nil
+local currentSuccessDialog = nil
+
+local function isContextValid(ctx)
+    if not ctx then return false end
+    if activity then
+        if activity.isFinishing() or activity.isDestroyed() then
+            return false
+        end
+    end
+    return true
+end
+
+local function closeToolCompletely(ctx)
+    Log.w(TAG, "Terminating host environment completely.")
+    pcall(function()
+        if currentUpdateDialog and currentUpdateDialog.isShowing() then currentUpdateDialog.dismiss() end
+        if currentSuccessDialog and currentSuccessDialog.isShowing() then currentSuccessDialog.dismiss() end
+        if oldMainDialog and oldMainDialog.isShowing() then oldMainDialog.dismiss() end
+    end)
+
+    if activity then
+        pcall(function() activity.finish() end)
+    end
+end
+
+local function showErrorDialog(ctx, message)
+    Handler(Looper.getMainLooper()).post(Runnable{run=function()
+        if not isContextValid(ctx) then return end
+        local errorDlg = AlertDialog.Builder(ctx)
+        errorDlg.setTitle("Update Error")
+        errorDlg.setMessage(message .. "\n\nThe tool will now close.")
+        errorDlg.setPositiveButton("OK", function(d, w)
+            closeToolCompletely(ctx)
+        end)
+        local d = errorDlg.create()
+        d.getWindow().setType(WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY)
+        d.setCancelable(false)
+        pcall(function() d.show() end)
+    end})
+end
+
+-- FIX: Ab yeh main.lua ka main UI flow call karega bina music loop double kiye
+local function runOriginalCode()
+    if startAppUiFlow then
+        startAppUiFlow()
+    end
+end
+
+local function checkUpdate()
+    Log.i(TAG, "Update checking started. Current local version: [" .. tostring(currentVersion) .. "]")
+    Http.get(updateURL, function(code, response)
+        if code == 200 and response then
+            local rawOnlineVersion = tostring(response)
+            local onlineVersion = rawOnlineVersion:gsub("[^%w%.%-]", "")
+            
+            if onlineVersion == "" then
+                Log.e(TAG, "Sanitization error: onlineVersion payload reduced to empty string.")
+                runOriginalCode()
+                return
+            end
+            
+            if onlineVersion ~= currentVersion then
+                Http.get(notesURL, function(nCode, nResponse)
+                    local notesText = ""
+                    if nCode == 200 and nResponse then
+                        notesText = tostring(nResponse)
+                    end
+                    
+                    Handler(Looper.getMainLooper()).post(Runnable{run=function()
+                        local ctx = service or activity
+                        if not isContextValid(ctx) then return end
+                        
+                        local updateAlertDlg = AlertDialog.Builder(ctx)
+                        updateAlertDlg.setTitle("Update Available!")
+                        
+                        local scrollView = ScrollView(ctx)
+                        local linearLayout = LinearLayout(ctx)
+                        linearLayout.setOrientation(LinearLayout.VERTICAL)
+                        linearLayout.setPadding(40, 40, 40, 40)
+                        scrollView.addView(linearLayout)
+                        
+                        local tvServer = TextView(ctx)
+                        tvServer.setText("Server Version: " .. onlineVersion)
+                        tvServer.setTextSize(16)
+                        linearLayout.addView(tvServer)
+                        
+                        local tvCurrent = TextView(ctx)
+                        tvCurrent.setText("Your Version: " .. currentVersion .. "\n")
+                        tvCurrent.setTextSize(16)
+                        linearLayout.addView(tvCurrent)
+                        
+                        if notesText ~= "" then
+                            for line in notesText:gmatch("[^\r\n]+") do
+                                local tvLine = TextView(ctx)
+                                tvLine.setText(line)
+                                tvLine.setTextSize(15)
+                                tvLine.setPadding(0, 0, 0, 10)
+                                linearLayout.addView(tvLine)
+                            end
+                        end
+                        
+                        updateAlertDlg.setView(scrollView)
+                        updateAlertDlg.setPositiveButton("Update", nil)
+                        updateAlertDlg.setNegativeButton("Later", nil)
+                        
+                        updateAlertDlg.setOnCancelListener(DialogInterface.OnCancelListener{
+                            onCancel = function(dialog)
+                                closeToolCompletely(ctx)
+                            end
+                        })
+                        
+                        currentUpdateDialog = updateAlertDlg.create()
+                        currentUpdateDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY)
+                        currentUpdateDialog.setCanceledOnTouchOutside(false)
+                        
+                        local successShow, errShow = pcall(function() currentUpdateDialog.show() end)
+                        if not successShow then return end
+                        
+                        local btnUpdate = currentUpdateDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                        local btnLater = currentUpdateDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                        
+                        btnLater.onClick = function(v)
+                            currentUpdateDialog.dismiss()
+                            runOriginalCode() -- Update skip karne par normal UI start ho jaye
+                        end
+
+                        btnUpdate.onClick = function(v)
+                            v.setText("Downloading...")
+                            v.setEnabled(false)
+                            btnLater.setEnabled(false)
+                            
+                            local dirFile = File(currentDir)
+                            if not dirFile.exists() then dirFile.mkdirs() end
+                            
+                            -- Multi-file download loop function (Nayi Logic)
+                            local function downloadNextFile(index)
+                                if index > #filesToUpdate then
+                                    -- Saari files download ho gayi hain, ab version update.lua may replace karo
+                                    local writeSuccess = true
+                                    local mf, mfErr = io.open(mainPath, "r")
+                                    if mf then
+                                        local mainContent = mf:read("*a")
+                                        mf:close()
+                                        
+                                        local pattern = 'local%s+currentVersion%s*=%s*["\'](.-)["\']'
+                                        local escapedOnlineVersion = onlineVersion:gsub("%%", "%%%%")
+                                        local replacementString = 'local currentVersion = "' .. escapedOnlineVersion .. '"'
+                                        
+                                        local newMainContent, matchCount = mainContent:gsub(pattern, function() return replacementString end, 1)
+                                        
+                                        if matchCount > 0 and newMainContent and newMainContent ~= "" then
+                                            local testFunc, compileErr = loadstring(newMainContent, "main_syntax_test")
+                                            if testFunc then
+                                                local mf2, mf2Err = io.open(mainPath, "w")
+                                                if mf2 then 
+                                                    mf2:write(newMainContent)
+                                                    mf2:flush()
+                                                    mf2:close() 
+                                                    currentVersion = onlineVersion
+                                                else
+                                                    writeSuccess = false
+                                                end
+                                            else
+                                                writeSuccess = false
+                                            end
+                                        else
+                                            writeSuccess = false
+                                        end
+                                    else
+                                        writeSuccess = false
+                                    end
+                                    
+                                    if writeSuccess then
+                                        Handler(Looper.getMainLooper()).post(Runnable{run=function()
+                                            if currentUpdateDialog then
+                                                pcall(function() currentUpdateDialog.dismiss() end)
+                                                currentUpdateDialog = nil
+                                            end
+                                            
+                                            if not isContextValid(ctx) then return end
+
+                                            local successDialog = AlertDialog.Builder(ctx)
+                                            successDialog.setTitle("Update Successful")
+                                            
+                                            math.randomseed(os.time())
+                                            local messages = {
+                                                [[Congratulations! You have successfully unlocked an incredible premium experience designed exclusively to elevate your journey to absolute perfection.
+This feature is developed by Muhammad Hussain.]],
+                                                [[Welcome to the future of pure premium entertainment where your satisfaction and engagement remain our absolute topmost priority.
+This feature is developed by Muhammad Hussain.]]
+                                            }
+
+                                            local msgIndex = math.random(1, #messages)
+                                            local selectedMessage = messages[msgIndex]
+
+                                            local successScrollView = ScrollView(ctx)
+                                            local successLayout = LinearLayout(ctx)
+                                            successLayout.setOrientation(LinearLayout.VERTICAL)
+                                            successLayout.setPadding(40, 40, 40, 40)
+                                            successScrollView.addView(successLayout)
+
+                                            for line in selectedMessage:gmatch("[^\r\n]+") do
+                                                local tvLine = TextView(ctx)
+                                                tvLine.setText(line)
+                                                tvLine.setTextSize(15)
+                                                tvLine.setPadding(0, 0, 0, 12)
+                                                successLayout.addView(tvLine)
+                                            end
+
+                                            successDialog.setView(successScrollView)
+                                            successDialog.setCancelable(false)
+                                            successDialog.setPositiveButton("Restart Now", nil)
+                                            
+                                            currentSuccessDialog = successDialog.create()
+                                            currentSuccessDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY)
+                                            
+                                            local successDlgShow, errDlgShow = pcall(function() currentSuccessDialog.show() end)
+                                            if not successDlgShow then return end
+
+                                            local btnRestart = currentSuccessDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                                            btnRestart.onClick = function(vx)
+                                                pcall(function() 
+                                                    if currentSuccessDialog and currentSuccessDialog.isShowing() then currentSuccessDialog.dismiss() end
+                                                end)
+                                                if activity then
+                                                    pcall(function() activity.finish() end)
+                                                end
+                                            end
+                                        end})
+                                    else
+                                        showErrorDialog(ctx, "Update apply karte waqt error aaya. Update file ko likhne mein masla hai.")
+                                    end
+                                    return
+                                end
+                                
+                                -- Ek file download karo, aur jab ho jaye tab automatically agli file par jao
+                                local currentFile = filesToUpdate[index]
+                                Http.get(currentFile.url, function(c, content)
+                                    if c ~= 200 or not content or tostring(content):gsub("^%s*(.-)%s*$", "%1") == "" then
+                                        showErrorDialog(ctx, "Download failed for " .. currentFile.name .. ". Please check internet connection.")
+                                        return
+                                    end
+                                    
+                                    local filePath = currentDir .. currentFile.name
+                                    local f, fErr = io.open(filePath, "w")
+                                    if f then 
+                                        f:write(tostring(content)) 
+                                        f:close() 
+                                        -- Recursive call to process the next file in the list
+                                        downloadNextFile(index + 1)
+                                    else
+                                        showErrorDialog(ctx, "Failed to write data to " .. currentFile.name)
+                                        return
+                                    end
+                                end)
+                            end
+                            
+                            -- Peli file se download process shuru karein
+                            downloadNextFile(1)
+                        end
+                    end})
+                end)
+            else
+                runOriginalCode()
+            end
+        else
+            runOriginalCode()
+        end
+    end)
+end
+
+checkUpdate()
