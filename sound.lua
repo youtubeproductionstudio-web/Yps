@@ -29,10 +29,12 @@ local filesToUpdate = {
     {name = "click.mp3", url = baseUrl .. "click.mp3"},
 {name = "key.mp3", url = baseUrl .. "key.mp3"}, 
    {name = "Coins.mp3", url = baseUrl .. "Coins.mp3"},
-{name = "guess.mp3.", url = baseUrl .. "guess.mp3"},    {name = "laugh4.mp3", url = baseUrl .. "laugh4.mp3"},
+{name = "guess.mp3.", url = baseUrl .. "guess.mp3"},
+    {name = "laugh4.mp3", url = baseUrl .. "laugh4.mp3"},
     {name = "perchased.mp3", url = baseUrl .. "perchased.mp3"},
     {name = "Play Card.mp3", url = baseUrl .. "Play%20Card.mp3"},
     {name = "receive.mp3", url = baseUrl .. "receive.mp3"},
+{name = "store.mp3", url = baseUrl .. "store.mp3"},
     {name = "send.mp3", url = baseUrl .. "send.mp3"},
     {name = "Vin sound.mp3", url = baseUrl .. "Vin%20sound.mp3"}
 }
