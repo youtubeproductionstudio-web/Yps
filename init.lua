@@ -1,1 +1,6 @@
-=IAPYthkQWr2DFAH7uAABwAAA5BA10aAGv/rgslHJM8EmmiuOhFkFNVXh5rWRFgz7qgD5pCn3F3vqSJdSjYpjwsR+kArL2usODS+ZXOKQMlPnPIc3CW9OtrrjfjilXKJVljBgPUf5qMkUlz6oBbEqKAdgNxLqAa73w0r/plOdaxV07LJtFCbC88+pBEah6IHgLd9SR/blAsAxSV92BlTCmAgamvDYLQU4HDE1sahSCmgsbitTePHZgEBMHw5b5i6zRyfXUwPPKCEsEPROZsmxd0xxXK66B1wwVb+vcz2uQBq1MMxJY8NjC7hnbi3pkCka3Bbj7L1GR8UcTzG7UA9wZNeM9HJXNXHk1RDozLkVrdxIod6CbiSAihQedWhxSA/AKzt3RM7mIw8dmRgBPYBwUek8nB5xrtv8wwnk1hKW1gA6iCm2A==
+appname = "All Games Hub"
+appver = "1.1"
+appcode = 1
+packagename = "com.yps.cardgames"
+appsdk = "36"
+debug = true
