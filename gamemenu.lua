@@ -1,1 +1,224 @@
-=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
+local gamesMenuModule = {}
+
+function gamesMenuModule.show(params)
+    local activity = params.activity
+    local mainUI = params.mainUI
+    local gameMainUI = params.gameMainUI
+    local memoryMainUI = params.memoryMainUI 
+    local playBGM = params.playBGM
+    local wrapClick = params.wrapClick
+    local styleButton = params.styleButton
+    local whiteText = params.whiteText
+    
+    local bgm2Path = params.bgm2Path
+    local bgm3Path = params.bgm3Path
+    local bgm4Path = params.bgm4Path
+
+    playBGM(bgm4Path)
+
+    -- SharedPreferences ko yahan call kiya hai takay keys ka data read/write ho sakay
+    local prefs = activity.getSharedPreferences("userdata", 0)
+    local editor = prefs.edit()
+
+    local layoutGM = {
+        LinearLayout,
+        orientation="vertical",
+        background="#000000",
+        layout_width="fill",
+        gravity="center",
+        padding="20dp",
+        {TextView, id="gmHead", text="Select Your Game", textSize="18sp", layout_marginBottom="20dp"},
+        {Button, id="playCardBtn", text="beggar my neighbor", layout_width="fill", layout_marginBottom="15dp"},
+        {Button, id="memoryBtn", text="Memory Game", layout_width="fill", layout_marginBottom="15dp"}, 
+        {Button, id="backToHomeBtn", text="Back to Home", layout_width="fill"}
+    }
+
+    local vgm = loadlayout(layoutGM)
+    whiteText(gmHead)
+    styleButton(playCardBtn)
+    styleButton(memoryBtn)
+    styleButton(backToHomeBtn)
+
+    local dgm = AlertDialog.Builder(activity).create()
+    dgm.setTitle("Games Menu")
+    dgm.setView(vgm)
+    dgm.show()
+
+    wrapClick(playCardBtn, function()
+        dgm.dismiss()
+        
+        local lobbyLayout = {
+            LinearLayout,
+            orientation="vertical",
+            layout_width="fill",
+            layout_height="fill",
+            background="#000000",
+            gravity="center",
+            padding="20dp",
+            {TextView, text="Welcome", textSize="30sp", textColor="#FFD700", layout_marginBottom="10dp", gravity="center"},
+            {TextView, text="Get Ready for the Challenge", textSize="16sp", textColor="#FFFFFF", layout_marginBottom="40dp", gravity="center"},
+            {Button, id="startGameBtn", text="Start Game", layout_width="fill", layout_marginBottom="20dp"},
+            {Button, id="backToMenuBtn", text="Back", layout_width="fill"}
+        }
+
+        activity.setContentView(loadlayout(lobbyLayout))
+        styleButton(startGameBtn)
+        styleButton(backToMenuBtn)
+
+        wrapClick(startGameBtn, function()
+            playBGM(bgm3Path)
+            gameMainUI()
+        end)
+
+        wrapClick(backToMenuBtn, function()
+            playBGM(bgm4Path)
+            mainUI()
+        end)
+    end)
+
+    -- Memory Game Sound and Unlock Logic
+    local keySoundPlayer = nil
+
+    local function openMemoryGameWithSound()
+        local loadingDialog = ProgressDialog(activity)
+        loadingDialog.setMessage("Unlocking Memory Game...")
+        loadingDialog.setCancelable(false)
+        loadingDialog.show()
+        
+        local function openMemLobby()
+            if loadingDialog and loadingDialog.isShowing() then
+                loadingDialog.dismiss()
+            end
+            Toast.makeText(activity, "1 Memory Key used!", Toast.LENGTH_SHORT).show()
+            
+            dgm.dismiss()
+            
+            local memLobbyLayout = {
+                LinearLayout,
+                orientation="vertical",
+                layout_width="fill",
+                layout_height="fill",
+                background="#000000",
+                gravity="center",
+                padding="20dp",
+                {TextView, text="Welcome to memory game", textSize="28sp", textColor="#FFD700", layout_marginBottom="15dp", gravity="center"},
+                {TextView, text="Choose difficulty", textSize="18sp", textColor="#FFFFFF", layout_marginBottom="10dp", gravity="center"},
+                {Spinner, id="difficultySpinner", layout_width="fill", layout_marginBottom="20dp", background="#FFFFFF"},
+                {Button, id="startMemBtn", text="Start Game", layout_width="fill", layout_marginBottom="20dp"},
+                {Button, id="backToMenuBtn", text="Back", layout_width="fill"}
+            }
+            
+            activity.setContentView(loadlayout(memLobbyLayout))
+            
+            -- Combo box mein options add karna
+            local diffAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, String{"Easy", "Medium", "Hard"})
+            diffAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            difficultySpinner.setAdapter(diffAdapter)
+
+            styleButton(startMemBtn)
+            styleButton(backToMenuBtn)
+
+            wrapClick(startMemBtn, function()
+                local selectedDiff = difficultySpinner.getSelectedItem()
+                playBGM(bgm3Path)
+                memoryMainUI(tostring(selectedDiff)) -- Start Memory Game
+            end)
+
+            wrapClick(backToMenuBtn, function()
+                playBGM(bgm4Path)
+                mainUI()
+            end)
+        end
+
+        local pathsToTry = {
+            tostring(activity.getLuaDir()) .. "/sound/key.mp3",
+            "/storage/emulated/0/解说/Tools/ All Games Hub/sound/key.mp3",
+            "/storage/emulated/0/解说/Tools/ All Games Hub/sounds/key.mp3"
+        }
+        
+        local played = false
+        for _, path in ipairs(pathsToTry) do
+            local success, err = pcall(function()
+                keySoundPlayer = MediaPlayer()
+                keySoundPlayer.setDataSource(path)
+                keySoundPlayer.prepare()
+                keySoundPlayer.start()
+                keySoundPlayer.setOnCompletionListener(MediaPlayer.OnCompletionListener{
+                    onCompletion = function(v)
+                        v.release()
+                        keySoundPlayer = nil 
+                        openMemLobby()
+                    end
+                })
+            end)
+            if success then
+                played = true
+                break
+            end
+        end
+        
+        if not played then
+            openMemLobby()
+        end
+    end
+
+    -- Memory Game Menu logic (Updated with Keys System and Store Button)
+    wrapClick(memoryBtn, function()
+        local memKeys = prefs.getInt("memory_keys", 0)
+        local memWelcomeShown = prefs.getBoolean("memory_welcome_shown", false)
+
+        if not memWelcomeShown then
+            AlertDialog.Builder(activity)
+                .setTitle("Welcome to Memory Game")
+                .setMessage("Welcome! Let's unlock the Memory Game using 1 Memory Key to play.")
+                .setCancelable(false)
+                .setPositiveButton("Unlock", {onClick=function()
+                    local currentKeys = prefs.getInt("memory_keys", 0)
+                    if currentKeys > 0 then
+                        editor.putInt("memory_keys", currentKeys - 1)
+                        editor.putBoolean("memory_welcome_shown", true)
+                        editor.apply()
+                        openMemoryGameWithSound()
+                    else
+                        AlertDialog.Builder(activity)
+                            .setTitle("Key Required")
+                            .setMessage("You need a Memory Key to open the Memory Game. Please buy it from the Store.")
+                            .setPositiveButton("Go to Store", {onClick=function()
+                                dgm.dismiss()
+                                local storeModule = require "store"
+                                storeModule.show({ activity = activity, prefs = prefs, editor = editor, mainUI = mainUI, wrapClick = wrapClick, styleButton = styleButton, whiteText = whiteText })
+                            end})
+                            .setNegativeButton("Cancel", nil)
+                            .show()
+                    end
+                end})
+                .setNegativeButton("Cancel", nil)
+                .show()
+        else
+            if memKeys > 0 then
+                editor.putInt("memory_keys", memKeys - 1).apply()
+                openMemoryGameWithSound()
+            else
+                AlertDialog.Builder(activity)
+                    .setTitle("Key Required")
+                    .setMessage("You need a Memory Key to open the Memory Game. Please buy it from the Store.")
+                    .setPositiveButton("Go to Store", {onClick=function()
+                        dgm.dismiss()
+                        local storeModule = require "store"
+                        storeModule.show({ activity = activity, prefs = prefs, editor = editor, mainUI = mainUI, wrapClick = wrapClick, styleButton = styleButton, whiteText = whiteText })
+                    end})
+                    .setNegativeButton("Cancel", nil)
+                    .show()
+            end
+        end
+    end)
+
+    wrapClick(backToHomeBtn, function()
+        dgm.dismiss()
+    end)
+
+    dgm.setOnCancelListener({onCancel=function() playBGM(bgm2Path) end})
+    dgm.setOnDismissListener({onDismiss=function() playBGM(bgm2Path) end})
+end
+
+return gamesMenuModule
