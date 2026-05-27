@@ -15,21 +15,19 @@ import "android.content.DialogInterface"
 activity.getActionBar().hide()
 
 -- Yahan YouTube Production Studio walay VALID links lagaye gaye hain
-local baseUrl = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/main/"
+local baseUrl = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/refs/heads/main/"
 local updateURL = baseUrl .. "Version.txt" -- Version check ke liye file
-local notesURL = baseUrl .. "Notes.txt" 
-   -- Update notes ke liye file
-
+local notesURL = baseUrl .. "Notes.txt"    -- Update notes ke liye file
 
 -- Multi-file list: Yeh saari files update hongi
 local filesToUpdate = {
-{name = "main.lua", url = baseUrl .. "main.lua"},
     {name = "about.lua", url = baseUrl .. "about.lua"},
     {name = "beggar_my_neighbor.lua", url = baseUrl .. "beggar_my_neighbor.lua"},
     {name = "credits.lua", url = baseUrl .. "credits.lua"},
 {name = "welcome.lua", url = baseUrl .. "welcome.lua"},
 {name = "sound.lua", url = baseUrl .. "sound.lua"},
     {name = "gamemenu.lua", url = baseUrl .. "gamemenu.lua"},
+    {name = "main.lua", url = baseUrl .. "main.lua"},
     {name = "moreoption.lua", url = baseUrl .. "moreoption.lua"},
     {name = "profile.lua", url = baseUrl .. "profile.lua"},
     {name = "public_chat.lua", url = baseUrl .. "public_chat.lua"},
@@ -37,12 +35,9 @@ local filesToUpdate = {
     {name = "reply_manager.lua", url = baseUrl .. "reply_manager.lua"},
     {name = "send_data.lua", url = baseUrl .. "send_data.lua"},
     {name = "store.lua", url = baseUrl .. "store.lua"},
-    {name = "memory.lua", url = baseUrl .. "memory.lua"},
-    {name = "update.lua", url = baseUrl .. "update.lua"},
 {name = "settings.lua", url = baseUrl .. "settings.lua"},
-{name = "init.lua", url = baseUrl .. "init.lua"},
-
-
+{name = "init.lua", url = baseUrl .. "init.lua"},    {name = "memory.lua", url = baseUrl .. "memory.lua"},
+    {name = "update.lua", url = baseUrl .. "update.lua"}
 }
 
 if service then
