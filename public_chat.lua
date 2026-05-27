@@ -376,13 +376,13 @@ function M.show(params)
         local displayTime = ""
         local epochTime = tonumber(timeStr)
         if epochTime and epochTime > 1000000000 then 
-            displayTime = os.date("%d %b %Y • %I:%M %p", epochTime)
+            displayTime = os.date("%d %b %Y â€¢ %I:%M %p", epochTime)
         else
             displayTime = timeStr 
         end
 
         local isMe = (sender == tostring(chatUsername))
-        local isDeleted = (text == "🚫 This message was deleted")
+        local isDeleted = (text == "ðŸš« This message was deleted")
 
         local safeText = text:gsub("<", "&lt;"):gsub(">", "&gt;"):gsub("\\n", "<br>"):gsub("\n", "<br>")
         local senderColor = isMe and "#00a884" or "#ea0038"
@@ -506,6 +506,8 @@ function M.show(params)
     end
 
     local function processIncomingData(dataMap, totalMsgCount)
+        if not _G.AppState.isInChat then return end -- Extra safety check
+        
         local starPrefs = act.getSharedPreferences("StarredDatabase", Context.MODE_PRIVATE)
         local metaPrefs = act.getSharedPreferences("UnreadMetadata", Context.MODE_PRIVATE)
         
@@ -513,7 +515,7 @@ function M.show(params)
         local highestTimestamp = lastSeenTime
 
         for k, v in pairs(dataMap) do
-            if type(v) == "table" and (v.text == "🚫 This message was deleted" or v.deleted == true) then
+            if type(v) == "table" and (v.text == "ðŸš« This message was deleted" or v.deleted == true) then
                 if starPrefs.contains(k) then starPrefs.edit().remove(k).apply() end
             end
         end
@@ -525,7 +527,7 @@ function M.show(params)
         local activeLiveCount = 0
         for i = 1, #sortedKeys do
             local v = dataMap[sortedKeys[i]]
-            if type(v) == "table" and v.text ~= "🚫 This message was deleted" then activeLiveCount = activeLiveCount + 1 end
+            if type(v) == "table" and v.text ~= "ðŸš« This message was deleted" then activeLiveCount = activeLiveCount + 1 end
         end
         titleTv.setText("Public Chat Room (" .. tostring(activeLiveCount) .. ")")
 
@@ -544,8 +546,11 @@ function M.show(params)
                     _G.AppState.seenSignatures[msgSignature] = true
                     
                     if not _G.AppState.isFirstLoad then
-                        -- FIX: Used precise matching same as green bubbles logic to prevent send clash
-                        if tostring(v.sender) ~= tostring(chatUsername) and v.text ~= "🚫 This message was deleted" and v.deleted ~= true then
+                        -- FIX 1: Bulletproof space stripping and lowercase check. Send par receive sound ab kabi nai ayegi.
+                        local msgSender = tostring(v.sender):match("^%s*(.-)%s*$") or tostring(v.sender)
+                        local myUser = tostring(chatUsername):match("^%s*(.-)%s*$") or tostring(chatUsername)
+                        
+                        if string.lower(msgSender) ~= string.lower(myUser) and v.text ~= "ðŸš« This message was deleted" and v.deleted ~= true then
                             hasNewReceive = true
                         end
                     end
@@ -560,8 +565,7 @@ function M.show(params)
         end
 
         if hasNewReceive then
-            -- 100% BULLETPROOF FIX: Check if chat is still active and visible on screen
-            if _G.AppState.isInChat and chatContainer and chatContainer.isShown() and chatContainer.getWindowVisibility() == 0 then
+            if _G.AppState.isInChat and act.hasWindowFocus() then
                 playSound(tostring(act.getLuaDir()) .. "/sounds/receive.mp3")
             end
         end
@@ -590,7 +594,6 @@ function M.show(params)
 
             mainHandler.post(Runnable{
                 run = function()
-                    -- FIX: Extra safety to kill ghost background network callbacks
                     if not _G.AppState.isInChat then return end
                     if normalizedData then processIncomingData(normalizedData, serverMsgCount) end
                 end
@@ -602,7 +605,10 @@ function M.show(params)
     loopRunnable = Runnable{
         run = function()
             if _G.AppState.isInChat then
-                if fetchMessages then fetchMessages() end
+                -- FIX 2: Background network fetch and sounds are entirely paused if app is minimized or dialog is active
+                if act.hasWindowFocus() then
+                    if fetchMessages then fetchMessages() end
+                end
                 mainHandler.postDelayed(loopRunnable, 1500)
             end
         end
@@ -623,8 +629,7 @@ function M.show(params)
             if not _G.AppState.isInChat then return end
             if code == 200 or code == 201 then
                 
-                -- 100% BULLETPROOF FIX: Check if chat is still active and visible on screen
-                if _G.AppState.isInChat and chatContainer and chatContainer.isShown() and chatContainer.getWindowVisibility() == 0 then
+                if _G.AppState.isInChat and act.hasWindowFocus() then
                     playSound(tostring(act.getLuaDir()) .. "/sounds/send.mp3")
                 end
                 
@@ -650,7 +655,8 @@ function M.show(params)
         showExitDialog()
     end)
 
-    if fetchMessages then fetchMessages() end
+    -- Start loop fetching only if active
+    if fetchMessages and act.hasWindowFocus() then fetchMessages() end
     mainHandler.postDelayed(loopRunnable, 1500)
 
 end
