@@ -1,1 +1,2 @@
-Minus stability fixed. Sounds update error fixed. What's new in this update. 
+What's new.
+Major update: All sound-related issues have been fixed. Now all sounds will play. Many new music tracks and sounds have been added. Enjoy a great audio experience and share your feedback. Your feedback is very important for us.
