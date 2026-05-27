@@ -16,7 +16,7 @@ function gamesMenuModule.show(params)
 
     playBGM(bgm4Path)
 
-    -- SharedPreferences ko yahan call kiya hai takay keys ka data read/write ho sakay
+    -- SharedPreferences for read/write key data
     local prefs = activity.getSharedPreferences("userdata", 0)
     local editor = prefs.edit()
 
@@ -110,7 +110,7 @@ function gamesMenuModule.show(params)
             
             activity.setContentView(loadlayout(memLobbyLayout))
             
-            -- Combo box mein options add karna
+            -- Combo box choices
             local diffAdapter = ArrayAdapter(activity, android.R.layout.simple_spinner_item, String{"Easy", "Medium", "Hard"})
             diffAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             difficultySpinner.setAdapter(diffAdapter)
@@ -121,7 +121,7 @@ function gamesMenuModule.show(params)
             wrapClick(startMemBtn, function()
                 local selectedDiff = difficultySpinner.getSelectedItem()
                 playBGM(bgm3Path)
-                memoryMainUI(tostring(selectedDiff)) -- Start Memory Game
+                memoryMainUI(tostring(selectedDiff)) 
             end)
 
             wrapClick(backToMenuBtn, function()
@@ -130,10 +130,10 @@ function gamesMenuModule.show(params)
             end)
         end
 
+        -- Corrected and streamlined dynamic app directories
         local pathsToTry = {
-            tostring(activity.getLuaDir()) .. "/sound/key.mp3",
-            "/storage/emulated/0/解说/Tools/ All Games Hub/sound/key.mp3",
-            "/storage/emulated/0/解说/Tools/ All Games Hub/sounds/key.mp3"
+            tostring(activity.getLuaDir()) .. "/sounds/key.mp3",
+            tostring(activity.getLuaDir()) .. "/sound/key.mp3"
         }
         
         local played = false
@@ -162,7 +162,7 @@ function gamesMenuModule.show(params)
         end
     end
 
-    -- Memory Game Menu logic (Updated with Keys System and Store Button)
+    -- Memory Game Menu Logic
     wrapClick(memoryBtn, function()
         local memKeys = prefs.getInt("memory_keys", 0)
         local memWelcomeShown = prefs.getBoolean("memory_welcome_shown", false)
