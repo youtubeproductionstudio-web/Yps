@@ -97,6 +97,7 @@ function welcomeModule.usernameScreen(params)
   isTransitioning = false
   
   local currentUname = params.prefs.getString("username", "")
+  local currentRole = params.prefs.getString("role", "user")
   
   local layout={ 
     LinearLayout, orientation="vertical", background="#000000", gravity="center", padding="16dp", 
@@ -139,7 +140,7 @@ function welcomeModule.usernameScreen(params)
       return 
     end
     
-    -- New Logic: Restricted "verified" word check (Case-insensitive)
+    -- Restricted "verified" word check
     if uname:lower():find("verified") then
       AlertDialog.Builder(params.activity).setTitle("Not Allowed").setMessage("The word 'verified' is restricted and cannot be used in your username.").setPositiveButton("OK", nil).show()
       return
@@ -150,70 +151,121 @@ function welcomeModule.usernameScreen(params)
       return
     end
 
-    local pd = ProgressDialog.show(params.activity, "Verifying", "Triple checking username availability...")
+    local isChange = (currentUname ~= "")
+    local isCaseOnlyChange = (isChange and currentUname:lower() == uname:lower())
     
-    local newNodeKey = uname:lower():gsub(" ", "%%20")
-    local checkUrl = firebaseUrl .. newNodeKey .. ".json"
+    local currentCoins = params.prefs.getInt("coins", 0)
+    local lastChangeStr = params.prefs.getString("last_name_change", "0")
+    local lastChangeTime = tonumber(lastChangeStr) or 0
+    local currentTime = os.time()
+    local tenDays = 10 * 24 * 60 * 60
     
-    local isCaseOnlyChange = (currentUname ~= "" and currentUname:lower() == uname:lower())
-    
-    if isCaseOnlyChange then
-      local currentId = params.prefs.getString("userid", "")
-      local updateData = '{"userid": "' .. currentId .. '", "username": "' .. uname .. '", "role": "user"}'
-      local updateUrl = firebaseUrl .. newNodeKey .. ".json?_method=PUT"
+    local cost = 0
+    local msg = ""
+
+    if isChange then
+      if lastChangeTime > 0 and (currentTime - lastChangeTime) < tenDays then
+        cost = 30
+        local timeRemaining = tenDays - (currentTime - lastChangeTime)
+        local daysRemaining = math.ceil(timeRemaining / (24 * 60 * 60))
+        msg = "You are attempting to change your username before the 10-day limit. This will cost 30 Coins!\n\nYou can wait and try again after " .. daysRemaining .. " days to change it for the regular cost of 10 Coins.\n\nAre you sure you want to change your username to '" .. uname .. "'?\n\nCost: 30 Coins."
+      else
+        cost = 10
+        msg = "Are you sure you want to change your username to '" .. uname .. "'?\n\nCost: 10 Coins."
+      end
       
-      Http.post(updateUrl, updateData, function(updCode, updContent)
-        pd.dismiss()
-        if updCode >= 200 and updCode < 300 then
-          params.editor.putString("username", uname).apply()
-          Toast.makeText(params.activity, "Display name updated.", Toast.LENGTH_SHORT).show()
-          params.mainUI()
-        else
-          Toast.makeText(params.activity, "Failed to update display name.", Toast.LENGTH_SHORT).show()
-        end
-      end)
-      return
+      if currentCoins < cost then
+         Toast.makeText(params.activity, "Not enough coins! You need " .. cost .. " coins to change your username.", Toast.LENGTH_SHORT).show()
+         return
+      end
+    else
+      msg = "Are you sure you want to set your username to '" .. uname .. "'?"
     end
 
-    Http.get(checkUrl, function(code, content)
-      if code == 200 then
-        if content and content ~= "null" then
+    local proceedWithUpdate = function()
+      local pd = ProgressDialog.show(params.activity, "Verifying", "Triple checking username availability...")
+      
+      local newNodeKey = uname:lower():gsub(" ", "%%20")
+      local checkUrl = firebaseUrl .. newNodeKey .. ".json"
+      
+      if isCaseOnlyChange then
+        local currentId = params.prefs.getString("userid", "")
+        local updateData = '{"userid": "' .. currentId .. '", "username": "' .. uname .. '", "role": "' .. currentRole .. '"}'
+        local updateUrl = firebaseUrl .. newNodeKey .. ".json?_method=PUT"
+        
+        Http.post(updateUrl, updateData, function(updCode, updContent)
           pd.dismiss()
-          AlertDialog.Builder(params.activity).setTitle("Username Taken").setMessage("This username is already registered. Please choose a different one.").setPositiveButton("Try Again", nil).show()
-        else
-          if params.prefs.getBoolean("first_run", true) or currentUname == "" then
-            pd.dismiss()
-            local newId = generateRandomUserID(10)
-            welcomeModule.showUserIdDialog(params, newId, uname)
+          if updCode >= 200 and updCode < 300 then
+            if isChange then
+              params.editor.putInt("coins", currentCoins - cost)
+              params.editor.putString("last_name_change", tostring(currentTime))
+            end
+            params.editor.putString("username", uname).apply()
+            Toast.makeText(params.activity, "Display name updated.", Toast.LENGTH_SHORT).show()
+            params.mainUI()
           else
-            pd.setMessage("Securing new username and removing old data...")
-            local currentId = params.prefs.getString("userid", "")
-            local updateData = '{"userid": "' .. currentId .. '", "username": "' .. uname .. '", "role": "user"}'
-            local updateUrl = firebaseUrl .. newNodeKey .. ".json?_method=PUT"
-            
-            Http.post(updateUrl, updateData, function(updCode, updContent)
-              if updCode >= 200 and updCode < 300 then
-                local oldNodeKey = currentUname:lower():gsub(" ", "%%20")
-                local deleteUrl = firebaseUrl .. oldNodeKey .. ".json?x-http-method-override=DELETE"
-                
-                Http.post(deleteUrl, "", function(delCode, delContent)
-                  pd.dismiss()
-                  params.editor.putString("username", uname).apply()
-                  Toast.makeText(params.activity, "Username updated successfully.", Toast.LENGTH_SHORT).show()
-                  params.mainUI()
-                end)
-              else
-                pd.dismiss()
-                Toast.makeText(params.activity, "Failed to update profile. Please try again.", Toast.LENGTH_SHORT).show()
-              end
-            end)
+            Toast.makeText(params.activity, "Failed to update display name.", Toast.LENGTH_SHORT).show()
           end
-        end
-      else
-        pd.dismiss()
-        Toast.makeText(params.activity, "Network error. Please check your connection.", Toast.LENGTH_SHORT).show()
+        end)
+        return
       end
-    end)
+
+      Http.get(checkUrl, function(code, content)
+        if code == 200 then
+          if content and content ~= "null" then
+            pd.dismiss()
+            AlertDialog.Builder(params.activity).setTitle("Username Taken").setMessage("This username is already registered. Please choose a different one.").setPositiveButton("Try Again", nil).show()
+          else
+            if params.prefs.getBoolean("first_run", true) or currentUname == "" then
+              pd.dismiss()
+              local newId = generateRandomUserID(10)
+              welcomeModule.showUserIdDialog(params, newId, uname)
+            else
+              pd.setMessage("Securing new username and removing old data...")
+              local currentId = params.prefs.getString("userid", "")
+              local updateData = '{"userid": "' .. currentId .. '", "username": "' .. uname .. '", "role": "' .. currentRole .. '"}'
+              local updateUrl = firebaseUrl .. newNodeKey .. ".json?_method=PUT"
+              
+              Http.post(updateUrl, updateData, function(updCode, updContent)
+                if updCode >= 200 and updCode < 300 then
+                  local oldNodeKey = currentUname:lower():gsub(" ", "%%20")
+                  local deleteUrl = firebaseUrl .. oldNodeKey .. ".json?x-http-method-override=DELETE"
+                  
+                  -- Delete old node ONLY after successful creation of new node
+                  Http.post(deleteUrl, "", function(delCode, delContent)
+                    pd.dismiss()
+                    if isChange then
+                      params.editor.putInt("coins", currentCoins - cost)
+                      params.editor.putString("last_name_change", tostring(currentTime))
+                    end
+                    params.editor.putString("username", uname).apply()
+                    Toast.makeText(params.activity, "Username updated successfully.", Toast.LENGTH_SHORT).show()
+                    params.mainUI()
+                  end)
+                else
+                  pd.dismiss()
+                  Toast.makeText(params.activity, "Failed to update profile. Please try again.", Toast.LENGTH_SHORT).show()
+                end
+              end)
+            end
+          end
+        else
+          pd.dismiss()
+          Toast.makeText(params.activity, "Network error. Please check your connection.", Toast.LENGTH_SHORT).show()
+        end
+      end)
+    end
+
+    local confirmDialog = AlertDialog.Builder(params.activity)
+    confirmDialog.setTitle("Confirm Username")
+    confirmDialog.setMessage(msg)
+    confirmDialog.setPositiveButton("Confirm", DialogInterface.OnClickListener{
+      onClick = function(dialog, which)
+        proceedWithUpdate()
+      end
+    })
+    confirmDialog.setNegativeButton("Cancel", nil)
+    confirmDialog.show()
   end)
 end
 
@@ -266,6 +318,7 @@ end
 local function performFullReset(params)
   params.editor.remove("username")
   params.editor.remove("userid")
+  params.editor.remove("role")
   params.editor.putInt("coins", 0)
   
   -- BMN Stats Reset
@@ -299,6 +352,7 @@ end
 function welcomeModule.startAppUiFlow(params)
   local currentUname = params.prefs.getString("username", "")
   local currentId = params.prefs.getString("userid", "")
+  local currentRole = params.prefs.getString("role", "user")
   
   -- Step 1: Check conditions for fresh registration flow
   if (params.prefs.getBoolean("first_run", true) or currentUname == "") and currentId == "" then
@@ -319,7 +373,7 @@ function welcomeModule.startAppUiFlow(params)
             
             -- Dynamic Role Synchronization
             local serverRole = content:match('"role"%s*:%s*"([^"]+)"')
-            if serverRole then
+            if serverRole and serverRole ~= currentRole then
               params.editor.putString("role", serverRole)
             end
             
@@ -355,7 +409,7 @@ function welcomeModule.startAppUiFlow(params)
                   if matchedUsername then
                     -- Synchronize and restore target metadata details locally
                     params.editor.putString("username", matchedUsername)
-                    if matchedRole then
+                    if matchedRole and matchedRole ~= currentRole then
                       params.editor.putString("role", matchedRole)
                     end
                     params.editor.apply()
@@ -422,7 +476,7 @@ function welcomeModule.startAppUiFlow(params)
             
             if matchedUsername then
               params.editor.putString("username", matchedUsername)
-              if matchedRole then
+              if matchedRole and matchedRole ~= currentRole then
                 params.editor.putString("role", matchedRole)
               end
               params.editor.apply()
