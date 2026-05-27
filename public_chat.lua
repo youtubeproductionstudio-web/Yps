@@ -38,7 +38,7 @@ _G.AppState = {
     isInChat = true,
     loadedIds = {},
     loadedViews = {},
-    seenSignatures = {}, -- ADDED: Har message ki pehchan record karne ke liye     
+    seenSignatures = {},     
     replyTo = nil,        
     isFirstLoad = true    
 }
@@ -75,7 +75,7 @@ function M.show(params)
                 _G.AppState.isInChat = false
                 mainHandler.removeCallbacksAndMessages(nil) 
                 if params.mainUI then
-                    params.mainUI() -- Redirects to Home Screen
+                    params.mainUI() 
                 end
             end
         })
@@ -217,7 +217,6 @@ function M.show(params)
 
     local layoutView = loadlayout(layout)
     
-    -- DOUBLE BIND KEY LISTENER
     local backKeyListener = View.OnKeyListener{
         onKey = function(v, keyCode, event)
             if event.getAction() == KeyEvent.ACTION_DOWN and keyCode == KeyEvent.KEYCODE_BACK then
@@ -280,13 +279,13 @@ function M.show(params)
         local displayTime = ""
         local epochTime = tonumber(timeStr)
         if epochTime and epochTime > 1000000000 then 
-            displayTime = os.date("%d %b %Y • %I:%M %p", epochTime)
+            displayTime = os.date("%d %b %Y â€¢ %I:%M %p", epochTime)
         else
             displayTime = timeStr 
         end
 
         local isMe = (sender == tostring(chatUsername))
-        local isDeleted = (text == "🚫 This message was deleted")
+        local isDeleted = (text == "ðŸš« This message was deleted")
 
         local safeText = text:gsub("<", "&lt;"):gsub(">", "&gt;"):gsub("\\n", "<br>"):gsub("\n", "<br>")
         local senderColor = isMe and "#00a884" or "#ea0038"
@@ -413,7 +412,7 @@ function M.show(params)
         local highestTimestamp = lastSeenTime
 
         for k, v in pairs(dataMap) do
-            if type(v) == "table" and (v.text == "🚫 This message was deleted" or v.deleted == true) then
+            if type(v) == "table" and (v.text == "ðŸš« This message was deleted" or v.deleted == true) then
                 if starPrefs.contains(k) then starPrefs.edit().remove(k).apply() end
             end
         end
@@ -425,7 +424,7 @@ function M.show(params)
         local activeLiveCount = 0
         for i = 1, #sortedKeys do
             local v = dataMap[sortedKeys[i]]
-            if type(v) == "table" and v.text ~= "🚫 This message was deleted" then activeLiveCount = activeLiveCount + 1 end
+            if type(v) == "table" and v.text ~= "ðŸš« This message was deleted" then activeLiveCount = activeLiveCount + 1 end
         end
         titleTv.setText("Public Chat Room (" .. tostring(activeLiveCount) .. ")")
 
@@ -438,19 +437,16 @@ function M.show(params)
                 local currentMsgTime = tonumber(v.time) or 0
                 if currentMsgTime > highestTimestamp then highestTimestamp = currentMsgTime end
 
-                -- FIXED LOGIC: Message ki pehchan time aur sender se lagai taake keys aagay peechay hone se false sound na bajay
                 local msgSignature = tostring(v.sender) .. "_" .. tostring(v.time)
                 
                 if not _G.AppState.seenSignatures[msgSignature] then
                     _G.AppState.seenSignatures[msgSignature] = true
                     
                     if not _G.AppState.isFirstLoad then
-                        -- Spaces aur gaps ko ignore karne ke liye match pattern use kiya
                         local msgSender = tostring(v.sender):match("^%s*(.-)%s*$") or ""
                         local myUser = tostring(chatUsername):match("^%s*(.-)%s*$") or ""
                         
-                        -- Agar bhejney wala main nahi hoon, tabhi sound bajay ga
-                        if msgSender ~= myUser and v.text ~= "🚫 This message was deleted" and v.deleted ~= true then
+                        if msgSender ~= myUser and v.text ~= "ðŸš« This message was deleted" and v.deleted ~= true then
                             hasNewReceive = true
                         end
                     end
@@ -464,9 +460,9 @@ function M.show(params)
             end
         end
 
-        -- Receive sound strictly ab naye friend messages par hi bajega
         if hasNewReceive then
-            playSound("/storage/emulated/0/解说/Tools/ All Games Hub/sounds/receive.mp3")
+            -- Fixed path to use dynamic App Directory
+            playSound(tostring(act.getLuaDir()) .. "/sounds/receive.mp3")
         end
 
         _G.AppState.isFirstLoad = false
@@ -517,8 +513,8 @@ function M.show(params)
             if not _G.AppState.isInChat then return end
             if code == 200 or code == 201 then
                 
-                -- Message successfully send honey pe sirf send sound bajay ga
-                playSound("/storage/emulated/0/解说/Tools/ All Games Hub/sounds/send.mp3")
+                -- Fixed path to use dynamic App Directory
+                playSound(tostring(act.getLuaDir()) .. "/sounds/send.mp3")
                 
                 mainHandler.post(Runnable{
                     run = function()
