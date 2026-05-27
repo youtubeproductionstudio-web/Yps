@@ -9,6 +9,7 @@ import "android.speech.tts.TextToSpeech"
 import "android.media.MediaPlayer"
 import "android.webkit.*"
 import "android.os.*"
+import "java.io.File" -- Active File Management ke liye
 
 local profile = require "profile"
 local aboutModule = require "about"
@@ -19,7 +20,7 @@ local publicchatModule = require "public_chat"
 local beggarMyNeighborModule = require "beggar_my_neighbor" 
 local storeModule = require "store" 
 local welcomeModule = require "welcome" 
-local memoryModule = require "memory" -- Yahan memory module require kiya gaya hai
+local memoryModule = require "memory" 
 
 activity.getActionBar().hide()
 math.randomseed(os.time())
@@ -146,10 +147,11 @@ local bgm1Path = "/storage/emulated/0/解说/Tools/ All Games Hub/sounds/BGM.ogg
 local bgm2Path = "/storage/emulated/0/解说/Tools/ All Games Hub/sounds/BGM 2.ogg"
 local bgm3Path = "/storage/emulated/0/解说/Tools/ All Games Hub/sounds/BGM 3.ogg"
 local bgm4Path = "/storage/emulated/0/解说/Tools/ All Games Hub/sounds/BGM 4.ogg"
-local storeBgmPath = "/storage/emulated/0/解说/Tools/ All Games Hub/sounds/store.mp3"
+local storeBgmPath = "/storage/emulated/0/解s/Tools/ All Games Hub/sounds/store.mp3"
 
 bgmPlayer = nil
 currentBgmPath = ""
+local isBgmPrepared = false 
 local wasPlayingBeforePause = false
 isTransitioning = false
 isProfileShowing = false
@@ -158,6 +160,41 @@ isGameActive = false
 isPublicChatShowing = false 
 
 local activePlayers = {}
+
+-- Stream link parsing foundation
+local onlineBaseUrl = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/refs/heads/main/sounds/"
+
+local function getOnlineUrl(path)
+    local filename = path:match("([^/]+)$")
+    if filename then
+        filename = filename:gsub(" ", "%%20")
+        return onlineBaseUrl .. filename
+    end
+    return nil
+end
+
+local function isAppActive()
+    return activity and not activity.isFinishing()
+end
+
+--- ENHANCED SECURE FILE CLEANER ENGINE ---
+local function checkAndDeleteIfCorrupted(path)
+    if not path or path:find("^http") then return true end
+    local success, isHealthy = pcall(function()
+        local f = File(path)
+        if f.exists() then
+            -- Audio files 1KB se kam nahi ho sakti. Agar kam hai to woh junk/fake structure hai.
+            if f.length() < 1024 then
+                f.delete() -- Storage cleaner target hit
+                return false
+            end
+            return true
+        end
+        return false
+    end)
+    return success and isHealthy
+end
+-------------------------------------------
 
 function getVol(key)
   return prefs.getInt("vol_"..key, 50) / 100
@@ -176,10 +213,12 @@ function playBGM(path)
 
   if currentBgmPath == path and bgmPlayer ~= nil then
     pcall(function()
-      if bgmPlayer.isPlaying() then
-        bgmPlayer.setVolume(getVol(key), getVol(key))
-      else
-        bgmPlayer.start()
+      if isBgmPrepared then
+        if bgmPlayer.isPlaying() then
+          bgmPlayer.setVolume(getVol(key), getVol(key))
+        else
+          bgmPlayer.start()
+        end
       end
     end)
     return 
@@ -187,38 +226,97 @@ function playBGM(path)
   
   if bgmPlayer ~= nil then
     pcall(function()
-      bgmPlayer.stop()
+      if isBgmPrepared and bgmPlayer.isPlaying() then
+        bgmPlayer.stop()
+      end
       bgmPlayer.release()
     end)
     bgmPlayer = nil
+    isBgmPrepared = false
   end
   
   currentBgmPath = path
-  pcall(function()
-    bgmPlayer = MediaPlayer()
-    bgmPlayer.setDataSource(path)
-    bgmPlayer.setLooping(true)
-    bgmPlayer.prepare()
-    bgmPlayer.setVolume(getVol(key), getVol(key))
-    bgmPlayer.start()
-  end)
+  
+  local function attemptBGMPlay(targetPath, isFallback)
+      if not isFallback and not checkAndDeleteIfCorrupted(targetPath) then
+          local fallbackUrl = getOnlineUrl(path)
+          if fallbackUrl then
+              attemptBGMPlay(fallbackUrl, true)
+          end
+          return
+      end
+
+      pcall(function()
+        bgmPlayer = MediaPlayer()
+        bgmPlayer.setDataSource(targetPath)
+        bgmPlayer.setLooping(true)
+        
+        bgmPlayer.setOnErrorListener(MediaPlayer.OnErrorListener{
+            onError=function(mp, what, extra)
+                pcall(function() mp.release() end)
+                if bgmPlayer == mp then
+                    bgmPlayer = nil
+                    currentBgmPath = ""
+                    isBgmPrepared = false
+                end
+                
+                -- DYNAMIC KILLER: Agar local file drivers ko crash karti hai, instantly storage se delete karo
+                if not isFallback then
+                    pcall(function() File(targetPath).delete() end)
+                    local fallbackUrl = getOnlineUrl(path)
+                    if fallbackUrl then
+                        currentBgmPath = path
+                        attemptBGMPlay(fallbackUrl, true)
+                    end
+                end
+                return true
+            end
+        })
+        
+        if targetPath:find("^http") then
+            bgmPlayer.setOnPreparedListener(MediaPlayer.OnPreparedListener{
+                onPrepared=function(mp)
+                    if bgmPlayer == mp and isAppActive() then
+                        pcall(function()
+                            isBgmPrepared = true
+                            mp.setVolume(getVol(key), getVol(key))
+                            mp.start()
+                        end)
+                    else
+                        pcall(function() mp.release() end)
+                    end
+                end
+            })
+            bgmPlayer.prepareAsync()
+        else
+            -- Local File Strategy: Instant synchronous execution
+            bgmPlayer.prepare()
+            isBgmPrepared = true
+            bgmPlayer.setVolume(getVol(key), getVol(key))
+            bgmPlayer.start()
+        end
+      end)
+  end
+  
+  attemptBGMPlay(path, false)
 end
 
 function stopBGM()
   if bgmPlayer ~= nil then
     pcall(function()
-      if bgmPlayer.isPlaying() then
+      if isBgmPrepared and bgmPlayer.isPlaying() then
         bgmPlayer.stop()
       end
       bgmPlayer.release()
     end)
     bgmPlayer = nil
     currentBgmPath = ""
+    isBgmPrepared = false
   end
 end
 
 function onPause()
-  if bgmPlayer ~= nil then
+  if bgmPlayer ~= nil and isBgmPrepared then
     pcall(function()
       if bgmPlayer.isPlaying() then
         bgmPlayer.pause()
@@ -229,7 +327,7 @@ function onPause()
 end
 
 function onResume()
-  if bgmPlayer ~= nil and wasPlayingBeforePause then
+  if bgmPlayer ~= nil and wasPlayingBeforePause and isBgmPrepared then
     pcall(function()
       bgmPlayer.start()
     end)
@@ -269,26 +367,66 @@ function playSound(path)
   
   if not prefs.getBoolean("sw_"..key, true) then return end
 
-  pcall(function()
-    local mp = MediaPlayer()
-    table.insert(activePlayers, mp)
-    mp.setDataSource(path)
-    mp.prepare()
-    local v = getVol(key)
-    mp.setVolume(v, v)
-    mp.start()
-    mp.setOnCompletionListener(MediaPlayer.OnCompletionListener{
-      onCompletion=function(v)
-        v.release()
-        for i, player in ipairs(activePlayers) do
-           if player == v then
-              table.remove(activePlayers, i)
-              break
-           end
-        end
+  local function attemptPlay(targetPath, isFallback)
+      if not isFallback and not checkAndDeleteIfCorrupted(targetPath) then
+          local fallbackUrl = getOnlineUrl(path)
+          if fallbackUrl then attemptPlay(fallbackUrl, true) end
+          return
       end
-    })
-  end)
+
+      pcall(function()
+        local mp = MediaPlayer()
+        table.insert(activePlayers, mp)
+        mp.setDataSource(targetPath)
+        
+        mp.setOnErrorListener(MediaPlayer.OnErrorListener{
+            onError=function(v, what, extra)
+                pcall(function() v.release() end)
+                for i, player in ipairs(activePlayers) do
+                    if player == v then
+                        table.remove(activePlayers, i)
+                        break
+                    end
+                end
+                
+                -- DYNAMIC KILLER FOR SHORT SOUNDS: Delete corrupted audio file from storage
+                if not isFallback then
+                    pcall(function() File(targetPath).delete() end)
+                    local fallbackUrl = getOnlineUrl(path)
+                    if fallbackUrl then attemptPlay(fallbackUrl, true) end
+                end
+                return true
+            end
+        })
+        
+        mp.setOnPreparedListener(MediaPlayer.OnPreparedListener{
+            onPrepared=function(v)
+                if not isAppActive() then pcall(function() v.release() end) return end
+                local vol = getVol(key)
+                pcall(function()
+                    v.setVolume(vol, vol)
+                    v.start()
+                end)
+            end
+        })
+        
+        mp.setOnCompletionListener(MediaPlayer.OnCompletionListener{
+          onCompletion=function(v)
+            pcall(function() v.release() end)
+            for i, player in ipairs(activePlayers) do
+               if player == v then
+                  table.remove(activePlayers, i)
+                  break
+               end
+            end
+          end
+        })
+        
+        mp.prepareAsync()
+      end)
+  end
+  
+  attemptPlay(path, false)
 end
 
 function showExitDialog()
@@ -427,7 +565,6 @@ function gameMainUI()
   })
 end
 
--- Memory Game Function ko define kar diya
 function memoryMainUI(difficulty)
   memoryModule.start({
       activity = activity,
@@ -462,52 +599,116 @@ local function openPublicChatWithSound()
   loadingDialog.setCancelable(false)
   loadingDialog.show()
   
+  local isChatOpened = false
+  
   local function openChatRoom()
-      if loadingDialog and loadingDialog.isShowing() then
-          loadingDialog.dismiss()
-      end
-      Toast.makeText(activity, "1 Public Chat Key used!", Toast.LENGTH_SHORT).show()
-      publicchatModule.show({ 
-          activity = activity, 
-          mainUI = mainUI, 
-          wrapClick = wrapClick, 
-          styleButton = styleButton, 
-          whiteText = whiteText, 
-          username = prefs.getString("username", "Guest"), 
-          userid = prefs.getString("userid", "") 
-      })
+      if isChatOpened then return end
+      isChatOpened = true
+      activity.runOnUiThread(Runnable{run=function()
+          pcall(function()
+              if loadingDialog and loadingDialog.isShowing() then
+                  loadingDialog.dismiss()
+              end
+          end)
+          Toast.makeText(activity, "1 Public Chat Key used!", Toast.LENGTH_SHORT).show()
+          publicchatModule.show({ 
+              activity = activity, 
+              mainUI = mainUI, 
+              wrapClick = wrapClick, 
+              styleButton = styleButton, 
+              whiteText = whiteText, 
+              username = prefs.getString("username", "Guest"), 
+              userid = prefs.getString("userid", "") 
+          })
+      end})
   end
 
   local pathsToTry = {
+      tostring(activity.getLuaDir()) .. "/sounds/key.mp3",
       tostring(activity.getLuaDir()) .. "/sound/key.mp3",
       "/storage/emulated/0/解说/Tools/ All Games Hub/sound/key.mp3",
-      "/storage/emulated/0/解说/Tools/ All Games Hub/sounds/key.mp3"
+      "/storage/emulated/0/解说/Tools/ All Games Hub/sounds/key.mp3",
+      onlineBaseUrl .. "key.mp3"
   }
   
-  local played = false
-  for _, path in ipairs(pathsToTry) do
-      local success, err = pcall(function()
+  local index = 1
+  
+  local function tryPlayKey()
+      if index > #pathsToTry then
+          openChatRoom()
+          return
+      end
+      
+      local path = pathsToTry[index]
+      index = index + 1
+      
+      if not path:find("^http") and not checkAndDeleteIfCorrupted(path) then
+          tryPlayKey()
+          return
+      end
+      
+      local isInternalActionDone = false
+      
+      local function moveToNextPath()
+          if not isInternalActionDone then
+              isInternalActionDone = true
+              pcall(function()
+                  if keySoundPlayer then
+                      keySoundPlayer.release()
+                      keySoundPlayer = nil
+                  end
+              end)
+              tryPlayKey()
+          end
+      end
+      
+      local success = pcall(function()
           keySoundPlayer = MediaPlayer()
           keySoundPlayer.setDataSource(path)
-          keySoundPlayer.prepare()
-          keySoundPlayer.start()
-          keySoundPlayer.setOnCompletionListener(MediaPlayer.OnCompletionListener{
-              onCompletion = function(v)
-                  v.release()
-                  keySoundPlayer = nil 
-                  openChatRoom()
+          
+          keySoundPlayer.setOnErrorListener(MediaPlayer.OnErrorListener{
+              onError = function(mp, what, extra)
+                  -- Chat key sound error par bhi dynamic clear policy
+                  if not path:find("^http") then
+                      pcall(function() File(path).delete() end)
+                  end
+                  moveToNextPath()
+                  return true
               end
           })
+          
+          keySoundPlayer.setOnCompletionListener(MediaPlayer.OnCompletionListener{
+              onCompletion = function(mp)
+                  if not isInternalActionDone then
+                      isInternalActionDone = true
+                      pcall(function() mp.release() end)
+                      keySoundPlayer = nil
+                      openChatRoom()
+                  end
+              end
+          })
+          
+          keySoundPlayer.setOnPreparedListener(MediaPlayer.OnPreparedListener{
+              onPrepared = function(mp)
+                  pcall(function() mp.start() end)
+              end
+          })
+          
+          keySoundPlayer.prepareAsync()
+          
+          Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
+              if not isInternalActionDone and isPublicChatShowing and not isChatOpened then
+                  moveToNextPath()
+              end
+          end}, 3000)
       end)
-      if success then
-          played = true
-          break
+      
+      if not success then
+          moveToNextPath()
       end
   end
   
-  if not played then
-      openChatRoom()
-  end
+  tryPlayKey()
 end
 
 function usernameScreen()
@@ -583,7 +784,6 @@ function mainUI()
   wrapClick(aboutBtn, function() aboutModule.show(activity, bgm1Path, bgm2Path) end)
   wrapClick(creditsBtn, function() creditsModule.show(activity, bgm1Path, bgm2Path) end)
   
-  -- Yahan param mein memoryMainUI = memoryMainUI pass kar diya gaya hai
   wrapClick(gamesMenuBtn, function()
       gamesMenuModule.show({ activity = activity, mainUI = mainUI, gameMainUI = gameMainUI, memoryMainUI = memoryMainUI, playBGM = playBGM, wrapClick = wrapClick, styleButton = styleButton, whiteText = whiteText, bgm2Path = bgm2Path, bgm3Path = bgm3Path, bgm4Path = bgm4Path })
   end)
