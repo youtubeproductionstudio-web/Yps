@@ -1,2 +1,3 @@
-What's new.
 Major update: All sound-related issues have been fixed. Now all sounds will play. Many new music tracks and sounds have been added. Enjoy a great audio experience and share your feedback. Your feedback is very important for us.
+
+If sounds weren't playing before, they will now play if your internet is on. If sounds were playing normally before, they'll continue to play normally, and an extra layer will be added. In case any sound file goes missing, it'll play online.
