@@ -1,3 +1,1 @@
-Major update: All sound-related issues have been fixed. Now all sounds will play. Many new music tracks and sounds have been added. Enjoy a great audio experience and share your feedback. Your feedback is very important for us.
-
-If sounds weren't playing before, they will now play if your internet is on. If sounds were playing normally before, they'll continue to play normally, and an extra layer will be added. In case any sound file goes missing, it'll play online.
+A big update has arrived in Old Games hub. In this update, send and receive message sounds have been added in public chat. Sounds for opening a box in memory and incorrect guesses have been added. Besides this, many other things have been added. Enjoy the latest version and don't forget to give your feedback. Your feedback is very valuable for us.
