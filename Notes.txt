@@ -1,1 +1,1 @@
-A new update is out, in which a "Go to most recent message" button has been added in public chat, clicking on which will bring the accessibility focus to the most recent message. Enhancements have been made to ensure there's no spamming in public chat. Hope you'll like this update. Don't forget to give your feedback, it's very valuable for us.
+Now measures have been taken to reduce spamming in public chat. The bug where a popup would show on deleted messages in public chat has been fixed, and many stability fixes have also been made. The focus has been improved.
