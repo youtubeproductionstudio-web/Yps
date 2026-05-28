@@ -453,7 +453,7 @@ function M.show(params)
             bubbleView.setOnLongClickListener(View.OnLongClickListener{
                 onLongClick = function(v)
                     local isCurrentlyStarred = starPrefs.contains(msgKey)
-                    local opts = {"Copy"}
+                    local opts = {"Copy", "Copy User ID"}
                     table.insert(opts, "Reply")
                     table.insert(opts, isCurrentlyStarred and "Unstar" or "Star")
                     if (isMe or isAdmin) then table.insert(opts, "Delete") end
@@ -466,6 +466,23 @@ function M.show(params)
                                 local clipboard = act.getSystemService(Context.CLIPBOARD_SERVICE)
                                 clipboard.setText(sender .. ":\n" .. text)
                                 Toast.makeText(act, "Copied", Toast.LENGTH_SHORT).show()
+                            elseif sel == "Copy User ID" then
+                                local nodeKey = sender:lower():gsub(" ", "%%20")
+                                local userUrl = "https://card-games-muzammil-munir-default-rtdb.firebaseio.com/users/" .. nodeKey .. ".json"
+                                Http.get(userUrl, function(code, content)
+                                    if code == 200 and content and content ~= "null" then
+                                        local serverUserId = content:match('"userid"%s*:%s*"([^"]+)"')
+                                        if serverUserId then
+                                            local clipboard = act.getSystemService(Context.CLIPBOARD_SERVICE)
+                                            clipboard.setText(serverUserId)
+                                            Toast.makeText(act, "User ID Copied", Toast.LENGTH_SHORT).show()
+                                        else
+                                            Toast.makeText(act, "User ID not found", Toast.LENGTH_SHORT).show()
+                                        end
+                                    else
+                                        Toast.makeText(act, "Failed to fetch User ID", Toast.LENGTH_SHORT).show()
+                                    end
+                                end)
                             elseif sel == "Reply" then
                                 ReplyManager.setReply(sender, text)
                             elseif sel == "Star" then
