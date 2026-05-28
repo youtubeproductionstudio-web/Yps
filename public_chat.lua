@@ -372,17 +372,23 @@ function M.show(params)
         text = tostring(text or "")
         timeStr = tostring(timeStr or "")
         msgKey = tostring(msgKey or "sys_msg")
+        
+        -- Clean string to strictly match 'This message was deleted' (Emoji Removed)
+        if string.find(text, "This message was deleted") then
+            text = "This message was deleted"
+        end
 
         local displayTime = ""
         local epochTime = tonumber(timeStr)
         if epochTime and epochTime > 1000000000 then 
-            displayTime = os.date("%d %b %Y â€¢ %I:%M %p", epochTime)
+            displayTime = os.date("%d %b %Y • %I:%M %p", epochTime)
         else
             displayTime = timeStr 
         end
+        displayTime = displayTime:gsub("^0(%d:)", "%1"):gsub("• 0(%d:)", "• %1")
 
         local isMe = (sender == tostring(chatUsername))
-        local isDeleted = (text == "ðŸš« This message was deleted")
+        local isDeleted = (text == "This message was deleted")
 
         local safeText = text:gsub("<", "&lt;"):gsub(">", "&gt;"):gsub("\\n", "<br>"):gsub("\n", "<br>")
         local senderColor = isMe and "#00a884" or "#ea0038"
@@ -442,60 +448,63 @@ function M.show(params)
 
         local starPrefs = act.getSharedPreferences("StarredDatabase", Context.MODE_PRIVATE)
         
-        bubbleView.setOnLongClickListener(View.OnLongClickListener{
-            onLongClick = function(v)
-                local isCurrentlyStarred = starPrefs.contains(msgKey)
-                local opts = {"Copy"}
-                if not isDeleted then table.insert(opts, "Reply") end
-                table.insert(opts, isCurrentlyStarred and "Unstar" or "Star")
-                if (isMe or isAdmin) and not isDeleted then table.insert(opts, "Delete") end
-                
-                local builder = AlertDialog.Builder(act)
-                builder.setItems(opts, DialogInterface.OnClickListener{
-                    onClick = function(dialog, which)
-                        local sel = opts[which+1]
-                        if sel == "Copy" then
-                            local clipboard = act.getSystemService(Context.CLIPBOARD_SERVICE)
-                            clipboard.setText(sender .. ":\n" .. text)
-                            Toast.makeText(act, "Copied", Toast.LENGTH_SHORT).show()
-                        elseif sel == "Reply" then
-                            ReplyManager.setReply(sender, text)
-                        elseif sel == "Star" then
-                            local dataObj = JSONObject()
-                            dataObj.put("sender", sender)
-                            dataObj.put("text", text)
-                            dataObj.put("time", timeStr)
-                            if replySender then dataObj.put("reply_to_sender", replySender) end
-                            if replyText then dataObj.put("reply_to_text", replyText) end
-                            starPrefs.edit().putString(msgKey, dataObj.toString()).apply()
-                            Toast.makeText(act, "Starred", Toast.LENGTH_SHORT).show()
-                        elseif sel == "Unstar" then
-                            starPrefs.edit().remove(msgKey).apply()
-                            Toast.makeText(act, "Unstarred", Toast.LENGTH_SHORT).show()
-                        elseif sel == "Delete" then
-                            local confirmDelete = AlertDialog.Builder(act)
-                            confirmDelete.setTitle("Delete Message")
-                            confirmDelete.setMessage("Are you sure you want to delete this message?")
-                            confirmDelete.setPositiveButton("Yes", DialogInterface.OnClickListener{
-                                onClick = function(d, w)
-                                    local firebaseKey = msgKey:gsub("^idx_", "")
-                                    local updateUrl = chatUrl:gsub("messages.json", "messages/" .. firebaseKey .. ".json")
-                                    SendData.deleteMessage(updateUrl, sender, timeStr, function(code, content)
-                                        if code == 200 or code == 201 then
-                                            mainHandler.post(Runnable{run = function() if fetchMessages then fetchMessages() end end})
-                                        end
-                                    end)
-                                end
-                            })
-                            confirmDelete.setNegativeButton("No", nil)
-                            confirmDelete.show()
+        -- Yahan sirf tab long click listener set hoga jab message deleted NAHI hoga
+        if not isDeleted then
+            bubbleView.setOnLongClickListener(View.OnLongClickListener{
+                onLongClick = function(v)
+                    local isCurrentlyStarred = starPrefs.contains(msgKey)
+                    local opts = {"Copy"}
+                    table.insert(opts, "Reply")
+                    table.insert(opts, isCurrentlyStarred and "Unstar" or "Star")
+                    if (isMe or isAdmin) then table.insert(opts, "Delete") end
+                    
+                    local builder = AlertDialog.Builder(act)
+                    builder.setItems(opts, DialogInterface.OnClickListener{
+                        onClick = function(dialog, which)
+                            local sel = opts[which+1]
+                            if sel == "Copy" then
+                                local clipboard = act.getSystemService(Context.CLIPBOARD_SERVICE)
+                                clipboard.setText(sender .. ":\n" .. text)
+                                Toast.makeText(act, "Copied", Toast.LENGTH_SHORT).show()
+                            elseif sel == "Reply" then
+                                ReplyManager.setReply(sender, text)
+                            elseif sel == "Star" then
+                                local dataObj = JSONObject()
+                                dataObj.put("sender", sender)
+                                dataObj.put("text", text)
+                                dataObj.put("time", timeStr)
+                                if replySender then dataObj.put("reply_to_sender", replySender) end
+                                if replyText then dataObj.put("reply_to_text", replyText) end
+                                starPrefs.edit().putString(msgKey, dataObj.toString()).apply()
+                                Toast.makeText(act, "Starred", Toast.LENGTH_SHORT).show()
+                            elseif sel == "Unstar" then
+                                starPrefs.edit().remove(msgKey).apply()
+                                Toast.makeText(act, "Unstarred", Toast.LENGTH_SHORT).show()
+                            elseif sel == "Delete" then
+                                local confirmDelete = AlertDialog.Builder(act)
+                                confirmDelete.setTitle("Delete Message")
+                                confirmDelete.setMessage("Are you sure you want to delete this message?")
+                                confirmDelete.setPositiveButton("Yes", DialogInterface.OnClickListener{
+                                    onClick = function(d, w)
+                                        local firebaseKey = msgKey:gsub("^idx_", "")
+                                        local updateUrl = chatUrl:gsub("messages.json", "messages/" .. firebaseKey .. ".json")
+                                        SendData.deleteMessage(updateUrl, sender, timeStr, function(code, content)
+                                            if code == 200 or code == 201 then
+                                                mainHandler.post(Runnable{run = function() if fetchMessages then fetchMessages() end end})
+                                            end
+                                        end)
+                                    end
+                                })
+                                confirmDelete.setNegativeButton("No", nil)
+                                confirmDelete.show()
+                            end
                         end
-                    end
-                })
-                builder.show()
-                return true
-            end
-        })
+                    })
+                    builder.show()
+                    return true
+                end
+            })
+        end
 
         chatContainer.addView(bubbleView)
         chatScroll.post(Runnable{run = function() 
@@ -515,8 +524,15 @@ function M.show(params)
         local highestTimestamp = lastSeenTime
 
         for k, v in pairs(dataMap) do
-            if type(v) == "table" and (v.text == "ðŸš« This message was deleted" or v.deleted == true) then
-                if starPrefs.contains(k) then starPrefs.edit().remove(k).apply() end
+            if type(v) == "table" then
+                -- Emoji removal check for incoming data processing
+                if v.text and string.find(v.text, "This message was deleted") then
+                    v.text = "This message was deleted"
+                end
+                
+                if v.text == "This message was deleted" or v.deleted == true then
+                    if starPrefs.contains(k) then starPrefs.edit().remove(k).apply() end
+                end
             end
         end
 
@@ -527,7 +543,7 @@ function M.show(params)
         local activeLiveCount = 0
         for i = 1, #sortedKeys do
             local v = dataMap[sortedKeys[i]]
-            if type(v) == "table" and v.text ~= "ðŸš« This message was deleted" then activeLiveCount = activeLiveCount + 1 end
+            if type(v) == "table" and v.text ~= "This message was deleted" then activeLiveCount = activeLiveCount + 1 end
         end
         titleTv.setText("Public Chat Room (" .. tostring(activeLiveCount) .. ")")
 
@@ -546,11 +562,10 @@ function M.show(params)
                     _G.AppState.seenSignatures[msgSignature] = true
                     
                     if not _G.AppState.isFirstLoad then
-                        -- FIX 1: Bulletproof space stripping and lowercase check. Send par receive sound ab kabi nai ayegi.
                         local msgSender = tostring(v.sender):match("^%s*(.-)%s*$") or tostring(v.sender)
                         local myUser = tostring(chatUsername):match("^%s*(.-)%s*$") or tostring(chatUsername)
                         
-                        if string.lower(msgSender) ~= string.lower(myUser) and v.text ~= "ðŸš« This message was deleted" and v.deleted ~= true then
+                        if string.lower(msgSender) ~= string.lower(myUser) and v.text ~= "This message was deleted" and v.deleted ~= true then
                             hasNewReceive = true
                         end
                     end
@@ -595,7 +610,15 @@ function M.show(params)
             mainHandler.post(Runnable{
                 run = function()
                     if not _G.AppState.isInChat then return end
-                    if normalizedData then processIncomingData(normalizedData, serverMsgCount) end
+                    if normalizedData and next(normalizedData) ~= nil then 
+                        processIncomingData(normalizedData, serverMsgCount) 
+                    else
+                        titleTv.setText("Public Chat Room (0)")
+                        chatContainer.removeAllViews()
+                        _G.AppState.loadedIds = {}
+                        _G.AppState.loadedViews = {}
+                        _G.AppState.seenSignatures = {}
+                    end
                 end
             })
         end)
@@ -605,7 +628,6 @@ function M.show(params)
     loopRunnable = Runnable{
         run = function()
             if _G.AppState.isInChat then
-                -- FIX 2: Background network fetch and sounds are entirely paused if app is minimized or dialog is active
                 if act.hasWindowFocus() then
                     if fetchMessages then fetchMessages() end
                 end
@@ -616,18 +638,20 @@ function M.show(params)
 
     params.wrapClick(sendBtn, function()
         sendBtn.setEnabled(false)
-        mainHandler.postDelayed(Runnable{
-            run = function()
-                if sendBtn then sendBtn.setEnabled(true) end
-            end
-        }, 3000)
-
+        
         local text = tostring(messageInput.getText().toString())
         local currentReply = _G.AppState.replyTo
 
         SendData.postMessage(chatUrl, chatUsername, text, currentReply, function(code, content)
             if not _G.AppState.isInChat then return end
+            
             if code == 200 or code == 201 then
+                -- Disable for 5 seconds AFTER successful upload
+                mainHandler.postDelayed(Runnable{
+                    run = function()
+                        if sendBtn then sendBtn.setEnabled(true) end
+                    end
+                }, 5000)
                 
                 if _G.AppState.isInChat and act.hasWindowFocus() then
                     playSound(tostring(act.getLuaDir()) .. "/sounds/send.mp3")
@@ -641,11 +665,17 @@ function M.show(params)
                     end
                 })
             elseif code == -1 then
+                -- Re-enable instantly on empty text error
+                mainHandler.post(Runnable{run = function() if sendBtn then sendBtn.setEnabled(true) end end})
                 Toast.makeText(act, "Cannot send empty message", Toast.LENGTH_SHORT).show()
             elseif code == -2 then
+                -- Re-enable instantly on char limit error
+                mainHandler.post(Runnable{run = function() if sendBtn then sendBtn.setEnabled(true) end end})
                 messageInput.setText("")
                 Toast.makeText(act, "Max 1500 characters allowed.", Toast.LENGTH_SHORT).show()
             else
+                -- Re-enable instantly on network error
+                mainHandler.post(Runnable{run = function() if sendBtn then sendBtn.setEnabled(true) end end})
                 Toast.makeText(act, "Network issue, check connection.", Toast.LENGTH_SHORT).show()
             end
         end)
