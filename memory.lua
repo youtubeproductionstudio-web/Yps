@@ -43,29 +43,39 @@ function memoryModule.start(params)
         end
     end
 
-    local function findSoundPath(soundName)
-        local baseDir = activity.getLuaDir()
+    -- Dynamic Path Handler for all sounds
+    local function getDynamicSoundPath(soundName)
+        local baseDir = tostring(activity.getLuaDir())
+        local cleanName = soundName:gsub("^/+", "")
+        
+        -- Special check for gas/guess sound fixing
+        if cleanName == "sounds/guess.mp3" or cleanName == "sounds/gas.mp3" then
+            if FileClass(baseDir .. "/sounds/gas.mp3").exists() then return baseDir .. "/sounds/gas.mp3" end
+            if FileClass(baseDir .. "/sounds/guess.mp3").exists() then return baseDir .. "/sounds/guess.mp3" end
+        end
+
         local pathsToTry = {
-            baseDir .. "/" .. soundName,
-            baseDir .. "/./" .. soundName,
-            "/storage/emulated/0/" .. soundName
+            baseDir .. "/" .. cleanName,
+            "/storage/emulated/0/" .. cleanName
         }
+        
         for _, p in ipairs(pathsToTry) do
             local f = FileClass(p)
             if f.exists() and f.isFile() then
                 return p
             end
         end
-        return nil
+        
+        -- Default dynamic fallback path
+        return baseDir .. "/" .. cleanName
     end
 
     local function playSound(soundName)
         pcall(function()
-            local validPath = findSoundPath(soundName)
-            if not validPath then return end -- Gracefully exit if file is missing
+            local dynamicPath = getDynamicSoundPath(soundName)
             
             local mp = MediaPlayer()
-            mp.setDataSource(validPath)
+            mp.setDataSource(dynamicPath)
             mp.prepare()
             mp.start()
             
@@ -82,7 +92,7 @@ function memoryModule.start(params)
 
     local colorPool = {{c="#FF0000", name="Red color"}, {c="#0000FF", name="Blue color"}, {c="#008000", name="Green color"}, {c="#FFFF00", name="Yellow color"}, {c="#800080", name="Purple color"}, {c="#FFC0CB", name="Pink color"}, {c="#00FFFF", name="Cyan color"}, {c="#FF00FF", name="Magenta color"}, {c="#A52A2A", name="Brown color"}, {c="#00FF00", name="Lime color"}, {c="#008080", name="Teal color"}, {c="#000080", name="Navy color"}, {c="#800000", name="Maroon color"}, {c="#808000", name="Olive color"}, {c="#808080", name="Gray color"}}
     local fruitVegPool = {{e="馃崕", name="Apple"}, {e="馃崒", name="Banana"}, {e="馃崌", name="Grapes"}, {e="馃崜", name="Strawberry"}, {e="馃崏", name="Watermelon"}, {e="馃崚", name="Cherry"}, {e="馃崙", name="Peach"}, {e="4", name="Pineapple"}, {e="馃キ", name="Mango"}, {e="馃", name="Kiwi"}, {e="馃ゥ", name="Coconut"}, {e="馃", name="Carrot"}, {e="馃ウ", name="Broccoli"}, {e="馃崊", name="Tomato"}, {e="馃", name="Potato"}, {e="馃", name="Onion"}, {e="馃尳", name="Corn"}, {e="馃", name="Cucumber"}, {e="馃崋", name="Eggplant"}}
-    local animalBirdPool = {{e="馃", name="Lion"}, {e="馃惎", name="Tiger"}, {e="馃悩", name="Elephant"}, {e="馃惖", name="Monkey"}, {e="馃惗", name="Dog"}, {e="馃惐", name="Cat"}, {e="馃惌", name="Mouse"}, {e="馃惢", name="Bear"}, {e="馃惏", name="Rabbit"}, {e="馃", name="Fox"}, {e="馃", name="Deer"}, {e="4", name="Zebra"}, {e="馃悇", name="Cow"}, {e="馃", name="Hedgehog"}, {e="馃悜", name="Sheep"}, {e="馃悙", name="Goat"}, {e="馃悢", name="Chicken"}, {e="馃", name="Duck"}, {e="馃", name="Eagle"}, {e="馃", name="Owl"}, {e="馃", name="Parrot"}, {e="馃惂", name="Penguin"}, {e="馃悕", name="Snake"}}
+    local animalBirdPool = {{e="🦜", name="Green Parrot"}, {e="🐈", name="Cat"}, {e="🐎", name="Horse"}, {e="🦗", name="Cricket"}, {e="🐓", name="Rooster"}, {e="🐐", name="Goat"}, {e="🫏", name="Donkey"}, {e="🐕", name="Dog"}, {e="🐑", name="Sheep"}, {e="🦚", name="Peacock"}, {e="🦃", name="Turkey"}, {e="🐔", name="Chicken"}, {e="🦆", name="Duck"}, {e="🦩", name="Flamingo"}, {e="🐧", name="Penguin"}, {e="🐻", name="Bear"}, {e="🐄", name="Cow"}, {e="🐝", name="Honey Bee"}, {e="🦅", name="Eagle"}, {e="🐦", name="Asian Koel"}, {e="🐦‍⬛", name="Crow"}, {e="🦜", name="African Grey Parrot"}, {e="🐪", name="Camel"}, {e="🐘", name="Elephant"}, {e="🐸", name="Frog"}, {e="🦛", name="Hippopotamus"}, {e="🦁", name="Lion"}, {e="🐼", name="Panda"}, {e="🐀", name="Rat"}, {e="🐺", name="Wolf"}, {e="🦓", name="Zebra"}}
 
     local isAnimalLookup = {}
     for _, v in ipairs(animalBirdPool) do
@@ -92,7 +102,7 @@ function memoryModule.start(params)
     local gameDeck = {}
     if difficulty == "Easy" then for i=1, 15 do table.insert(gameDeck, colorPool[i]); table.insert(gameDeck, colorPool[i]) end
     elseif difficulty == "Medium" then for i=1, 19 do table.insert(gameDeck, fruitVegPool[i]); table.insert(gameDeck, fruitVegPool[i]) end
-    elseif difficulty == "Hard" then for i=1, 23 do table.insert(gameDeck, animalBirdPool[i]); table.insert(gameDeck, animalBirdPool[i]) end for i=1, 4 do table.insert(gameDeck, fruitVegPool[i]); table.insert(gameDeck, fruitVegPool[i]) end for i=1, 4 do table.insert(gameDeck, colorPool[i]); table.insert(gameDeck, colorPool[i]) end end
+    elseif difficulty == "Hard" then for i=1, 31 do table.insert(gameDeck, animalBirdPool[i]); table.insert(gameDeck, animalBirdPool[i]) end end
     
     math.randomseed(os.time())
     for i = #gameDeck, 2, -1 do local j = math.random(i); gameDeck[i], gameDeck[j] = gameDeck[j], gameDeck[i] end
@@ -101,6 +111,9 @@ function memoryModule.start(params)
     local p1Guesses, p2Guesses = 0, 0
     local lastData1, lastData2 = nil, nil
     local isGameActive = true
+    
+    -- Computer's Human memory table tracking
+    local computerMemory = {}
     
     -- Safe Lua Table debounce lock to prevent runtime errors on Buttons
     local processingBoxes = {}
@@ -191,10 +204,10 @@ function memoryModule.start(params)
             
             editor.putInt("coins", currentCoins + addedCoins)
             
-            -- Play main.lua global sounds safely
+            -- Play main.lua global sounds safely with dynamic paths
             if _G.playSound then
-                pcall(function() _G.playSound("/storage/emulated/0/瑙ｈ/Tools/ All Games Hub/sounds/Vin sound.mp3") end)
-                pcall(function() _G.playSound("/storage/emulated/0/瑙ｈ/Tools/ All Games Hub/sounds/Coins.mp3") end)
+                pcall(function() _G.playSound(getDynamicSoundPath("sounds/Vin sound.mp3")) end)
+                pcall(function() _G.playSound(getDynamicSoundPath("sounds/Coins.mp3")) end)
             end
             
         elseif result == "lose" then
@@ -209,9 +222,9 @@ function memoryModule.start(params)
             local losses = prefs.getInt("memory_losses", 0) + 1
             editor.putInt("memory_losses", losses)
             
-            -- Play main.lua global lose sound
+            -- Play main.lua global lose sound with dynamic path
             if _G.playSound then
-                pcall(function() _G.playSound("/storage/emulated/0/瑙ｈ/Tools/ All Games Hub/sounds/laugh4.mp3") end)
+                pcall(function() _G.playSound(getDynamicSoundPath("sounds/laugh4.mp3")) end)
             end
             
         elseif result == "draw" then
@@ -289,6 +302,10 @@ function memoryModule.start(params)
         lastData1, lastData2 = pick1.data, pick2.data
         local h = HandlerClass(LooperClass.getMainLooper())
         
+        -- Store the opened cards into computer's memory bank
+        computerMemory[pick1.index] = pick1.data.name
+        computerMemory[pick2.index] = pick2.data.name
+        
         if currentTurn == 1 then
             p1Guesses = p1Guesses + 1
         else
@@ -311,6 +328,10 @@ function memoryModule.start(params)
         end
         
         if isMatch then
+            -- Remove matched cards from memory since they are hidden now
+            computerMemory[pick1.index] = nil
+            computerMemory[pick2.index] = nil
+            
             if currentTurn == 1 then 
                 p1Score = p1Score + 1
                 p1Text.setText("You: " .. p1Score)
@@ -322,6 +343,15 @@ function memoryModule.start(params)
             end
         else
             playSound("sounds/wrong.mp3")
+            -- Human forgetfulness: 25% chance to randomly forget a card on an incorrect guess
+            if math.random(1, 100) <= 25 then
+                local rememberedKeys = {}
+                for k, _ in pairs(computerMemory) do table.insert(rememberedKeys, k) end
+                if #rememberedKeys > 0 then
+                    local targetKey = rememberedKeys[math.random(#rememberedKeys)]
+                    computerMemory[targetKey] = nil
+                end
+            end
         end
 
         if _G.ttsAnnounce then _G.ttsAnnounce(matchStatus) end
@@ -382,13 +412,13 @@ function memoryModule.start(params)
             local p1_idx, p2_idx
             local calculatedMatch = false
             
-            -- Smart Tweak: 35% chance computer will intentionally look for an available matching pair
+            -- Human Memory Tweak: 35% chance computer will successfully recall an available matching pair from its known cards list
             if math.random(1, 100) <= 35 then
                 for i = 1, #available - 1 do
                     for j = i + 1, #available do
                         local index1 = available[i]
                         local index2 = available[j]
-                        if gameDeck[index1].name == gameDeck[index2].name then
+                        if computerMemory[index1] and computerMemory[index2] and computerMemory[index1] == computerMemory[index2] and index1 ~= index2 then
                             p1_idx = index1
                             p2_idx = index2
                             calculatedMatch = true
@@ -399,11 +429,27 @@ function memoryModule.start(params)
                 end
             end
             
-            -- Fallback if 35% rule misses or no matches are left on board
+            -- Fallback if 35% memory recall fails or it hasn't stored a visible matching pair yet
             if not calculatedMatch then
                 p1_idx = available[math.random(1, #available)]
-                p2_idx = available[math.random(1, #available)]
-                while p2_idx == p1_idx do p2_idx = available[math.random(1, #available)] end
+                
+                -- After picking first box, check if computer remembers where its matching pair is
+                local targetName = gameDeck[p1_idx].name
+                local rememberedIdx = nil
+                for _, idx in ipairs(available) do
+                    if idx ~= p1_idx and computerMemory[idx] == targetName then
+                        rememberedIdx = idx
+                        break
+                    end
+                end
+                
+                -- If it remembers, it has a 70% human chance to pull it off, otherwise it guesses randomly
+                if rememberedIdx and math.random(1, 100) <= 70 then
+                    p2_idx = rememberedIdx
+                else
+                    p2_idx = available[math.random(1, #available)]
+                    while p2_idx == p1_idx do p2_idx = available[math.random(1, #available)] end
+                end
             end
             
             openBox(p1_idx)
@@ -417,7 +463,7 @@ function memoryModule.start(params)
                     checkMatch({btn=_G["membox_"..p1_idx], index=p1_idx, data=gameDeck[p1_idx]}, {btn=_G["membox_"..p2_idx], index=p2_idx, data=gameDeck[p2_idx]})
                 end}), 1500)
                 
-            end}), 1800) 
+            end}), 3000) 
             
         end}), 1500)
     end
