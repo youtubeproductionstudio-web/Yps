@@ -1,1 +1,2 @@
-Now measures have been taken to reduce spamming in public chat. The bug where a popup would show on deleted messages in public chat has been fixed, and many stability fixes have also been made. The focus has been improved.
+What's new.
+Memory hard modeUpdated.. added new animals.. added new animal sounds. Added a new feature in public chat copy user ID button now you can copy the user ID.   you find any person who Spamming.  in the public chat just copy his user id and send us from the sand feedback button.
