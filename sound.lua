@@ -48,7 +48,7 @@ else
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.2"
+local currentVersion = "1.1"
 
 local currentPath = ...
 local currentDir = nil
