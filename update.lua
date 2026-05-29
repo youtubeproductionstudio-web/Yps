@@ -38,7 +38,8 @@ local filesToUpdate = {
 {name = "settings.lua", url = baseUrl .. "settings.lua"},
 {name = "init.lua", url = baseUrl .. "init.lua"},    {name = "memory.lua", url = baseUrl .. "memory.lua"},
     {name = "update.lua", url = baseUrl .. "update.lua"},
-{name = "diagnostic_util.lua", url = baseUrl .. "diagnostic_util.lua"}
+{name = "diagnostic_util.lua", url = baseUrl .. "diagnostic_util.lua"},
+{name = "main.lua", url = baseUrl .. "main.lua"}
 }
 
 if service then
