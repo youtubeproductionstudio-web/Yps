@@ -49,7 +49,7 @@ else
 end
 
 local TAG = "LuaUpdater"
-local currentVersion = "1.1.5"
+local currentVersion = "1.1.9"
 
 local currentPath = ...
 local currentDir = nil
@@ -200,8 +200,7 @@ local function checkUpdate()
                         local btnLater = currentUpdateDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
                         
                         btnLater.onClick = function(v)
-                            currentUpdateDialog.dismiss()
-                            runOriginalCode() -- Update skip karne par normal UI start ho jaye
+                            closeToolCompletely(ctx)
                         end
 
                         btnUpdate.onClick = function(v)
