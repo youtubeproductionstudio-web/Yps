@@ -10,6 +10,9 @@ import "android.media.MediaPlayer"
 import "android.webkit.*"
 import "android.os.*"
 
+-- Update logic ko sab se top par kar diya gaya hai taake fast download foran shuru ho jaye
+local update = require "update"
+
 local profile = require "profile"
 local aboutModule = require "about"
 local creditsModule = require "credits"
@@ -649,5 +652,3 @@ function startAppUiFlow()
       welcomeModule.startAppUiFlow(getWelcomeParams())
   end
 end
-
-local update = require "update"
