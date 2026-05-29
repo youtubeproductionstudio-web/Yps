@@ -1,2 +1,1 @@
-What's new.
-Memory hard modeUpdated.. added new animals.. added new animal sounds. Added a new feature in public chat copy user ID button now you can copy the user ID.   you find any person who Spamming.  in the public chat just copy his user id and send us from the sand feedback button.
+A big stability update is here and all runtime errors have been fixed. Update now, enjoy it, and boost your gaming experience.
