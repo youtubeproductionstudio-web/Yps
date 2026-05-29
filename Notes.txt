@@ -1,1 +1,5 @@
-A big stability update is here and all runtime errors have been fixed. Update now, enjoy it, and boost your gaming experience.
+The ad reward system has been improved. Players will still normally receive 2 coins for watching an advertisement, but the chances of receiving a bonus reward of 3 coins have been increased, giving players more opportunities to earn extra coins while enjoying the game.
+
+The game has also been further optimized and made more stable to provide smoother performance, better reliability, and an improved overall user experience.
+
+Additionally, in the Memory game mode, a small delay/spacing has been added between the computer opening the first box and the second box, making the gameplay easier to follow and improving the overall visual and gameplay experience.
