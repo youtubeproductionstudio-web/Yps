@@ -37,7 +37,8 @@ local filesToUpdate = {
     {name = "store.lua", url = baseUrl .. "store.lua"},
 {name = "settings.lua", url = baseUrl .. "settings.lua"},
 {name = "init.lua", url = baseUrl .. "init.lua"},    {name = "memory.lua", url = baseUrl .. "memory.lua"},
-    {name = "update.lua", url = baseUrl .. "update.lua"}
+    {name = "update.lua", url = baseUrl .. "update.lua"},
+{name = "diagnostic_util.lua", url = baseUrl .. "diagnostic_util.lua"}
 }
 
 if service then
@@ -47,7 +48,7 @@ else
 end
 
 local TAG = "LuaUpdater"
-local currentVersion = "1.1"
+local currentVersion = "1.1.5"
 
 local currentPath = ...
 local currentDir = nil
