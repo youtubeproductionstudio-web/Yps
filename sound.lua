@@ -69,7 +69,13 @@ local filesToUpdate = {
     {name = "panda.mp3", url = baseUrl .. "panda.mp3"},
     {name = "rat.mp3", url = baseUrl .. "rat.mp3"},
     {name = "wolf.mp3", url = baseUrl .. "wolf.mp3"},
-    {name = "zebra.mp3", url = baseUrl .. "zebra.mp3"}
+    {name = "zebra.mp3", url = baseUrl .. "zebra.mp3"},
+    {name = "pistol.mp3", url = baseUrl .. "pistol.mp3"},
+    {name = "shotgun.mp3", url = baseUrl .. "shotgun.mp3"},
+    {name = "ak47.mp3", url = baseUrl .. "ak47.mp3"},
+    {name = "machinegun.mp3", url = baseUrl .. "machinegun.mp3"},
+    {name = "walk.mp3", url = baseUrl .. "walk.mp3"},
+    {name = "reload.mp3", url = baseUrl .. "reload.mp3"},
 }
 
 if service then
@@ -79,7 +85,7 @@ else
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.1"
+local currentVersion = "1.2"
 
 local currentPath = ...
 local currentDir = nil
