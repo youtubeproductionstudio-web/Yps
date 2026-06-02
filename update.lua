@@ -39,8 +39,8 @@ local filesToUpdate = {
 {name = "init.lua", url = baseUrl .. "init.lua"},    {name = "memory.lua", url = baseUrl .. "memory.lua"},
     {name = "update.lua", url = baseUrl .. "update.lua"},
 {name = "diagnostic_util.lua", url = baseUrl .. "diagnostic_util.lua"},
-{name = "main.lua", url = baseUrl .. "main.lua"}
-}
+{name = "main.lua", url = baseUrl .. "main.lua"},
+{name = "mode_1vs5.lua", url = baseUrl .. "mode_1vs5.lua"}}
 
 if service then
     service.speak("Checking for updates!, please wait...")
@@ -49,7 +49,7 @@ else
 end
 
 local TAG = "LuaUpdater"
-local currentVersion = "1.1.9"
+local currentVersion = "2.01"
 
 local currentPath = ...
 local currentDir = nil
