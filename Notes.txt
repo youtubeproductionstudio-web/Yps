@@ -1,1 +1,22 @@
-A big stability update has arrived. What's new in this update: we have resolved the gesture bug. Now, the swipe up with two fingers then left gesture opens the inventory. We also resolved the reload gesture: swipe down with two fingers then left works perfectly. When you open the inventory, the game pauses, and after you close it, the game resumes. We also fixed on-click and runtime errors. Your feedback is important—click on the About button, then Send Feedback to Y P S YouTube Production Studios.
+A Big Stability Update Has Arrived!
+
+We're excited to bring you a major stability update focused on improving accessibility, gameplay reliability, and overall performance.
+
+What's New in This Update?
+
+Fixed the gesture bug. The swipe up with two fingers, then left gesture now correctly opens the Inventory.
+
+Fixed the reload gesture. The swipe down with two fingers, then left gesture now works properly and consistently for reloading.
+
+Added improved Inventory behavior. When the Inventory is opened, the game automatically pauses, preventing any gameplay actions from continuing in the background. Once the Inventory is closed, the game resumes exactly where you left off.
+
+Resolved several on-click issues that could cause buttons or actions to behave unexpectedly.
+
+Fixed multiple runtime errors to improve game stability and reduce crashes.
+
+Improved overall responsiveness and reliability for a smoother gaming experience.
+
+
+Your feedback is important to us! If you have any suggestions, bug reports, or ideas for future updates, click the About button and then select Send Feedback. Your feedback helps us continue improving the game and making it better for everyone.
+
+Thank you for playing, and enjoy the update!
