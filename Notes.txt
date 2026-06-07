@@ -14,15 +14,19 @@ Gameplay balancing and optimization have been completed to provide a more consis
 
 The Sunday Gift system provided by the developers now includes stronger validation and security checks to ensure fair distribution and prevent issues.
 
+New sound effects have been added in this update, including new sounds designed to improve the overall gameplay experience.
 
-Upcoming Sound Update
+The Free Fire-inspired sound experience has also been integrated into this update, providing more engaging and immersive audio feedback during gameplay.
 
-The previously available sounds remain fully functional and stable. However, the new Free Fire-inspired sound effects included in the latest development work are not being released in this update. They are scheduled to arrive in a separate sound update, expected either later this evening or tomorrow morning.
 
-Because this update already contains many major changes, we have decided to release the new sounds separately. This helps reduce the risk of unexpected errors and ensures a more stable experience for everyone.
+Performance & Stability
+
+This is one of the largest updates released so far. Because of the number of improvements included, extensive work has been done to maintain stability and reduce the possibility of errors. The game should now feel smoother, faster, and more responsive than before.
 
 Need Help?
 
 If you encounter any bugs, errors, or unexpected behavior, please let us know. Open the About section in the game and tap the Send Feedback button to report the issue. Our team will carefully review your report and make every effort to fix the problem as quickly as possible.
 
-Thank you for playing and supporting the game. Your feedback helps us continue improving the experience for everyone. Stay tuned for the upcoming sound update! 🎮🚀
+Thank you for playing and supporting the game. Your feedback helps us continue improving the experience for everyone. We hope you enjoy the new TTS options, improved performance, enhanced stability, and the newly added sound experience.
+
+Happy Gaming! 🎮🚀
