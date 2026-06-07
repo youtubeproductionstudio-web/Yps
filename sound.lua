@@ -76,7 +76,13 @@ local filesToUpdate = {
     {name = "machinegun.mp3", url = baseUrl .. "machinegun.mp3"},
     {name = "walk.mp3", url = baseUrl .. "walk.mp3"},
     {name = "reload.mp3", url = baseUrl .. "reload.mp3"},
+{name = "kill.mp3", url = baseUrl .. "kill.mp3"},
+    {name = "kill1.mp3", url = baseUrl .. "kill1.mp3"},
+    {name = "hit.mp3", url = baseUrl .. "hit.mp3"},
+{name = "hit1.mp3", url = baseUrl .. "hit1.mp3"},
+    {name = "heel.mp3", url = baseUrl .. "heel.mp3"},
 }
+
 
 if service then
     service.speak("Checking for sound updates!, please wait...")
@@ -85,7 +91,7 @@ else
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.2"
+local currentVersion = "1.4"
 
 local currentPath = ...
 local currentDir = nil
