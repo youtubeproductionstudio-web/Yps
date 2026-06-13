@@ -1,32 +1,9 @@
-Major Update Released!
+Major Stability Update Before Online Multiplayer
 
-We are excited to announce a major update packed with new features, improvements, and stability enhancements.
+We are excited to share that a major stability update is being completed before the launch of Online Multiplayer. All of our servers are now online and running on a new infrastructure to provide a faster, more reliable, and smoother gaming experience.
 
-What's New?
+As part of this upgrade, we migrated our services to a new server platform. Unfortunately, this migration resulted in the loss of previous player data, and some old progress, items, and records may no longer be available.
 
-A new Text-to-Speech (TTS) Settings option has been added. Players can now choose their preferred TTS voice and enjoy a more personalized experience.
+We sincerely apologize for this inconvenience and appreciate your understanding and support during this transition. To thank you for your patience and help with the recovery process, every affected player will receive a special compensation gift. This reward will be distributed alongside the upcoming major Online Multiplayer update.
 
-Overall game performance has been significantly improved for smoother gameplay.
-
-Numerous bugs, crashes, and stability issues have been fixed.
-
-Gameplay balancing and optimization have been completed to provide a more consistent and enjoyable experience for all players.
-
-The Sunday Gift system provided by the developers now includes stronger validation and security checks to ensure fair distribution and prevent issues.
-
-New sound effects have been added in this update, including new sounds designed to improve the overall gameplay experience.
-
-The Free Fire-inspired sound experience has also been integrated into this update, providing more engaging and immersive audio feedback during gameplay.
-
-
-Performance & Stability
-
-This is one of the largest updates released so far. Because of the number of improvements included, extensive work has been done to maintain stability and reduce the possibility of errors. The game should now feel smoother, faster, and more responsive than before.
-
-Need Help?
-
-If you encounter any bugs, errors, or unexpected behavior, please let us know. Open the About section in the game and tap the Send Feedback button to report the issue. Our team will carefully review your report and make every effort to fix the problem as quickly as possible.
-
-Thank you for playing and supporting the game. Your feedback helps us continue improving the experience for everyone. We hope you enjoy the new TTS options, improved performance, enhanced stability, and the newly added sound experience.
-
-Happy Gaming! 🎮🚀
+Thank you for being part of our community. Your support helps us continue improving the game and delivering exciting new features.
