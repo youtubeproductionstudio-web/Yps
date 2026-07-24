@@ -1,20 +1,22 @@
-💬 All Games Hub – Public Chat Just Got Better!
+🔔 All Games Hub – Stay Updated Like Never Before!
 
-Your community experience is now faster, smarter, and more connected!
+Never miss an important announcement again!
 
-✨ What's New?
+📢 New Notifications Feature
 
-We've introduced several improvements to make Public Chat more useful and convenient:
+We've added a brand-new Notifications section to keep you connected with everything happening in All Games Hub.
 
-🔔 Unread Messages Counter – Instantly see how many unread messages you have without opening Public Chat.
+With this new feature, you can:
 
-🌐 Online Players Display – You can now see how many players are currently online and active in the community.
+Read the latest announcements directly inside the app.
 
-⚡ Faster & Easier Chat Experience – Stay updated with new conversations at a glance, so you never miss important messages.
+Stay informed about new updates, features, events, and important news.
 
-🛠️ Stability Improvements – We've made several behind-the-scenes optimizations to improve performance, reliability, and overall app stability.
+Receive official posts shared by the All Games Hub developers in one convenient place.
 
-Whether you're chatting with friends or keeping up with the community, these improvements make Public Chat smoother and more enjoyable than ever.
+Keep up with everything that's happening without missing a single update.
 
-If you notice any issues after updating, simply go to About and tap Send Feedback. Your feedback helps us continue improving All Games Hub with every update.
+This feature ensures you're always the first to know about exciting improvements, upcoming releases, and important announcements from the development team.
+
+If you experience any issues after updating, simply go to About and tap Send Feedback. Your feedback helps us make All Games Hub even better with every update.
 
