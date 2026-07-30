@@ -31,6 +31,9 @@ local filesToUpdate = {
    {name = "Coins.mp3", url = baseUrl .. "Coins.mp3"},
 {name = "guess.mp3", url = baseUrl .. "guess.mp3"},
     {name = "laugh4.mp3", url = baseUrl .. "laugh4.mp3"},
+{name = "leave.mp3", url = baseUrl .. "leave.mp3"},
+{name = "join.mp3", url = baseUrl .. "join.mp3"},
+{name = "unloc.mp3", url = baseUrl .. "unloc.mp3"},
     {name = "perchased.mp3", url = baseUrl .. "perchased.mp3"},
     {name = "Play Card.mp3", url = baseUrl .. "Play%20Card.mp3"},
     {name = "receive.mp3", url = baseUrl .. "receive.mp3"},
@@ -69,20 +72,8 @@ local filesToUpdate = {
     {name = "panda.mp3", url = baseUrl .. "panda.mp3"},
     {name = "rat.mp3", url = baseUrl .. "rat.mp3"},
     {name = "wolf.mp3", url = baseUrl .. "wolf.mp3"},
-    {name = "zebra.mp3", url = baseUrl .. "zebra.mp3"},
-    {name = "pistol.mp3", url = baseUrl .. "pistol.mp3"},
-    {name = "shotgun.mp3", url = baseUrl .. "shotgun.mp3"},
-    {name = "ak47.mp3", url = baseUrl .. "ak47.mp3"},
-    {name = "machinegun.mp3", url = baseUrl .. "machinegun.mp3"},
-    {name = "walk.mp3", url = baseUrl .. "walk.mp3"},
-    {name = "reload.mp3", url = baseUrl .. "reload.mp3"},
-{name = "kill.mp3", url = baseUrl .. "kill.mp3"},
-    {name = "kill1.mp3", url = baseUrl .. "kill1.mp3"},
-    {name = "hit.mp3", url = baseUrl .. "hit.mp3"},
-{name = "hit1.mp3", url = baseUrl .. "hit1.mp3"},
-    {name = "heel.mp3", url = baseUrl .. "heel.mp3"},
+    {name = "zebra.mp3", url = baseUrl .. "zebra.mp3"}
 }
-
 
 if service then
     service.speak("Checking for sound updates!, please wait...")
