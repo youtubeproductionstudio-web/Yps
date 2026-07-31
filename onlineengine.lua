@@ -1,1 +1,1211 @@
-=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
+local onlineEngineModule = {}
+
+local DB_URL = "https://online-multiplayer-e1e9b-default-rtdb.firebaseio.com"
+local Network = require("NetworkEngine")
+local UIData = require("onlineEngineUI") 
+local JoinRoomModule = require("join") 
+local Helper = require("onlineEngineHelper")
+local GameLogicManager = require("GameLogicManager")
+
+-- Java classes statically bound to prevent reflection overhead during binary encryption
+local System = luajava.bindClass("java.lang.System")
+local String = luajava.bindClass("java.lang.String")
+local JSONObject = luajava.bindClass("org.json.JSONObject")
+local JSONArray = luajava.bindClass("org.json.JSONArray")
+local Runnable = luajava.bindClass("java.lang.Runnable")
+local File = luajava.bindClass("java.io.File")
+local Toast = luajava.bindClass("android.widget.Toast")
+local Color = luajava.bindClass("android.graphics.Color")
+local Gravity = luajava.bindClass("android.view.Gravity")
+local Typeface = luajava.bindClass("android.graphics.Typeface")
+local View = luajava.bindClass("android.view.View")
+local KeyEvent = luajava.bindClass("android.view.KeyEvent")
+local MediaPlayer = luajava.bindClass("android.media.MediaPlayer")
+local TextToSpeech = luajava.bindClass("android.speech.tts.TextToSpeech")
+local Looper = luajava.bindClass("android.os.Looper")
+local Handler = luajava.bindClass("android.os.Handler")
+local Bundle = luajava.bindClass("android.os.Bundle")
+local AlertDialog = luajava.bindClass("android.app.AlertDialog")
+local ProgressDialog = luajava.bindClass("android.app.ProgressDialog")
+local Context = luajava.bindClass("android.content.Context")
+local DialogInterface = luajava.bindClass("android.content.DialogInterface")
+local LinearLayout = luajava.bindClass("android.widget.LinearLayout")
+local TextView = luajava.bindClass("android.widget.TextView")
+local Button = luajava.bindClass("android.widget.Button")
+local EditText = luajava.bindClass("android.widget.EditText")
+local CheckBox = luajava.bindClass("android.widget.CheckBox")
+local FrameLayout = luajava.bindClass("android.widget.FrameLayout")
+
+-- Moved imports globally to avoid runtime initialization overhead in encrypted lua
+import "android.app.*"
+import "android.os.*"
+import "android.widget.*"
+import "android.content.*" 
+import "android.text.InputFilter"
+
+function onlineEngineModule.showUniversalLobby(activity, prefs, params, gameConfig)
+
+    local function nowTimeMs() return System.currentTimeMillis() end
+
+    local isActionInFlight, actionFlightTime, isNetworkAvailableCached, bgMusicPlayer = false, 0, true, nil
+    local gameTitle = gameConfig.title or "Generic Game"
+    local gamePathNode = gameTitle:gsub("%s+", "") 
+    local currentRoom, myRole, gameCurrentState = "", "waiting", "MAIN_MENU"
+    local myUsername = prefs.getString("username", "Player_" .. math.random(1000, 9999))
+    local safeUsernameKey = myUsername:gsub("[%.$#%[%]/%s]", "_")
+    local globalChatMuted, isMuteButtonCooldown, activeRoomHostName, syncScoreData = false, false, "", 0
+    local selectedGameName, selectedGameHealth = "BEGGAR MY NEIGHBOR", "5" 
+    local lastSyncedGameName, lastSyncedGameHealth, lastSyncedMuteState = "", "", nil
+    
+    local trackedOnlinePlayersMap, previousPlayerSlotsMap, joinSpeechGuards, establishedListeners = {}, {}, {}, {}
+    local lastAudienceHashStr, lastWaitingHashStr, lastP1RowCacheStr, lastP2RowCacheStr, lastHeadingCacheStr, lastRawBodyCache = "", "", "", "", "", ""
+    local lastHbTime, trackedHeartbeats, lastChatTimestamp = 0, {}, 0
+    local player_names, player_statuses = { player1 = "Empty", player2 = "Empty" }, { player1 = "empty", player2 = "empty" }
+
+    -- Performance, Threading, and Caching Variables
+    local currentPollInterval, idleCycles = 1500, 0
+    local isPolling = false 
+    local isOutboundAudioPlaying = false 
+    local movementQueue, isProcessingMovement = {}, false
+    local lastSpeechTime, recentMovements = 0, {}
+    local activeDialogs = {} 
+    local activeRoomUrlCache = "" -- CACHED URL TO PREVENT GC SPAM
+
+    -- Inter-module continuous syncing pointers
+    local activeGameContext = nil
+    local lastSeenSyncScore = 0
+
+    local txtTotal, layoutGame, genericGameViewport, layoutOnlineMenu, btnStartMatchSignal
+    local txtChatDisplay, btnInGameSendMsg, btnInGameChatHistory, btnUpdateGameRoom, btnToggleGlobalChat
+    local txtPlayer1Row, txtPlayer2Row, txtAudienceHeading, txtWaitingListHeading 
+    local containerAudienceList, containerWaitingList, layoutInGameControls, lblHeadingCustom
+    local containerAvailableRoomsList, btnRefreshServerRooms, mainRoot, btnExitRoom
+    
+    local systemHandler = Handler(Looper.getMainLooper())
+    local listenRunnable, menuListenRunnable = nil, nil
+
+    local function updateActiveRoomUrl()
+        if gamePathNode ~= "" and currentRoom ~= "" then
+            activeRoomUrlCache = DB_URL .. "/rooms/" .. gamePathNode .. "/" .. currentRoom .. ".json"
+        else
+            activeRoomUrlCache = ""
+        end
+    end
+
+    local function safeUI(func)
+        if activity and not activity.isFinishing() and not activity.isDestroyed() then activity.runOnUiThread(Runnable({run = func})) end
+    end
+    local function asyncNetwork(action) pcall(function() Network.executeTask(action) end) end
+    local function updateTextIfChanged(view, newText)
+        if view and tostring(view.getText()) ~= tostring(newText) then view.setText(tostring(newText)) end
+    end
+    local function setVisibilityIfChanged(view, visibility)
+        if view and view.getVisibility() ~= visibility then view.setVisibility(visibility) end
+    end
+    local function safeName(n) return (not n or n == "") and "empty" or n:gsub("[%.$#%[%]/%s]", "_"):lower() end
+    local function showToast(text) safeUI(function() Toast.makeText(activity, text, Toast.LENGTH_SHORT).show() end) end
+
+    local ttsEngine = Helper.setupTTSEngine(activity, prefs)
+    local function speakText(text)
+        if ttsEngine then pcall(function()
+            local paramsBundle = Bundle() paramsBundle.putFloat("volume", prefs.getInt("tts_volume", 100) / 100)
+            ttsEngine.speak(text, TextToSpeech.QUEUE_ADD, paramsBundle, "engine_audio") 
+        end) end
+    end
+
+    local function processedSpeakText(text, isMovement, playerName)
+        local nowTime = os.time()
+        if isMovement and playerName then
+            if not recentMovements[playerName] then
+                recentMovements[playerName] = { count = 1, lastTime = nowTime }
+            else
+                local mData = recentMovements[playerName]
+                if nowTime - mData.lastTime < 4 then
+                    mData.count = mData.count + 1
+                    mData.lastTime = nowTime
+                    if mData.count >= 2 then
+                        if mData.timer then systemHandler.removeCallbacks(mData.timer) end
+                        mData.timer = Runnable({run = function()
+                            speakText(playerName .. " changed positions multiple times")
+                            mData.count = 0
+                        end})
+                        systemHandler.postDelayed(mData.timer, 1500)
+                        return
+                    end
+                else
+                    mData.count = 1
+                    mData.lastTime = nowTime
+                end
+            end
+        end
+
+        if not isMovement then
+            if nowTime - lastSpeechTime < 2 then return end
+        end
+
+        lastSpeechTime = nowTime
+        speakText(text)
+    end
+
+    local function playMainMenuMusic()
+        pcall(function()
+            if params then
+                if type(params.pauseMusic) == "function" then pcall(params.pauseMusic) end
+                if type(params.stopMusic) == "function" then pcall(params.stopMusic) end
+                if type(params.stopMainMenuMusic) == "function" then pcall(params.stopMainMenuMusic) end
+            end
+            for _, player in ipairs({_G.bgMusicPlayer, _G.mediaPlayer, _G.bgMusic, _G.musicPlayer}) do
+                if player and type(player.pause) == "function" then pcall(function() player.pause() end) end
+            end
+            if not bgMusicPlayer then
+                local f = File(activity.getLuaDir() .. "/sounds/online.mp3")
+                if f.exists() then
+                    bgMusicPlayer = MediaPlayer() bgMusicPlayer.setDataSource(f.getAbsolutePath())
+                    bgMusicPlayer.setLooping(true) bgMusicPlayer.prepare()
+                end
+            end
+            if bgMusicPlayer and not bgMusicPlayer.isPlaying() then bgMusicPlayer.start() end
+        end)
+    end
+
+    local function stopMainMenuMusic()
+        if bgMusicPlayer then pcall(function() if bgMusicPlayer.isPlaying() then bgMusicPlayer.stop() end bgMusicPlayer.release() bgMusicPlayer = nil end) end
+    end
+
+    local function shutdownEngine()
+        pcall(function()
+            if listenRunnable then systemHandler.removeCallbacks(listenRunnable) listenRunnable = nil end
+            if menuListenRunnable then systemHandler.removeCallbacks(menuListenRunnable) menuListenRunnable = nil end
+            stopMainMenuMusic()
+            if ttsEngine then pcall(function() ttsEngine.stop() ttsEngine.shutdown() ttsEngine = nil end) end
+            isActionInFlight = false
+        end)
+    end
+
+    pcall(function()
+        local originalOnDestroy = activity.onDestroy
+        activity.onDestroy = function()
+            shutdownEngine()
+            if originalOnDestroy then originalOnDestroy() end
+        end
+    end)
+
+    local function consumeCoinsOnline(cost, onSuccess, onInsufficient)
+        local cm = activity.getSystemService(Context.CONNECTIVITY_SERVICE)
+        local ni = cm.getActiveNetworkInfo()
+        if not (ni ~= nil and ni.isConnected()) then
+           showToast("Active internet connection is required.")
+           if onInsufficient then onInsufficient() end
+           return
+        end
+
+        local currentUname = prefs.getString("username", "")
+        if currentUname == "" then
+            showToast("Session expired! Username not found.")
+            if onInsufficient then onInsufficient() end
+            return
+        end
+
+        local pd = ProgressDialog.show(activity, "Processing", "Verifying coins with server...", true, false)
+        local firebaseUrl = "https://all-games-76b5d-default-rtdb.firebaseio.com/users/"
+        local nodeKey = currentUname:lower():gsub(" ", "%%20")
+        local userUrl = firebaseUrl .. nodeKey .. ".json"
+
+        local Http = luajava.bindClass("com.androlua.Http")
+        Http.get(userUrl, function(code, content)
+            safeUI(function()
+                if code == 200 and content and content ~= "null" then
+                    local success, err = pcall(function()
+                        local cleanContent = content:gsub("^%s*(.-)%s*$", "%1")
+                        local jsonObj = JSONObject(cleanContent)
+                        local userDataObj = jsonObj
+                        
+                        local keysIter = jsonObj.keys()
+                        if keysIter.hasNext() then
+                            local firstKey = tostring(keysIter.next())
+                            if firstKey:sub(1,1) == "-" then userDataObj = jsonObj.optJSONObject(firstKey) end
+                        end
+                        
+                        if userDataObj == nil then error("Database structure is invalid or missing.") end
+                        if not userDataObj.has("coins") or userDataObj.isNull("coins") then error("Coins record missing in user database.") end
+                        
+                        local currentCoins = tonumber(tostring(userDataObj.get("coins")))
+                        if currentCoins == nil then error("Coins data is corrupted.") end
+                        
+                        if currentCoins >= cost then
+                            local newCoins = currentCoins - cost
+                            local updateData = '{"coins": ' .. newCoins .. '}'
+                            local updateUrl = userUrl .. "?x-http-method-override=PATCH"
+                            
+                            Http.post(updateUrl, updateData, function(updCode, updContent)
+                                safeUI(function()
+                                    pcall(function() pd.dismiss() end)
+                                    if updCode >= 200 and updCode < 300 then
+                                        if _G.setSecureCoins then pcall(_G.setSecureCoins, newCoins) end
+                                        if onSuccess then onSuccess() end
+                                    else
+                                        showToast("Server transaction failed!")
+                                        if onInsufficient then onInsufficient() end
+                                    end
+                                end)
+                            end)
+                        else
+                            pcall(function() pd.dismiss() end)
+                            if onInsufficient then onInsufficient() end
+                        end
+                    end)
+                    if not success then
+                        pcall(function() pd.dismiss() end)
+                        showToast("Data Error: " .. tostring(err))
+                        if onInsufficient then onInsufficient() end
+                    end
+                else
+                    pcall(function() pd.dismiss() end)
+                    showToast("Failed to connect to server.")
+                    if onInsufficient then onInsufficient() end
+                end
+            end)
+        end)
+    end
+
+    local lastClickClock = 0
+    local function withNet(action)
+        return function(...)
+            if nowTimeMs() - lastClickClock < 400 then return end
+            lastClickClock = nowTimeMs()
+            if not isNetworkAvailableCached then
+                safeUI(function() AlertDialog.Builder(activity).setTitle("No Internet").setMessage("Internet connection lost. Please connect to the internet.").setPositiveButton("OK", nil).show() end)
+                return
+            end
+            if action then return action(...) end
+        end
+    end
+
+    local wrapClick = function(view, action) (params.wrapClick or function(v, act) v.setOnClickListener(View.OnClickListener({onClick=act})) end)(view, withNet(action)) end
+    local styleButton = params.styleButton or function(btn) end
+
+    local fetchAndRefreshActiveRooms, startListeningEngine, startMenuListeningEngine, stopMenuListeningEngine, applyGenericRulesAndSync, handleDynamicPlayerManagement, showSmartExitConfirmation
+
+    local function triggerEngineSyncUI() 
+        if listenRunnable then 
+            isPolling = false
+            systemHandler.removeCallbacks(listenRunnable) 
+            systemHandler.postDelayed(listenRunnable, 200) 
+        end 
+    end
+
+    local function deepLockdownView(v)
+        if not v then return end
+        pcall(function()
+            if v.setClickable then v.setClickable(false) end if v.setEnabled then v.setEnabled(false) end if v.setOnClickListener then v.setOnClickListener(nil) end
+            if v.getChildCount then for idx = 0, v.getChildCount() - 1 do deepLockdownView(v.getChildAt(idx)) end end
+        end)
+    end
+
+    local function stopListening() isPolling = false if listenRunnable then systemHandler.removeCallbacks(listenRunnable) listenRunnable = nil end end
+    stopMenuListeningEngine = function() if menuListenRunnable then systemHandler.removeCallbacks(menuListenRunnable) menuListenRunnable = nil end end
+
+    local function forceExitToMenu(msg)
+        safeUI(function()
+            stopListening()
+            for _, d in ipairs(activeDialogs) do if d and d.isShowing() then d.dismiss() end end
+            activeDialogs = {}
+            if msg then showToast(msg) end
+            Helper.clearLobbyDataAndViews({ containerAudienceList = containerAudienceList, containerWaitingList = containerWaitingList, txtChatDisplay = txtChatDisplay, txtPlayer1Row = txtPlayer1Row, txtPlayer2Row = txtPlayer2Row })
+            lastAudienceHashStr, lastWaitingHashStr, lastP1RowCacheStr, lastP2RowCacheStr, lastHeadingCacheStr, lastRawBodyCache = "", "", "", "", "", ""
+            trackedHeartbeats, trackedOnlinePlayersMap, previousPlayerSlotsMap, joinSpeechGuards = {}, {}, {}, {}
+            currentRoom, myRole, gameCurrentState, activeRoomHostName, isActionInFlight = "", "waiting", "MAIN_MENU", "", false
+            player_names, player_statuses = { player1 = "Empty", player2 = "Empty" }, { player1 = "empty", player2 = "empty" }
+            lastChatTimestamp, syncScoreData, globalChatMuted = 0, 0, false
+            lastSyncedGameName, lastSyncedGameHealth, lastSyncedMuteState = "", "", nil
+            movementQueue, isProcessingMovement = {}, false
+            currentPollInterval, idleCycles = 1500, 0
+            isPolling = false
+            activeRoomUrlCache = ""
+            
+            activeGameContext = nil
+            lastSeenSyncScore = 0
+            
+            if lblHeadingCustom then updateTextIfChanged(lblHeadingCustom, "CUSTOM ROOMS") end
+            setVisibilityIfChanged(layoutGame, View.GONE) setVisibilityIfChanged(layoutOnlineMenu, View.VISIBLE)
+            playMainMenuMusic() startMenuListeningEngine()
+        end)
+    end
+
+    local function mutateRoomData(modifier, callback)
+        if activeRoomUrlCache == "" then return end
+        asyncNetwork(function()
+            Network.get(activeRoomUrlCache, function(body, success)
+                if not success or not body or body == "null" or body == "" then 
+                    isActionInFlight = false 
+                    if callback then callback(false) end
+                    return 
+                end
+                asyncNetwork(function() pcall(function()
+                    local rObj = JSONObject(body)
+                    local patchData = JSONObject()
+                    if modifier(rObj, patchData) then 
+                        Network.patch(activeRoomUrlCache, patchData.toString(), function(ok) 
+                            isActionInFlight = false 
+                            triggerEngineSyncUI() 
+                            if callback then callback(ok) end
+                        end) 
+                    else 
+                        isActionInFlight = false 
+                        if callback then callback(false) end
+                    end
+                end) end)
+            end)
+        end)
+    end
+
+    local function removePlayerFromArrays(rObj, patchData, pName)
+        if rObj.optString("player1_name") == pName then patchData.put("player1_name", "Empty") patchData.put("player1_status", "empty") end
+        if rObj.optString("player2_name") == pName then patchData.put("player2_name", "Empty") patchData.put("player2_status", "empty") end
+        local function filter(arrName)
+            local arr = rObj.has(arrName) and not rObj.isNull(arrName) and rObj.getJSONArray(arrName) or JSONArray()
+            local newArr = JSONArray()
+            local hasChanged = false
+            for i=0, arr.length()-1 do 
+                if arr.getString(i) ~= pName and arr.getString(i) ~= "" then 
+                    newArr.put(arr.getString(i)) 
+                else
+                    hasChanged = true
+                end
+            end
+            if hasChanged then patchData.put(arrName, newArr) end
+        end
+        filter("audience") filter("waitingList")
+    end
+
+    local function joinRoomById(targetPathNode, roomKey)
+        if not roomKey or roomKey == "" or not targetPathNode or targetPathNode == "" then return end
+        if isActionInFlight then return end
+        
+        if not isNetworkAvailableCached then showToast("Waiting for network...") return end
+        isActionInFlight = true
+        stopMenuListeningEngine() 
+
+        asyncNetwork(function()
+            Network.get(DB_URL .. "/rooms/" .. targetPathNode .. "/" .. roomKey .. ".json", function(body, success)
+                if not success or not body or body == "null" or body == "" then
+                    isActionInFlight = false
+                    startMenuListeningEngine()
+                    showToast("Room no longer exists.")
+                    return
+                end
+                
+                local userIsBanned = false
+                pcall(function()
+                    local rObj = JSONObject(body)
+                    local localKickBanStamp = rObj.optLong("banned_player_" .. safeName(myUsername), 0)
+                    if localKickBanStamp > 0 and os.time() < localKickBanStamp then
+                        userIsBanned = true
+                    end
+                end)
+
+                if userIsBanned then
+                    isActionInFlight = false
+                    startMenuListeningEngine()
+                    safeUI(function()
+                        local bDialog = AlertDialog.Builder(activity)
+                            .setTitle("Access Denied")
+                            .setMessage("You are banned from this room.")
+                            .setPositiveButton("OK", nil)
+                            .show()
+                        table.insert(activeDialogs, bDialog)
+                    end)
+                    return
+                end
+
+                consumeCoinsOnline(4, function()
+                    systemHandler.postDelayed(Runnable({run = function()
+                        JoinRoomModule.execute(roomKey, {
+                            DB_URL = DB_URL, gamePathNode = targetPathNode, myUsername = myUsername, Network = Network, JSONObject = JSONObject, JSONArray = JSONArray,
+                            asyncNetwork = asyncNetwork, safeUI = safeUI, safeName = safeName, getCurrentRoom = function() return currentRoom end,
+                            setCurrentRoom = function(r) currentRoom = r end, setMyRole = function(r) myRole = r end, forceExitToMenu = function(m) isActionInFlight = false forceExitToMenu(m) end,
+                            onJoinSuccess = function()
+                                isActionInFlight = false
+                                gamePathNode = targetPathNode 
+                                stopMainMenuMusic()
+                                updateActiveRoomUrl() -- Cache the URL
+                                trackedOnlinePlayersMap, previousPlayerSlotsMap, joinSpeechGuards = {}, {}, {}
+                                setVisibilityIfChanged(layoutOnlineMenu, View.GONE) setVisibilityIfChanged(layoutGame, View.VISIBLE) 
+                                gameCurrentState = "LOBBY" startListeningEngine() 
+                            end
+                        })
+                    end}), 150)
+                end, function()
+                    isActionInFlight = false
+                    startMenuListeningEngine()
+                    showToast("Insufficient Coins! 4 coins required to join a room.")
+                end)
+            end)
+        end)
+    end
+
+    local function processExitFlow(shouldDeleteEntireRoom)
+        if activeRoomUrlCache == "" then return end
+        safeUI(function() forceExitToMenu(nil) end)
+        
+        if shouldDeleteEntireRoom then 
+            asyncNetwork(function() Network.delete(activeRoomUrlCache, function() end) end) 
+            return 
+        end
+        
+        asyncNetwork(function()
+            Network.get(activeRoomUrlCache, function(body, success)
+                if not success or not body or body == "null" or body == "" then return end
+                pcall(function()
+                    local rObj = JSONObject(body)
+                    local patchData = JSONObject()
+                    local currentHost = rObj.optString("hostName", "")
+                    
+                    removePlayerFromArrays(rObj, patchData, myUsername)
+                    
+                    if currentHost == myUsername then
+                        local candidateHost = "Empty"
+                        for _, key in ipairs({"player1_name", "player2_name"}) do
+                            local n = rObj.optString(key, "Empty") if n ~= "Empty" and n ~= "" and n ~= myUsername then candidateHost = n break end
+                        end
+                        if candidateHost == "Empty" then
+                            for _, arrKey in ipairs({"waitingList", "audience"}) do
+                                if rObj.has(arrKey) and not rObj.isNull(arrKey) and rObj.getJSONArray(arrKey).length() > 0 then 
+                                    local arr = rObj.getJSONArray(arrKey)
+                                    for i=0, arr.length()-1 do 
+                                        if arr.getString(i) ~= myUsername then candidateHost = arr.getString(i) break end 
+                                    end
+                                end
+                                if candidateHost ~= "Empty" then break end
+                            end
+                        end
+                        if candidateHost == "Empty" then 
+                            Network.delete(activeRoomUrlCache) 
+                            return 
+                        end
+                        patchData.put("hostName", candidateHost)
+                    end
+                    Network.patch(activeRoomUrlCache, patchData.toString())
+                end)
+            end)
+        end)
+    end
+
+    showSmartExitConfirmation = function()
+        local container = LinearLayout(activity) container.setOrientation(LinearLayout.VERTICAL) container.setPadding(40, 20, 40, 20)
+        local txtTitle = TextView(activity) txtTitle.setText("Exit Room?") txtTitle.setTextSize(20) txtTitle.setTypeface(Typeface.DEFAULT_BOLD) txtTitle.setTextColor(Color.WHITE) container.addView(txtTitle)
+        local txtWarn = TextView(activity) txtWarn.setText("Are you sure you want to exit the custom room?") txtWarn.setTextSize(16) txtWarn.setTextColor(Color.WHITE) txtWarn.setPadding(0, 20, 0, 20) container.addView(txtWarn)
+        local chkDelete = nil
+        if activeRoomHostName == myUsername then chkDelete = CheckBox(activity) chkDelete.setText("Delete Room from Server") chkDelete.setTextColor(Color.WHITE) container.addView(chkDelete) end
+        
+        local exitDialog = AlertDialog.Builder(activity).setView(container)
+        .setPositiveButton("Exit", DialogInterface.OnClickListener({
+            onClick = function(dialog, which)
+                withNet(function() processExitFlow(chkDelete and chkDelete.isChecked()) end)()
+            end
+        }))
+        .setNegativeButton("Cancel", DialogInterface.OnClickListener({onClick = function() end}))
+        .show()
+        table.insert(activeDialogs, exitDialog)
+    end
+
+    local function applyOptimisticRoomsRecycler(roomListTemp)
+        if not containerAvailableRoomsList or gameCurrentState ~= "MAIN_MENU" then return end
+        local currentChildCount = containerAvailableRoomsList.getChildCount()
+        
+        if currentChildCount > 0 and tostring(containerAvailableRoomsList.getChildAt(0).getTag()) == "status_msg" then
+            containerAvailableRoomsList.removeAllViews() currentChildCount = 0
+        end
+
+        local desiredCount = #roomListTemp
+        for i = 1, math.max(currentChildCount, desiredCount) do
+            if i <= desiredCount then
+                local item = roomListTemp[i]
+                local joinerCount = (item.p1 ~= "Empty" and item.p1 ~= "" and 1 or 0) + (item.p2 ~= "Empty" and item.p2 ~= "" and 1 or 0) + item.audCount + item.waitCount
+                local formattedTime = item.time > 0 and os.date("%I:%M %p, %d %b %Y", item.time) or "Unknown Time"
+                local modeText = (item.gameName ~= "BEGGAR MY NEIGHBOR" and item.gameMode ~= "") and (" (Mode: " .. item.gameMode .. ")") or ""
+                local displayRoomTitleText = string.format("Room: %s\nGame: %s%s\nActive Since: %s\nTotal Joiners: %d", item.hostName:upper(), item.gameName, modeText, formattedTime, joinerCount)
+
+                local roomRow, roomInfo, btnJoinItem
+                if i <= currentChildCount then
+                    roomRow = containerAvailableRoomsList.getChildAt(i - 1) setVisibilityIfChanged(roomRow, View.VISIBLE)
+                    roomInfo, btnJoinItem = roomRow.getChildAt(0), roomRow.getChildAt(1)
+                else
+                    roomRow = LinearLayout(activity) roomRow.setOrientation(LinearLayout.HORIZONTAL) roomRow.setPadding(20, 25, 20, 25)
+                    roomRow.setBackgroundColor(Color.parseColor("#FF262626")) roomRow.setGravity(Gravity.CENTER_VERTICAL)
+                    local lp = LinearLayout.LayoutParams(-1, -2) lp.setMargins(0, 10, 0, 10) roomRow.setLayoutParams(lp)
+                    
+                    roomInfo = TextView(activity) roomInfo.setTextColor(Color.WHITE) roomInfo.setTextSize(14) roomInfo.setLineSpacing(0, 1.3)
+                    roomInfo.setLayoutParams(LinearLayout.LayoutParams(0, -2, 1.0)) roomRow.addView(roomInfo)
+                    
+                    btnJoinItem = Button(activity) btnJoinItem.setText("JOIN") btnJoinItem.setBackgroundColor(Color.parseColor("#FF00AA55")) btnJoinItem.setTextColor(Color.WHITE)
+                    roomRow.addView(btnJoinItem) containerAvailableRoomsList.addView(roomRow)
+                end
+
+                updateTextIfChanged(roomInfo, displayRoomTitleText) btnJoinItem.setTag(item.gamePathNode .. "|" .. tostring(item.key))
+                
+                local joinBtnId = tostring(btnJoinItem)
+                if not establishedListeners[joinBtnId] then
+                    establishedListeners[joinBtnId] = true wrapClick(btnJoinItem, function(v) 
+                        local tagStr = tostring(v.getTag() or "") 
+                        local sep = tagStr:find("|", 1, true)
+                        if sep then joinRoomById(tagStr:sub(1, sep-1), tagStr:sub(sep+1)) end 
+                    end)
+                end
+            else
+                local child = containerAvailableRoomsList.getChildAt(i - 1)
+                setVisibilityIfChanged(child, View.GONE) child.setTag("")
+                if establishedListeners[tostring(child)] then child.setOnClickListener(nil) establishedListeners[tostring(child)] = nil end
+            end
+        end
+    end
+
+    fetchAndRefreshActiveRooms = function(silent)
+        if gameCurrentState ~= "MAIN_MENU" then return end
+        safeUI(function() if btnRefreshServerRooms then btnRefreshServerRooms.setEnabled(false) btnRefreshServerRooms.setText("Refreshing...") systemHandler.postDelayed(Runnable({run = function() if btnRefreshServerRooms then btnRefreshServerRooms.setEnabled(true) btnRefreshServerRooms.setText("Refresh") end end}), 5000) end end)
+        
+        asyncNetwork(function()
+            Network.get(DB_URL .. "/rooms.json", function(body, connected)
+                isNetworkAvailableCached = connected
+                if not connected then
+                    safeUI(function()
+                        if btnRefreshServerRooms then btnRefreshServerRooms.setEnabled(true) btnRefreshServerRooms.setText("Refresh") end
+                        if containerAvailableRoomsList then containerAvailableRoomsList.removeAllViews() local noConnTxt = TextView(activity) noConnTxt.setText("Network error. Please try again.") noConnTxt.setTextColor(Color.RED) noConnTxt.setGravity(Gravity.CENTER) noConnTxt.setTag("status_msg") containerAvailableRoomsList.addView(noConnTxt) end
+                        if not silent then showToast("Connection failed! Retrying...") end
+                    end) return
+                end
+                asyncNetwork(function()
+                    local roomListTemp, trimmedBody = {}, body:gsub("^%s*(.-)%s*$", "%1")
+                    local isValidData = (trimmedBody ~= "null" and trimmedBody ~= "" and trimmedBody ~= "{}")
+                    if isValidData then
+                        pcall(function()
+                            local rootObj, nowTime = JSONObject(trimmedBody), os.time()
+                            local gameCategories = rootObj.names()
+                            if gameCategories then
+                                for g = 0, gameCategories.length() - 1 do
+                                    local cNode = gameCategories.getString(g)
+                                    local roomsObj = rootObj.optJSONObject(cNode)
+                                    if roomsObj then
+                                        local keysArray = roomsObj.names()
+                                        if keysArray then
+                                            for i = 0, keysArray.length() - 1 do
+                                                local roomKey = keysArray.getString(i) local sRoom = roomsObj.optJSONObject(roomKey)
+                                                if sRoom then
+                                                    local createdAt = sRoom.optLong("createdAtTimestamp", 0)
+                                                    if createdAt > 0 and (nowTime - createdAt) >= 600 and sRoom.optString("gameState", "") ~= "STARTED" then Network.delete(DB_URL .. "/rooms/" .. cNode .. "/" .. roomKey .. ".json")
+                                                    elseif sRoom.optString("gameState", "") == "WAITING" then
+                                                        table.insert(roomListTemp, { key = roomKey, gamePathNode = cNode, hostName = sRoom.optString("hostName", "Unknown"), gameName = sRoom.optString("selectedGame", "Generic Game"), gameMode = sRoom.optString("gameHealthConfig", ""), p1 = sRoom.optString("player1_name", "Empty"), p2 = sRoom.optString("player2_name", "Empty"), audCount = sRoom.has("audience") and not sRoom.isNull("audience") and sRoom.getJSONArray("audience").length() or 0, waitCount = sRoom.has("waitingList") and not sRoom.isNull("waitingList") and sRoom.getJSONArray("waitingList").length() or 0, time = createdAt })
+                                                    end
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end)
+                    end
+                    
+                    safeUI(function()
+                        if btnRefreshServerRooms then btnRefreshServerRooms.setEnabled(true) btnRefreshServerRooms.setText("Refresh") end
+                        if #roomListTemp == 0 then 
+                            if containerAvailableRoomsList then containerAvailableRoomsList.removeAllViews() local noRoomTxt = TextView(activity) noRoomTxt.setText("No Rooms Available to Join.") noRoomTxt.setTextColor(Color.parseColor("#88FFFFFF")) noRoomTxt.setGravity(Gravity.CENTER) noRoomTxt.setTag("status_msg") containerAvailableRoomsList.addView(noRoomTxt) end
+                            return 
+                        end
+                        table.sort(roomListTemp, function(a, b) return a.time > b.time end) applyOptimisticRoomsRecycler(roomListTemp)
+                        if not silent then showToast("Rooms refreshed successfully!") end
+                    end)
+                end)
+            end)
+        end)
+    end
+
+    startMenuListeningEngine = function() 
+        stopMenuListeningEngine() 
+        playMainMenuMusic() 
+        fetchAndRefreshActiveRooms(false)
+    end
+
+    local function patchRoomState(patchObj, callback)
+        if activeRoomUrlCache == "" then return end
+        asyncNetwork(function() Network.patch(activeRoomUrlCache, patchObj.toString(), callback) end)
+    end
+
+    local function openSendMessageCustomDialog()
+        if globalChatMuted and activeRoomHostName ~= myUsername then showToast("Host has disabled all player messages!") return end
+        local editMsg = EditText(activity) editMsg.setHint("Type message here...") editMsg.setTextColor(0xFF000000) editMsg.setFilters({InputFilter.LengthFilter(50)})
+        local container = LinearLayout(activity) container.setOrientation(LinearLayout.VERTICAL) container.setPadding(45, 20, 45, 20) container.addView(editMsg)
+        
+        local cDialog = AlertDialog.Builder(activity).setTitle("Send Message").setView(container).setPositiveButton("Send", DialogInterface.OnClickListener({
+            onClick = function(dialog, which)
+                withNet(function()
+                    local msgText = tostring(editMsg.getText()):gsub("^%s*(.-)%s*$", "%1") if msgText == "" then return end
+                    
+                    safeUI(function() 
+                        if txtChatDisplay then txtChatDisplay.setText("Chat: " .. myUsername:upper() .. " -> " .. msgText) end 
+                        isOutboundAudioPlaying = true
+                        processedSpeakText("You say " .. msgText, false) 
+                        systemHandler.postDelayed(Runnable({run = function() isOutboundAudioPlaying = false end}), 4000)
+                    end)
+
+                    if btnInGameSendMsg then btnInGameSendMsg.setEnabled(false) systemHandler.postDelayed(Runnable({run = function() if btnInGameSendMsg then btnInGameSendMsg.setEnabled(true) end end}), 10000) end
+                    pcall(function()
+                        local ts = os.time() * 1000 local chatObj, patchData = JSONObject(), JSONObject()
+                        chatObj.put("sender", myUsername:upper()) chatObj.put("text", msgText) chatObj.put("timestamp", ts)
+                        patchData.put("chatHistory/" .. ts, chatObj) patchData.put("lastChat", chatObj)
+                        patchRoomState(patchData, function(ok) if ok then triggerEngineSyncUI() end end)
+                    end)
+                end)()
+            end
+        })).setNegativeButton("Cancel", nil).show()
+        table.insert(activeDialogs, cDialog)
+    end
+
+    local function openChatHistoryDialog()
+        if activeRoomUrlCache == "" then return end
+        local historyUrl = activeRoomUrlCache:gsub(".json", "/chatHistory.json")
+        asyncNetwork(function()
+            Network.get(historyUrl, function(body)
+                if not body or body == "null" or body == "" then showToast("No chat history available!") return end
+                asyncNetwork(function() pcall(function()
+                    local cObj, keys, items, sortedKeys = JSONObject(body), JSONObject(body).names(), {}, {}
+                    if keys then
+                        for i = 0, keys.length() - 1 do table.insert(sortedKeys, keys.getString(i)) end table.sort(sortedKeys)
+                        for _, k in ipairs(sortedKeys) do table.insert(items, cObj.getJSONObject(k).optString("sender") .. ": " .. cObj.getJSONObject(k).optString("text")) end
+                    end
+                    safeUI(function() local d = AlertDialog.Builder(activity).setTitle("Chat History").setItems(items, nil).setPositiveButton("Close", nil).show() table.insert(activeDialogs, d) end)
+                end) end)
+            end)
+        end)
+    end
+
+    local function processMovementQueue()
+        if isProcessingMovement or #movementQueue == 0 then return end
+        isProcessingMovement = true
+        
+        local currentMove = table.remove(movementQueue, 1)
+        local tSlot, pN = currentMove.targetSlot, currentMove.pName
+        
+        trackedOnlinePlayersMap[pN], previousPlayerSlotsMap[pN] = true, tSlot
+
+        safeUI(function()
+            local function wipe(container)
+                if container then 
+                    for idx = 0, container.getChildCount() - 1 do 
+                        local v = container.getChildAt(idx) 
+                        if tostring(v.getTag()) == pN then 
+                            setVisibilityIfChanged(v, View.GONE) 
+                            v.setTag("") 
+                            if establishedListeners[tostring(v)] then 
+                                v.setOnClickListener(nil) 
+                                establishedListeners[tostring(v)] = nil 
+                            end 
+                        end 
+                    end 
+                end
+            end
+            wipe(containerAudienceList) 
+            wipe(containerWaitingList)
+            if txtPlayer1Row and tostring(txtPlayer1Row.getText()):find(pN:upper(), 1, true) then txtPlayer1Row.setText("Player One: EMPTY") end
+            if txtPlayer2Row and tostring(txtPlayer2Row.getText()):find(pN:upper(), 1, true) then txtPlayer2Row.setText("Player Two: EMPTY") end
+            
+            local msgs = {player1="Player One", player2="Player Two", audience="Audience", waitingList="Waiting List"}
+            if tSlot == "player1" and txtPlayer1Row then txtPlayer1Row.setText("Player One: " .. pN:upper() .. " - ONLINE") end
+            if tSlot == "player2" and txtPlayer2Row then txtPlayer2Row.setText("Player Two: " .. pN:upper() .. " - ONLINE") end
+            processedSpeakText(pN .. " moved to " .. (msgs[tSlot] or tSlot), true, pN)
+        end)
+
+        mutateRoomData(function(rObj, patchData)
+            removePlayerFromArrays(rObj, patchData, pN)
+            if tSlot == "player1" then 
+                patchData.put("player1_name", pN) 
+                patchData.put("player1_status", "joined")
+            elseif tSlot == "player2" then 
+                patchData.put("player2_name", pN) 
+                patchData.put("player2_status", "joined")
+            else 
+                local arr = rObj.has(tSlot) and not rObj.isNull(tSlot) and rObj.getJSONArray(tSlot) or JSONArray()
+                arr.put(pN)
+                patchData.put(tSlot, arr) 
+            end
+            return true
+        end, function(ok)
+            isProcessingMovement = false
+            systemHandler.post(Runnable({run = processMovementQueue}))
+        end)
+    end
+
+    local function executeSlotMove(targetSlot, pName)
+        local updated = false
+        for i = #movementQueue, 1, -1 do
+            if movementQueue[i].pName == pName then
+                movementQueue[i].targetSlot = targetSlot
+                updated = true
+                break
+            end
+        end
+        if not updated then table.insert(movementQueue, {targetSlot = targetSlot, pName = pName}) end
+        processMovementQueue()
+    end
+
+    handleDynamicPlayerManagement = function(targetName, currentSlotType)
+        if activeRoomHostName ~= myUsername then return end 
+        local opts, actions = {}, {}
+        
+        if targetName == myUsername then
+            if player_names["player1"] == "Empty" then table.insert(opts, "Move to Player 1 Seat") table.insert(actions, "MOVE_P1") end
+            if player_names["player2"] == "Empty" then table.insert(opts, "Move to Player 2 Seat") table.insert(actions, "MOVE_P2") end
+            if currentSlotType ~= "audience" then table.insert(opts, "Move to Audience") table.insert(actions, "MOVE_AUD") end
+            if currentSlotType ~= "waitingList" then table.insert(opts, "Move to Waiting List") table.insert(actions, "MOVE_WAIT") end
+        else
+            table.insert(opts, "Kick Player") table.insert(actions, "KICK") table.insert(opts, "Transfer Online Ownership") table.insert(actions, "OWNER")
+            if player_names["player1"] == "Empty" or player_names["player1"] == "" then table.insert(opts, "Move to Player 1") table.insert(actions, "MOVE_P1") end
+            if player_names["player2"] == "Empty" or player_names["player2"] == "" then table.insert(opts, "Move to Player 2") table.insert(actions, "MOVE_P2") end
+            if currentSlotType ~= "audience" then table.insert(opts, "Move to Audience") table.insert(actions, "MOVE_AUD") end
+            if currentSlotType ~= "waitingList" then table.insert(opts, "Move to Waiting List") table.insert(actions, "MOVE_WAIT") end
+        end
+
+        local optsArray = String[#opts]
+        for i=1, #opts do optsArray[i-1] = opts[i] end
+
+        local mDialog = AlertDialog.Builder(activity).setTitle("Manage: " .. targetName:upper()).setItems(optsArray, DialogInterface.OnClickListener({
+            onClick = function(dialog, which)
+                withNet(function()
+                    local act = actions[which + 1]
+                    if act == "KICK" then
+                        if isActionInFlight and (nowTimeMs() - actionFlightTime < 2500) then return end
+                        isActionInFlight, actionFlightTime = true, nowTimeMs()
+                        safeUI(function() processedSpeakText("Kicking player " .. targetName, false) end)
+                        mutateRoomData(function(rObj, patchData)
+                            removePlayerFromArrays(rObj, patchData, targetName)
+                            local sysObj = JSONObject() sysObj.put("sender", "SYSTEM") sysObj.put("text", targetName:upper() .. " kicked out.") sysObj.put("timestamp", os.time()*1000)
+                            patchData.put("lastChat", sysObj) patchData.put("banned_player_" .. safeName(targetName), os.time() + 315360000)
+                            return true
+                        end)
+                    elseif act == "OWNER" then safeUI(function() processedSpeakText("Transferring ownership to " .. targetName, false) end) pcall(function() local po = JSONObject() po.put("hostName", targetName) patchRoomState(po) end)
+                    else executeSlotMove(act:sub(6):lower() == "p1" and "player1" or act:sub(6):lower() == "p2" and "player2" or act:sub(6):lower() == "aud" and "audience" or "waitingList", targetName) end
+                end)()
+            end
+        })).show()
+        table.insert(activeDialogs, mDialog)
+    end
+
+    local function openRoomConfigurationSetup(isUpdateMode)
+        Helper.openRoomConfigurationSetup(activity, isUpdateMode, {
+            selectedGameName = selectedGameName, selectedGameHealth = selectedGameHealth, wrapClickCallback = withNet,
+            onUpdateExecuted = function(gameName, gameHealth)
+                gameName = (gameName and gameName ~= "") and gameName or selectedGameName
+                gameHealth = (gameHealth and gameHealth ~= "") and gameHealth or selectedGameHealth
+                
+                if string.match(gameName:lower(), "memory") then showToast("Memory Game is coming soon!") return end
+
+                if isActionInFlight and (nowTimeMs() - actionFlightTime < 1000) then return end
+                isActionInFlight, actionFlightTime = true, nowTimeMs()
+                pcall(function() local patch = JSONObject() patch.put("selectedGame", gameName) patch.put("gameHealthConfig", gameHealth) patchRoomState(patch, function(s) isActionInFlight = false if s then showToast("Game mode dynamically updated!") triggerEngineSyncUI() end end) end)
+            end,
+            onCreateExecuted = function(gameName, gameHealth)
+                gameName = (gameName and gameName ~= "") and gameName or selectedGameName
+                gameHealth = (gameHealth and gameHealth ~= "") and gameHealth or selectedGameHealth
+                
+                if string.match(gameName:lower(), "memory") then showToast("Memory Game is coming soon!") return end
+                
+                selectedGameName = gameName
+                selectedGameHealth = gameHealth
+                local targetLocalPathNode = gameName:gsub("%s+", "")
+
+                isActionInFlight = true 
+                consumeCoinsOnline(5, function()
+                    asyncNetwork(function() pcall(function()
+                        currentRoom, activeRoomHostName = safeUsernameKey:lower() .. "_rm", myUsername
+                        updateActiveRoomUrl() -- SET URL CACHE FOR FAST EXECUTION
+                        local jobj = JSONObject() jobj.put("syncScoreData", 0) jobj.put("maxLives", 5) jobj.put("maxPlayersLimit", 2) jobj.put("gameState", "WAITING") jobj.put("hostName", myUsername) jobj.put("selectedGame", gameName) jobj.put("gameHealthConfig", gameHealth) jobj.put("globalChatMuted", false) jobj.put("createdAtTimestamp", os.time()) jobj.put("player1_name", myUsername) jobj.put("player1_status", "joined") jobj.put("player1_life", 5) jobj.put("player2_name", "Empty") jobj.put("player2_status", "empty") jobj.put("player2_life", 5) jobj.put("audience", JSONArray()) jobj.put("waitingList", JSONArray()) jobj.put("hb_" .. safeName(myUsername), os.time())
+                        
+                        Network.put(activeRoomUrlCache, jobj.toString(), function(ok) safeUI(function()
+                            isActionInFlight = false 
+                            if ok then 
+                                gamePathNode = targetLocalPathNode
+                                stopMenuListeningEngine() stopMainMenuMusic() trackedOnlinePlayersMap, previousPlayerSlotsMap, joinSpeechGuards = {}, {}, {} setVisibilityIfChanged(layoutOnlineMenu, View.GONE) setVisibilityIfChanged(layoutGame, View.VISIBLE) gameCurrentState = "LOBBY" startListeningEngine() if mainRoot then mainRoot.setFocusableInTouchMode(true) mainRoot.requestFocus() end 
+                            end
+                        end) end)
+                    end) end)
+                end, function()
+                    isActionInFlight = false
+                    showToast("Insufficient Coins! 5 coins required to create a room.")
+                end)
+
+            end
+        })
+    end
+
+    local function toggleGlobalChatMuteState()
+        if activeRoomHostName ~= myUsername or isMuteButtonCooldown then return end
+        isMuteButtonCooldown, globalChatMuted = true, not globalChatMuted 
+        lastSyncedMuteState = globalChatMuted
+        safeUI(function()
+            if btnToggleGlobalChat then btnToggleGlobalChat.setEnabled(false) btnToggleGlobalChat.setAlpha(0.5) btnToggleGlobalChat.setText(globalChatMuted and "Enable Messages" or "Disable All Messages") end
+            processedSpeakText(globalChatMuted and "All player messages have been disabled" or "Player messages have been enabled", false)
+            systemHandler.postDelayed(Runnable({run = function() isMuteButtonCooldown = false if btnToggleGlobalChat then btnToggleGlobalChat.setEnabled(true) btnToggleGlobalChat.setAlpha(1.0) end end}), 10000)
+        end)
+        pcall(function() local patch = JSONObject() patch.put("globalChatMuted", globalChatMuted == true) patchRoomState(patch) end)
+    end
+
+    local function applyDynamicLayoutRecycler(container, dataList, onActionClick)
+        local childCount, desiredMap, usedNames = container.getChildCount(), {}, {}
+        for _, data in ipairs(dataList) do desiredMap[data.name] = data end
+        
+        for i = 0, childCount - 1 do
+            local child, boundName = container.getChildAt(i), tostring(container.getChildAt(i).getTag() or "")
+            if boundName ~= "" and desiredMap[boundName] then
+                setVisibilityIfChanged(child, View.VISIBLE) updateTextIfChanged(child, boundName:upper() .. (desiredMap[boundName].state ~= "ONLINE" and " (OFFLINE)" or "")) usedNames[boundName] = true
+                if not establishedListeners[tostring(child)] then establishedListeners[tostring(child)] = true wrapClick(child, function(v) local bName = tostring(v.getTag() or "") if bName ~= "" and v.getVisibility() == View.VISIBLE then onActionClick(bName) end end) end
+            else
+                setVisibilityIfChanged(child, View.GONE) child.setTag("")
+                if establishedListeners[tostring(child)] then child.setOnClickListener(nil) establishedListeners[tostring(child)] = nil end
+            end
+        end
+        for _, data in ipairs(dataList) do
+            if not usedNames[data.name] then
+                local targetView = nil
+                for i = 0, container.getChildCount() - 1 do if container.getChildAt(i).getVisibility() == View.GONE then targetView = container.getChildAt(i) break end end
+                if not targetView then targetView = Button(activity) targetView.setTransformationMethod(nil) styleButton(targetView) container.addView(targetView) end
+                targetView.setTag(data.name) setVisibilityIfChanged(targetView, View.VISIBLE) updateTextIfChanged(targetView, data.name:upper() .. (data.state ~= "ONLINE" and " (OFFLINE)" or ""))
+                if not establishedListeners[tostring(targetView)] then establishedListeners[tostring(targetView)] = true wrapClick(targetView, function(v) local bName = tostring(v.getTag() or "") if bName ~= "" and v.getVisibility() == View.VISIBLE then onActionClick(bName) end end) end
+            end
+        end
+    end
+
+    local function scheduleNextPoll() 
+        if listenRunnable then 
+            isPolling = false
+            systemHandler.removeCallbacks(listenRunnable)
+            systemHandler.postDelayed(listenRunnable, currentPollInterval) 
+        end 
+    end
+
+    local function getPlayerState(pName, jobj, liveTime)
+        if pName == "Empty" or pName == "" then return "EMPTY" end
+        local hb = jobj.optLong("hb_" .. safeName(pName), 0)
+        if not trackedHeartbeats[pName] then trackedHeartbeats[pName] = { value = hb, localTime = liveTime } return "ONLINE" end
+        if trackedHeartbeats[pName].value ~= hb then trackedHeartbeats[pName].value = hb trackedHeartbeats[pName].localTime = liveTime return "ONLINE" end
+        return (liveTime - trackedHeartbeats[pName].localTime > 18) and "OFFLINE" or "ONLINE"
+    end
+
+    local function checkSlotRegistration(pName, slot, seenNames, currentActivePlayersList)
+        if pName == "Empty" or pName == "" or seenNames[pName] then return false end 
+        seenNames[pName], currentActivePlayersList[pName] = true, slot 
+        return true
+    end
+
+    startListeningEngine = function()
+        stopListening() lastRawBodyCache = ""
+        isPolling = false
+        listenRunnable = Runnable({
+            run = function()
+                if not listenRunnable or isPolling or activeRoomUrlCache == "" then return end
+                isPolling = true
+                local now = os.time()
+                asyncNetwork(function()
+                    if now - lastHbTime >= 6 then 
+                        pcall(function() 
+                            local patchStr = string.format('{"hb_%s":%d}', safeName(myUsername), now)
+                            asyncNetwork(function() Network.patch(activeRoomUrlCache, patchStr) end)
+                        end) 
+                        lastHbTime = now 
+                    end
+                    
+                    Network.get(activeRoomUrlCache, function(body, statusOk)
+                        isNetworkAvailableCached = statusOk
+                        if not statusOk or isActionInFlight then scheduleNextPoll() return end
+                        if not body or body == "null" or body == "" then forceExitToMenu("Room was deleted or closed by host.") return end
+                        
+                        if body == lastRawBodyCache then 
+                            idleCycles = idleCycles + 1
+                            if idleCycles > 15 then
+                                currentPollInterval = 3000
+                            elseif idleCycles > 5 then
+                                currentPollInterval = 1500
+                            end
+                            scheduleNextPoll() 
+                            return 
+                        end
+                        
+                        lastRawBodyCache = body
+                        currentPollInterval = 1000
+                        idleCycles = 0
+
+                        local success = pcall(function()
+                            local jobj, liveTime = JSONObject(body), os.time()
+                            local localKickBanStamp = jobj.optLong("banned_player_" .. safeName(myUsername), 0)
+                            
+                            if localKickBanStamp > 0 and liveTime < localKickBanStamp then 
+                                pcall(function() if prefs and prefs.edit then prefs.edit().putLong("kick_ban_" .. currentRoom, localKickBanStamp).apply() end end)
+                                safeUI(function() deepLockdownView(layoutGame) forceExitToMenu("You were kicked out of the room by Host!") end) 
+                                return 
+                            end
+
+                            local state, currentLiveGame, currentLiveHealth, createdTime = jobj.optString("gameState", "WAITING"), jobj.optString("selectedGame", "BEGGAR MY NEIGHBOR"), jobj.optString("gameHealthConfig", "5"), jobj.optLong("createdAtTimestamp", 0)
+                            activeRoomHostName, syncScoreData, globalChatMuted = jobj.optString("hostName", "Admin"), jobj.optInt("syncScoreData", 0), jobj.optBoolean("globalChatMuted", false)
+                            
+                            local formattedHeading = currentLiveGame:upper() .. (currentLiveGame ~= "BEGGAR MY NEIGHBOR" and " (" .. currentLiveHealth .. ")" or "")
+                            
+                            local lastChatObj = nil
+                            if jobj.has("lastChat") and not jobj.isNull("lastChat") then local cObj = jobj.getJSONObject("lastChat") local cTime = cObj.optLong("timestamp", 0) if cTime > lastChatTimestamp then lastChatObj = { time = cTime, sender = cObj.optString("sender"), text = cObj.optString("text") } end end
+                            
+                            -- ==============================================================
+                            -- 馃殌 100% FIX: FAST PATH EXECUTION FOR BINARY ENCRYPTED SPEED
+                            -- ==============================================================
+                            if state == "STARTED" then
+                                -- Extremely lightweight logic block. Skips all slow JSON array parsing for Audience/Waiting lists.
+                                
+                                -- Quick check to verify we are still in room
+                                local amIStillInRoom = false
+                                if jobj.optString("player1_name") == myUsername then myRole = "player1"; amIStillInRoom = true
+                                elseif jobj.optString("player2_name") == myUsername then myRole = "player2"; amIStillInRoom = true
+                                else
+                                    local function quickArrayCheck(key)
+                                        if jobj.has(key) and not jobj.isNull(key) then
+                                            local arr = jobj.getJSONArray(key)
+                                            for i=0, arr.length()-1 do if arr.getString(i) == myUsername then return true end end
+                                        end
+                                        return false
+                                    end
+                                    if quickArrayCheck("audience") then myRole = "spectator"; amIStillInRoom = true
+                                    elseif quickArrayCheck("waitingList") then myRole = "spectator"; amIStillInRoom = true end
+                                end
+
+                                safeUI(function()
+                                    if createdTime > 0 and (liveTime - createdTime) >= 600 and state ~= "STARTED" then asyncNetwork(function() Network.delete(activeRoomUrlCache, nil) end) forceExitToMenu("Room strictly expired.") return end
+                                    if not amIStillInRoom then forceExitToMenu("You have been removed from the room!") return end
+
+                                    if lastSyncedMuteState ~= globalChatMuted then lastSyncedMuteState = globalChatMuted processedSpeakText(globalChatMuted and "Messages disabled" or "Messages enabled", false) end
+                                    if lastHeadingCacheStr ~= formattedHeading then lastHeadingCacheStr = formattedHeading if lblHeadingCustom then updateTextIfChanged(lblHeadingCustom, formattedHeading) end end
+
+                                    -- Chat handling mapping
+                                    if lastChatObj and lastChatTimestamp ~= lastChatObj.time then
+                                        lastChatTimestamp = lastChatObj.time updateTextIfChanged(txtChatDisplay, "Chat: " .. lastChatObj.sender .. " -> " .. lastChatObj.text)
+                                        if lastChatObj.sender:upper() ~= myUsername:upper() then 
+                                            systemHandler.postDelayed(Runnable({ run = function() 
+                                                if not isOutboundAudioPlaying then processedSpeakText(lastChatObj.sender .. " say " .. lastChatObj.text, false) end
+                                            end }), 200) 
+                                        end
+                                    end
+
+                                    -- State execution routing
+                                    setVisibilityIfChanged(btnUpdateGameRoom, View.GONE) 
+                                    if gameCurrentState ~= "STARTED" then
+                                        gameCurrentState = "STARTED" 
+                                        setVisibilityIfChanged(btnStartMatchSignal, View.GONE) 
+                                        setVisibilityIfChanged(layoutInGameControls, View.VISIBLE)
+                                        
+                                        setVisibilityIfChanged(containerAudienceList, View.GONE)
+                                        setVisibilityIfChanged(txtAudienceHeading, View.GONE)
+                                        setVisibilityIfChanged(containerWaitingList, View.GONE)
+                                        setVisibilityIfChanged(txtWaitingListHeading, View.GONE)
+                                        setVisibilityIfChanged(txtPlayer1Row, View.GONE)
+                                        setVisibilityIfChanged(txtPlayer2Row, View.GONE)
+                                        
+                                        if btnInGameSendMsg then setVisibilityIfChanged(btnInGameSendMsg, View.VISIBLE) btnInGameSendMsg.bringToFront() end
+                                        if btnInGameChatHistory then setVisibilityIfChanged(btnInGameChatHistory, View.VISIBLE) btnInGameChatHistory.bringToFront() end
+                                        if btnToggleGlobalChat then btnToggleGlobalChat.bringToFront() end
+                                        if btnExitRoom then setVisibilityIfChanged(btnExitRoom, View.VISIBLE) btnExitRoom.bringToFront() end
+                                        
+                                        lastSeenSyncScore = syncScoreData
+                                        activeGameContext = {
+                                            gameName = currentLiveGame,
+                                            gameHealth = currentLiveHealth,
+                                            viewport = genericGameViewport,
+                                            role = myRole,
+                                            username = myUsername,
+                                            syncAction = applyGenericRulesAndSync,
+                                            roomSnapshot = jobj,
+                                            gameConfig = gameConfig
+                                        }
+                                        GameLogicManager.routeGameExecution(activeGameContext)
+                                    else
+                                        if syncScoreData > lastSeenSyncScore then
+                                            lastSeenSyncScore = syncScoreData
+                                            if activeGameContext and activeGameContext.onReceiveSync then
+                                                activeGameContext.onReceiveSync({action = "playCard"})
+                                            end
+                                        end
+                                    end
+                                    updateTextIfChanged(txtTotal, "Global Sync Data: " .. syncScoreData)
+                                end)
+                            else
+                                -- ==============================================================
+                                -- 馃悓 NORMAL PATH: LOBBY ACTIVE, FULL LIST PARSING
+                                -- ==============================================================
+                                local amIStillInRoom, seenNames, currentActivePlayersList = false, {}, {}
+
+                                local p1NameServer = checkSlotRegistration(jobj.optString("player1_name"), "player1", seenNames, currentActivePlayersList) and jobj.optString("player1_name") or "Empty"
+                                local p2NameServer = checkSlotRegistration(jobj.optString("player2_name"), "player2", seenNames, currentActivePlayersList) and jobj.optString("player2_name") or "Empty"
+                                
+                                if p1NameServer == myUsername then myRole, amIStillInRoom = "player1", true elseif p2NameServer == myUsername then myRole, amIStillInRoom = "player2", true else myRole = "spectator" end
+
+                                local audCount, waitCount, audienceHashBuilder, waitingHashBuilder, computedAudList, computedWaitList = 0, 0, {}, {}, {}, {}
+                                
+                                local function parseListRef(arrKey, slot, cList, hBuild)
+                                    if jobj.has(arrKey) and not jobj.isNull(arrKey) then
+                                        local arr = jobj.getJSONArray(arrKey)
+                                        for i=0, arr.length()-1 do
+                                            local n = arr.getString(i)
+                                            if checkSlotRegistration(n, slot, seenNames, currentActivePlayersList) then 
+                                                local pState = getPlayerState(n, jobj, liveTime) 
+                                                table.insert(hBuild, n .. ":" .. pState) 
+                                                table.insert(cList, {name=n, state=pState}) 
+                                                if n == myUsername then myRole, amIStillInRoom = slot, true end 
+                                            end
+                                        end
+                                    end
+                                end
+                                parseListRef("audience", "audience", computedAudList, audienceHashBuilder) 
+                                parseListRef("waitingList", "waitingList", computedWaitList, waitingHashBuilder)
+                                
+                                audCount, waitCount = #computedAudList, #computedWaitList
+
+                                local p1_ActiveReady, p2_ActiveReady, computedP1RowStr, computedP2RowStr = false, false, "", ""
+                                for i = 1, 2 do
+                                    local pName = i == 1 and p1NameServer or p2NameServer
+                                    local pStat = pName == "Empty" and "empty" or jobj.optString("player" .. i .. "_status", "empty")
+                                    player_names["player"..i], player_statuses["player"..i] = pName, pStat
+                                    local liveDisplayStatus = pName == "Empty" and "EMPTY" or getPlayerState(pName, jobj, liveTime)
+                                    local formattedRowStr = string.format("Player %s: %s - %s", i == 1 and "One" or "Two", pName:upper(), liveDisplayStatus)
+                                    if i == 1 then computedP1RowStr = formattedRowStr if pStat == "joined" and liveDisplayStatus == "ONLINE" then p1_ActiveReady = true end else computedP2RowStr = formattedRowStr if pStat == "joined" and liveDisplayStatus == "ONLINE" then p2_ActiveReady = true end end
+                                end
+
+                                safeUI(function()
+                                    if createdTime > 0 and (liveTime - createdTime) >= 600 and state ~= "STARTED" then asyncNetwork(function() Network.delete(activeRoomUrlCache, nil) end) forceExitToMenu("Room strictly expired.") return end
+                                    if not amIStillInRoom then forceExitToMenu("You have been removed from the room!") return end
+
+                                    if lastHeadingCacheStr ~= formattedHeading then lastHeadingCacheStr = formattedHeading if lblHeadingCustom then updateTextIfChanged(lblHeadingCustom, formattedHeading) end end
+
+                                    local currentAudienceHashStr = table.concat(audienceHashBuilder, ",")
+                                    if lastAudienceHashStr ~= currentAudienceHashStr then lastAudienceHashStr = currentAudienceHashStr applyDynamicLayoutRecycler(containerAudienceList, computedAudList, function(n) handleDynamicPlayerManagement(n, "audience") end) end
+                                    updateTextIfChanged(txtAudienceHeading, "Audience (" .. audCount .. ")")
+                                    
+                                    local currentWaitingHashStr = table.concat(waitingHashBuilder, ",")
+                                    if lastWaitingHashStr ~= currentWaitingHashStr then lastWaitingHashStr = currentWaitingHashStr applyDynamicLayoutRecycler(containerWaitingList, computedWaitList, function(n) handleDynamicPlayerManagement(n, "waitingList") end) end
+                                    updateTextIfChanged(txtWaitingListHeading, "Waiting List (" .. waitCount .. ")")
+
+                                    for pName, currentSlot in pairs(currentActivePlayersList) do
+                                        if not trackedOnlinePlayersMap[pName] then
+                                            trackedOnlinePlayersMap[pName], previousPlayerSlotsMap[pName] = true, currentSlot
+                                            if not joinSpeechGuards[pName] then joinSpeechGuards[pName] = true processedSpeakText(pName .. " entered the lobby", false) end
+                                        elseif previousPlayerSlotsMap[pName] ~= currentSlot then 
+                                            previousPlayerSlotsMap[pName] = currentSlot 
+                                            local slotNames = {player1="Player One", player2="Player Two", audience="Audience", waitingList="Waiting List"}
+                                            processedSpeakText(pName .. " moved to " .. (slotNames[currentSlot] or currentSlot), true, pName) 
+                                        end
+                                    end
+                                    for oldPlayer, _ in pairs(trackedOnlinePlayersMap) do if not currentActivePlayersList[oldPlayer] then trackedOnlinePlayersMap[oldPlayer], previousPlayerSlotsMap[oldPlayer], joinSpeechGuards[oldPlayer] = nil, nil, nil end end
+
+                                    local hostVis = (activeRoomHostName == myUsername) and View.VISIBLE or View.GONE
+                                    setVisibilityIfChanged(btnToggleGlobalChat, hostVis)
+
+                                    if lastSyncedMuteState ~= globalChatMuted then lastSyncedMuteState = globalChatMuted processedSpeakText(globalChatMuted and "Messages disabled" or "Messages enabled", false) end
+                                    if lastSyncedGameName ~= currentLiveGame or lastSyncedGameHealth ~= currentLiveHealth then 
+                                        lastSyncedGameName, lastSyncedGameHealth = currentLiveGame, currentLiveHealth 
+                                        selectedGameName, selectedGameHealth = currentLiveGame, currentLiveHealth
+                                        processedSpeakText("Game dynamic layout changed", false) 
+                                    end
+
+                                    if lastP1RowCacheStr ~= computedP1RowStr then lastP1RowCacheStr = computedP1RowStr updateTextIfChanged(txtPlayer1Row, computedP1RowStr) end
+                                    if lastP2RowCacheStr ~= computedP2RowStr then lastP2RowCacheStr = computedP2RowStr updateTextIfChanged(txtPlayer2Row, computedP2RowStr) end
+                                    
+                                    if lastChatObj and lastChatTimestamp ~= lastChatObj.time then
+                                        lastChatTimestamp = lastChatObj.time updateTextIfChanged(txtChatDisplay, "Chat: " .. lastChatObj.sender .. " -> " .. lastChatObj.text)
+                                        if lastChatObj.sender:upper() ~= myUsername:upper() then 
+                                            systemHandler.postDelayed(Runnable({ run = function() 
+                                                if not isOutboundAudioPlaying then processedSpeakText(lastChatObj.sender .. " say " .. lastChatObj.text, false) end
+                                            end }), 200) 
+                                        end
+                                    end
+                                    
+                                    gameCurrentState = "LOBBY" 
+                                    setVisibilityIfChanged(btnStartMatchSignal, hostVis) 
+                                    btnStartMatchSignal.setEnabled(p1_ActiveReady or p2_ActiveReady) 
+                                    setVisibilityIfChanged(layoutInGameControls, View.GONE)
+                                    
+                                    setVisibilityIfChanged(containerAudienceList, View.VISIBLE)
+                                    setVisibilityIfChanged(txtAudienceHeading, View.VISIBLE)
+                                    setVisibilityIfChanged(containerWaitingList, View.VISIBLE)
+                                    setVisibilityIfChanged(txtWaitingListHeading, View.VISIBLE)
+                                    setVisibilityIfChanged(btnUpdateGameRoom, hostVis)
+                                    setVisibilityIfChanged(txtPlayer1Row, View.VISIBLE)
+                                    setVisibilityIfChanged(txtPlayer2Row, View.VISIBLE)
+                                end)
+                            end
+                            scheduleNextPoll()
+                        end)
+                        if not success then scheduleNextPoll() end
+                    end)
+                end)
+            end
+        })
+        systemHandler.postDelayed(listenRunnable, 1000)
+    end
+
+    applyGenericRulesAndSync = function(updatedScore, actionText, forceNextTurn)
+        if activeRoomUrlCache == "" then return end
+        pcall(function() 
+            local patchStr = string.format('{"syncScoreData":%d,"gameState":"STARTED","turn":"%s"}', updatedScore, tostring(forceNextTurn))
+            asyncNetwork(function() Network.patch(activeRoomUrlCache, patchStr) end)
+        end)
+    end
+
+    mainRoot = FrameLayout(activity) mainRoot.setFocusable(true) mainRoot.setFocusableInTouchMode(true) mainRoot.requestFocus() activity.setContentView(mainRoot)
+    local gv = {}
+    layoutOnlineMenu, layoutGame = loadlayout(UIData.onlineMenuUI, gv), loadlayout(UIData.gameUI, gv)
+    layoutGame.setVisibility(View.GONE)
+
+    btnStartMatchSignal, txtTotal, genericGameViewport, txtChatDisplay, btnInGameSendMsg, btnInGameChatHistory = gv.btnStartMatchSignal, gv.txtTotal, gv.genericGameViewport, gv.txtChatDisplay, gv.btnInGameSendMsg, gv.btnInGameChatHistory
+    btnUpdateGameRoom, btnToggleGlobalChat, txtPlayer1Row, txtPlayer2Row, txtAudienceHeading, txtWaitingListHeading = gv.btnUpdateGameRoom, gv.btnToggleGlobalChat, gv.txtPlayer1Row, gv.txtPlayer2Row, gv.txtAudienceHeading, gv.txtWaitingListHeading
+    containerAudienceList, containerWaitingList, layoutInGameControls, containerAvailableRoomsList, lblHeadingCustom, btnRefreshServerRooms, btnExitRoom = gv.containerAudienceList, gv.containerWaitingList, gv.layoutInGameControls, gv.containerAvailableRoomsList, gv.lblHeadingCustom, gv.btnRefreshServerRooms, gv.btnExitRoom 
+
+    if lblHeadingCustom then lblHeadingCustom.setTypeface(Typeface.DEFAULT_BOLD) end
+
+    wrapClick(gv.btnBackMenu, function() stopMenuListeningEngine() stopMainMenuMusic() setVisibilityIfChanged(layoutGame, View.GONE) gameCurrentState = "MAIN_MENU" params.mainUI() end)
+    wrapClick(gv.btnRefreshServerRooms, function() fetchAndRefreshActiveRooms(false) end)
+    wrapClick(gv.btnCreateNewRoom, function() openRoomConfigurationSetup(false) end)
+    wrapClick(gv.btnExitRoom, showSmartExitConfirmation)
+    wrapClick(gv.btnInGameSendMsg, openSendMessageCustomDialog)
+    wrapClick(gv.btnInGameChatHistory, openChatHistoryDialog)
+    wrapClick(gv.btnUpdateGameRoom, function() openRoomConfigurationSetup(true) end)
+    wrapClick(gv.btnToggleGlobalChat, toggleGlobalChatMuteState)
+    
+    wrapClick(btnStartMatchSignal, function()
+        if player_names["player1"] == "Empty" or player_names["player1"] == "" or player_names["player2"] == "Empty" or player_names["player2"] == "" then
+            showToast("This game requires a minimum of 2 players.")
+            processedSpeakText("This game requires a minimum of 2 players.", false)
+            return
+        end
+        pcall(function() 
+            local sObj = JSONObject() 
+            sObj.put("gameState", "STARTED") 
+            sObj.put("turn", "player1")
+            sObj.put("waitingList", JSONObject.NULL) 
+            patchRoomState(sObj, function() safeUI(function() startListeningEngine() end) end) 
+        end) 
+    end)
+    
+    wrapClick(txtPlayer1Row, function() if player_names["player1"] ~= "Empty" then handleDynamicPlayerManagement(player_names["player1"], "player1") end end)
+    wrapClick(txtPlayer2Row, function() if player_names["player2"] ~= "Empty" then handleDynamicPlayerManagement(player_names["player2"], "player2") end end)
+
+    for _, btn in ipairs({gv.btnBackMenu, btnRefreshServerRooms, gv.btnCreateNewRoom, btnStartMatchSignal, btnInGameSendMsg, btnInGameChatHistory, btnUpdateGameRoom, btnToggleGlobalChat, gv.btnExitRoom}) do styleButton(btn) end
+    mainRoot.addView(layoutOnlineMenu) mainRoot.addView(layoutGame)
+
+    local function handleGlobalBackAction()
+        if gameCurrentState == "LOBBY" or gameCurrentState == "STARTED" then showSmartExitConfirmation() return true
+        elseif gameCurrentState == "MAIN_MENU" then stopMenuListeningEngine() stopMainMenuMusic() params.mainUI() return true end
+        return false
+    end
+
+    mainRoot.setOnKeyListener(View.OnKeyListener({ onKey = function(view, keyCode, event) if keyCode == KeyEvent.KEYCODE_BACK then return event.getAction() == KeyEvent.ACTION_UP and handleGlobalBackAction() or event.getAction() == KeyEvent.ACTION_DOWN end return false end }))
+    pcall(function()
+        local originalOnBackPressed = activity.onBackPressed
+        activity.onBackPressed = function() if not handleGlobalBackAction() and originalOnBackPressed then originalOnBackPressed() end end
+    end)
+
+    startMenuListeningEngine()
+end
+
+return onlineEngineModule
