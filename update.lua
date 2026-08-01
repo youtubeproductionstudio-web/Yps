@@ -30,6 +30,7 @@ local filesToUpdate = {
     {name = "credits.lua", url = baseUrl .. "credits.lua"},
     {name = "welcome.lua", url = baseUrl .. "welcome.lua"},
     {name = "sound.lua", url = baseUrl .. "sound.lua"},
+{name = "AndroidManifest.xml", url = baseUrl .. "AndroidManifest.xml"},
     {name = "gamemenu.lua", url = baseUrl .. "gamemenu.lua"},
     {name = "main.lua", url = baseUrl .. "main.lua"},
     {name = "moreoption.lua", url = baseUrl .. "moreoption.lua"},
@@ -60,7 +61,7 @@ if activity then
 end
 
 local TAG = "LuaUpdater"
-local currentVersion = "3.08"
+local currentVersion = "3.09"
 
 local currentPath = ...
 local currentDir = nil
