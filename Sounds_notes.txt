@@ -1,2 +1,1 @@
-A new sound is available
-test it
+All sound related problem is fixed. 
