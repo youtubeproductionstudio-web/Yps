@@ -12,7 +12,11 @@ import "android.widget.LinearLayout"
 import "android.widget.TextView"
 import "android.util.Log"
 import "android.content.DialogInterface"
-activity.getActionBar().hide()
+
+-- FIX: Pehle check karein ke ActionBar exist karta hai ya nahi (Line 15 error fix)
+if activity and activity.getActionBar() then
+    activity.getActionBar().hide()
+end
 
 -- Yahan YouTube Production Studio walay VALID links lagaye gaye hain
 local baseUrl = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/refs/heads/main/"
@@ -24,8 +28,8 @@ local filesToUpdate = {
     {name = "about.lua", url = baseUrl .. "about.lua"},
     {name = "beggar_my_neighbor.lua", url = baseUrl .. "beggar_my_neighbor.lua"},
     {name = "credits.lua", url = baseUrl .. "credits.lua"},
-{name = "welcome.lua", url = baseUrl .. "welcome.lua"},
-{name = "sound.lua", url = baseUrl .. "sound.lua"},
+    {name = "welcome.lua", url = baseUrl .. "welcome.lua"},
+    {name = "sound.lua", url = baseUrl .. "sound.lua"},
     {name = "gamemenu.lua", url = baseUrl .. "gamemenu.lua"},
     {name = "main.lua", url = baseUrl .. "main.lua"},
     {name = "moreoption.lua", url = baseUrl .. "moreoption.lua"},
@@ -35,11 +39,12 @@ local filesToUpdate = {
     {name = "reply_manager.lua", url = baseUrl .. "reply_manager.lua"},
     {name = "send_data.lua", url = baseUrl .. "send_data.lua"},
     {name = "store.lua", url = baseUrl .. "store.lua"},
-{name = "settings.lua", url = baseUrl .. "settings.lua"},
-{name = "init.lua", url = baseUrl .. "init.lua"},    {name = "memory.lua", url = baseUrl .. "memory.lua"},
+    {name = "settings.lua", url = baseUrl .. "settings.lua"},
+    {name = "init.lua", url = baseUrl .. "init.lua"},    
+    {name = "memory.lua", url = baseUrl .. "memory.lua"},
     {name = "update.lua", url = baseUrl .. "update.lua"},
-{name = "diagnostic_util.lua", url = baseUrl .. "diagnostic_util.lua"},
-{name = "main.lua", url = baseUrl .. "main.lua"},
+    {name = "diagnostic_util.lua", url = baseUrl .. "diagnostic_util.lua"},
+    {name = "main.lua", url = baseUrl .. "main.lua"},
     {name = "onlineEngineUI.lua", url = baseUrl .. "onlineEngineUI.lua"},
     {name = "onlineEngineHelper.lua", url = baseUrl .. "onlineEngineHelper.lua"},
     {name = "onlineengine.lua", url = baseUrl .. "onlineengine.lua"},
@@ -49,14 +54,13 @@ local filesToUpdate = {
     {name = "GameLogicManager.lua", url = baseUrl .. "GameLogicManager.lua"}
 }
 
-if service then
-    service.speak("Checking for updates!, please wait...")
-else 
-    return "Please turn on Jieshuo Accessibility service first to use this tool"
+-- Screen par message show karega
+if activity then
+    Toast.makeText(activity, "Checking for updates, please wait...", Toast.LENGTH_LONG).show()
 end
 
 local TAG = "LuaUpdater"
-local currentVersion = "2.18"
+local currentVersion = "3.08"
 
 local currentPath = ...
 local currentDir = nil
@@ -68,8 +72,6 @@ end
 if not currentDir then
     if activity then
         currentDir = tostring(activity.getLuaDir()) .. "/"
-    elseif service then
-        currentDir = tostring(service.getLuaDir()) .. "/"
     else
         currentDir = "/storage/emulated/0/解说/Tools/Card games version 1.1./"
     end
@@ -120,7 +122,6 @@ local function showErrorDialog(ctx, message)
             closeToolCompletely(ctx)
         end)
         local d = errorDlg.create()
-        d.getWindow().setType(WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY)
         d.setCancelable(false)
         pcall(function() d.show() end)
     end})
@@ -154,7 +155,7 @@ local function checkUpdate()
                     end
                     
                     Handler(Looper.getMainLooper()).post(Runnable{run=function()
-                        local ctx = service or activity
+                        local ctx = activity -- APK ke liye context
                         if not isContextValid(ctx) then return end
                         
                         local updateAlertDlg = AlertDialog.Builder(ctx)
@@ -197,7 +198,6 @@ local function checkUpdate()
                         })
                         
                         currentUpdateDialog = updateAlertDlg.create()
-                        currentUpdateDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY)
                         currentUpdateDialog.setCanceledOnTouchOutside(false)
                         
                         local successShow, errShow = pcall(function() currentUpdateDialog.show() end)
@@ -298,7 +298,6 @@ This feature is developed by Muhammad Hussain.]]
                                             successDialog.setPositiveButton("Restart Now", nil)
                                             
                                             currentSuccessDialog = successDialog.create()
-                                            currentSuccessDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY)
                                             
                                             local successDlgShow, errDlgShow = pcall(function() currentSuccessDialog.show() end)
                                             if not successDlgShow then return end
