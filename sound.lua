@@ -12,7 +12,10 @@ import "android.widget.LinearLayout"
 import "android.widget.TextView"
 import "android.util.Log"
 import "android.content.DialogInterface"
-activity.getActionBar().hide()
+
+if activity and activity.getActionBar() then
+    activity.getActionBar().hide()
+end
 
 -- Yahan YouTube Production Studio walay VALID Sound links lagaye gaye hain
 local baseUrl = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/refs/heads/main/sounds/"
@@ -80,7 +83,7 @@ if activity then
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.4"
+local currentVersion = "1.5"
 
 local currentPath = ...
 local currentDir = nil
