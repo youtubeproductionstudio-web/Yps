@@ -1,5 +1,5 @@
 appname="All games hub"
-appver="1.0"
+appver="3.09"
 appcode="1"
 packagename="com.mm.agh"
 developer="Muzammil Muneer and Muhammad Hussain"
