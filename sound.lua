@@ -27,21 +27,20 @@ local filesToUpdate = {
     {name = "BGM 4.ogg", url = baseUrl .. "BGM%204.ogg"},
     {name = "card_shuffle.mp3", url = baseUrl .. "card_shuffle.mp3"},
     {name = "click.mp3", url = baseUrl .. "click.mp3"},
-{name = "key.mp3", url = baseUrl .. "key.mp3"}, 
-   {name = "Coins.mp3", url = baseUrl .. "Coins.mp3"},
-{name = "guess.mp3", url = baseUrl .. "guess.mp3"},
+    {name = "key.mp3", url = baseUrl .. "key.mp3"}, 
+    {name = "Coins.mp3", url = baseUrl .. "Coins.mp3"},
+    {name = "guess.mp3", url = baseUrl .. "guess.mp3"},
     {name = "laugh4.mp3", url = baseUrl .. "laugh4.mp3"},
-{name = "leave.mp3", url = baseUrl .. "leave.mp3"},
-{name = "join.mp3", url = baseUrl .. "join.mp3"},
-{name = "unloc.mp3", url = baseUrl .. "unloc.mp3"},
+    {name = "leave.mp3", url = baseUrl .. "leave.mp3"},
+    {name = "join.mp3", url = baseUrl .. "join.mp3"},
     {name = "perchased.mp3", url = baseUrl .. "perchased.mp3"},
     {name = "Play Card.mp3", url = baseUrl .. "Play%20Card.mp3"},
     {name = "receive.mp3", url = baseUrl .. "receive.mp3"},
-{name = "store.mp3", url = baseUrl .. "store.mp3"},
+    {name = "store.mp3", url = baseUrl .. "store.mp3"},
     {name = "send.mp3", url = baseUrl .. "send.mp3"},
     {name = "Vin sound.mp3", url = baseUrl .. "Vin%20sound.mp3"},
-{name = "wrong.mp3", url = baseUrl .. "wrong.mp3"},
-{name = "Open.mp3", url = baseUrl .. "Open.mp3"},
+    {name = "wrong.mp3", url = baseUrl .. "wrong.mp3"},
+    {name = "Open.mp3", url = baseUrl .. "Open.mp3"},
     {name = "greenparrot.mp3", url = baseUrl .. "greenparrot.mp3"},
     {name = "cat.mp3", url = baseUrl .. "cat.mp3"},
     {name = "horse.mp3", url = baseUrl .. "horse.mp3"},
@@ -75,10 +74,9 @@ local filesToUpdate = {
     {name = "zebra.mp3", url = baseUrl .. "zebra.mp3"}
 }
 
-if service then
-    service.speak("Checking for sound updates!, please wait...")
-else 
-    return "Please turn on Jieshuo Accessibility service first to use this tool"
+-- Screen par message show karega (sighted + TalkBack dono ke liye)
+if activity then
+    Toast.makeText(activity, "Checking for sound updates, please wait...", Toast.LENGTH_LONG).show()
 end
 
 local TAG = "SoundUpdater"
@@ -94,8 +92,6 @@ end
 if not currentDir then
     if activity then
         currentDir = tostring(activity.getLuaDir()) .. "/"
-    elseif service then
-        currentDir = tostring(service.getLuaDir()) .. "/"
     else
         currentDir = "/storage/emulated/0/解说/Tools/Card games version 1.1./"
     end
@@ -150,7 +146,6 @@ local function showErrorDialog(ctx, message)
             closeToolCompletely(ctx)
         end)
         local d = errorDlg.create()
-        d.getWindow().setType(WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY)
         d.setCancelable(false)
         pcall(function() d.show() end)
     end})
@@ -184,7 +179,7 @@ local function checkUpdate()
                     end
                     
                     Handler(Looper.getMainLooper()).post(Runnable{run=function()
-                        local ctx = service or activity
+                        local ctx = activity -- APK ke liye sirf activity context
                         if not isContextValid(ctx) then return end
                         
                         local updateAlertDlg = AlertDialog.Builder(ctx)
@@ -227,7 +222,6 @@ local function checkUpdate()
                         })
                         
                         currentUpdateDialog = updateAlertDlg.create()
-                        currentUpdateDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY)
                         currentUpdateDialog.setCanceledOnTouchOutside(false)
                         
                         local successShow, errShow = pcall(function() currentUpdateDialog.show() end)
@@ -327,7 +321,6 @@ This feature is developed by Muhammad Hussain.]]
                                             successDialog.setPositiveButton("Restart Now", nil)
                                             
                                             currentSuccessDialog = successDialog.create()
-                                            currentSuccessDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY)
                                             
                                             local successDlgShow, errDlgShow = pcall(function() currentSuccessDialog.show() end)
                                             if not successDlgShow then return end
