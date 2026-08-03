@@ -1,4 +1,3 @@
--- music fixed auto update
 require "import"
 import "com.androlua.Http"
 import "android.widget.Toast"
@@ -30,7 +29,7 @@ local filesToUpdate = {
     {name = "credits.lua", url = baseUrl .. "credits.lua"},
     {name = "welcome.lua", url = baseUrl .. "welcome.lua"},
     {name = "sound.lua", url = baseUrl .. "sound.lua"},
-{name = "AndroidManifest.xml", url = baseUrl .. "AndroidManifest.xml"},
+    {name = "AndroidManifest.xml", url = baseUrl .. "AndroidManifest.xml"},
     {name = "gamemenu.lua", url = baseUrl .. "gamemenu.lua"},
     {name = "main.lua", url = baseUrl .. "main.lua"},
     {name = "moreoption.lua", url = baseUrl .. "moreoption.lua"},
@@ -45,14 +44,14 @@ local filesToUpdate = {
     {name = "memory.lua", url = baseUrl .. "memory.lua"},
     {name = "update.lua", url = baseUrl .. "update.lua"},
     {name = "diagnostic_util.lua", url = baseUrl .. "diagnostic_util.lua"},
-    {name = "main.lua", url = baseUrl .. "main.lua"},
+    {name = "main.lua", url = baseUrl .. "main.lua"}, -- Duplicate in original, left as is
     {name = "onlineEngineUI.lua", url = baseUrl .. "onlineEngineUI.lua"},
     {name = "onlineEngineHelper.lua", url = baseUrl .. "onlineEngineHelper.lua"},
     {name = "onlineengine.lua", url = baseUrl .. "onlineengine.lua"},
     {name = "NetworkEngine.lua", url = baseUrl .. "NetworkEngine.lua"},
     {name = "join.lua", url = baseUrl .. "join.lua"},
     {name = "GameModule.lua", url = baseUrl .. "GameModule.lua"},
-{name = "event.lua", url = baseUrl .. "event.lua"},
+    {name = "event.lua", url = baseUrl .. "event.lua"},
     {name = "GameLogicManager.lua", url = baseUrl .. "GameLogicManager.lua"}
 }
 
@@ -220,7 +219,7 @@ local function checkUpdate()
                             local dirFile = File(currentDir)
                             if not dirFile.exists() then dirFile.mkdirs() end
                             
-                            -- Multi-file download loop function (Nayi Logic)
+                            -- Multi-file download loop function
                             local function downloadNextFile(index)
                                 if index > #filesToUpdate then
                                     -- Saari files download ho gayi hain, ab version update.lua may replace karo
@@ -342,8 +341,29 @@ This feature is developed by Muhammad Hussain.]]
                                 end)
                             end
                             
-                            -- Peli file se download process shuru karein
-                            downloadNextFile(1)
+                            -- NAYA LOGIC: Server se latest update.lua ki list dynamically nikalna
+                            Http.get(baseUrl .. "update.lua", function(lCode, lContent)
+                                if lCode == 200 and lContent then
+                                    local remoteCode = tostring(lContent)
+                                    -- Remote code mein se baseUrl aur filesToUpdate block dhundhna
+                                    local remoteBaseUrl = remoteCode:match('local%s+baseUrl%s*=%s*["\'](.-)["\']') or baseUrl
+                                    local tableStr = remoteCode:match("local%s+filesToUpdate%s*=%s*(%b{})")
+                                    
+                                    if tableStr then
+                                        -- String ko executable code mein convert karke table extract karna
+                                        local func = loadstring("local baseUrl = '" .. remoteBaseUrl .. "'; return " .. tableStr)
+                                        if func then
+                                            local status, newTable = pcall(func)
+                                            if status and type(newTable) == "table" then
+                                                filesToUpdate = newTable
+                                                Log.i(TAG, "Dynamically fetched the latest filesToUpdate list from server.")
+                                            end
+                                        end
+                                    end
+                                end
+                                -- Latest list milne ke baad (ya fail hone par purani hi) download shuru karein
+                                downloadNextFile(1)
+                            end)
                         end
                     end})
                 end)
