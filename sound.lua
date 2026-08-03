@@ -50,6 +50,7 @@ local filesToUpdate = {
     {name = "cricket.mp3", url = baseUrl .. "cricket.mp3"},
     {name = "rooster.mp3", url = baseUrl .. "rooster.mp3"},
     {name = "goat.mp3", url = baseUrl .. "goat.mp3"},
+{name = "event.mp3", url = baseUrl .. "event.mp3"},
     {name = "donkey.mp3", url = baseUrl .. "donkey.mp3"},
     {name = "dog.mp3", url = baseUrl .. "dog.mp3"},
     {name = "sheep.mp3", url = baseUrl .. "sheep.mp3"},
@@ -83,7 +84,7 @@ if activity then
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.5"
+local currentVersion = "1.6"
 
 local currentPath = ...
 local currentDir = nil
