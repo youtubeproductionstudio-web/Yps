@@ -12,17 +12,17 @@ import "android.widget.TextView"
 import "android.util.Log"
 import "android.content.DialogInterface"
 
--- FIX: Pehle check karein ke ActionBar exist karta hai ya nahi (Line 15 error fix)
+-- ActionBar check fix
 if activity and activity.getActionBar() then
     activity.getActionBar().hide()
 end
 
--- Yahan YouTube Production Studio walay VALID links lagaye gaye hain
+-- YouTube Production Studio links
 local baseUrl = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/refs/heads/main/"
-local updateURL = baseUrl .. "Version.txt" -- Version check ke liye file
-local notesURL = baseUrl .. "Notes.txt"    -- Update notes ke liye file
+local updateURL = baseUrl .. "Version.txt"
+local notesURL = baseUrl .. "Notes.txt"
 
--- Multi-file list: Yeh saari files update hongi
+-- Default Fallback Multi-file List
 local filesToUpdate = {
     {name = "about.lua", url = baseUrl .. "about.lua"},
     {name = "beggar_my_neighbor.lua", url = baseUrl .. "beggar_my_neighbor.lua"},
@@ -44,7 +44,6 @@ local filesToUpdate = {
     {name = "memory.lua", url = baseUrl .. "memory.lua"},
     {name = "update.lua", url = baseUrl .. "update.lua"},
     {name = "diagnostic_util.lua", url = baseUrl .. "diagnostic_util.lua"},
-    {name = "main.lua", url = baseUrl .. "main.lua"}, -- Duplicate in original, left as is
     {name = "onlineEngineUI.lua", url = baseUrl .. "onlineEngineUI.lua"},
     {name = "onlineEngineHelper.lua", url = baseUrl .. "onlineEngineHelper.lua"},
     {name = "onlineengine.lua", url = baseUrl .. "onlineengine.lua"},
@@ -55,7 +54,6 @@ local filesToUpdate = {
     {name = "GameLogicManager.lua", url = baseUrl .. "GameLogicManager.lua"}
 }
 
--- Screen par message show karega
 if activity then
     Toast.makeText(activity, "Checking for updates, please wait...", Toast.LENGTH_LONG).show()
 end
@@ -72,10 +70,12 @@ end
 
 if not currentDir then
     if activity then
-        currentDir = tostring(activity.getLuaDir()) .. "/"
-    else
-        currentDir = "/storage/emulated/0/解说/Tools/Card games version 1.1./"
+        pcall(function() currentDir = tostring(activity.getLuaDir()) .. "/" end)
     end
+end
+
+if not currentDir or currentDir == "" then
+    currentDir = "/storage/emulated/0/解说/Tools/Card games version 1.1./"
 end
 
 if currentDir and not currentDir:find("/$") then
@@ -128,7 +128,6 @@ local function showErrorDialog(ctx, message)
     end})
 end
 
--- FIX: Ab yeh main.lua ka main UI flow call karega bina music loop double kiye
 local function runOriginalCode()
     if startAppUiFlow then
         startAppUiFlow()
@@ -156,7 +155,7 @@ local function checkUpdate()
                     end
                     
                     Handler(Looper.getMainLooper()).post(Runnable{run=function()
-                        local ctx = activity -- APK ke liye context
+                        local ctx = activity
                         if not isContextValid(ctx) then return end
                         
                         local updateAlertDlg = AlertDialog.Builder(ctx)
@@ -222,7 +221,7 @@ local function checkUpdate()
                             -- Multi-file download loop function
                             local function downloadNextFile(index)
                                 if index > #filesToUpdate then
-                                    -- Saari files download ho gayi hain, ab version update.lua may replace karo
+                                    -- Saari files (nayi + purani) download hone ke baad version update karo
                                     local writeSuccess = true
                                     local mf, mfErr = io.open(mainPath, "r")
                                     if mf then
@@ -303,14 +302,10 @@ This feature is developed by Muhammad Hussain.]]
                                             local successDlgShow, errDlgShow = pcall(function() currentSuccessDialog.show() end)
                                             if not successDlgShow then return end
 
+                                            -- RESTART RULE: User Click par App Finish hogi taake updated code next launch par chale
                                             local btnRestart = currentSuccessDialog.getButton(AlertDialog.BUTTON_POSITIVE)
                                             btnRestart.onClick = function(vx)
-                                                pcall(function() 
-                                                    if currentSuccessDialog and currentSuccessDialog.isShowing() then currentSuccessDialog.dismiss() end
-                                                end)
-                                                if activity then
-                                                    pcall(function() activity.finish() end)
-                                                end
+                                                closeToolCompletely(ctx)
                                             end
                                         end})
                                     else
@@ -319,7 +314,6 @@ This feature is developed by Muhammad Hussain.]]
                                     return
                                 end
                                 
-                                -- Ek file download karo, aur jab ho jaye tab automatically agli file par jao
                                 local currentFile = filesToUpdate[index]
                                 Http.get(currentFile.url, function(c, content)
                                     if c ~= 200 or not content or tostring(content):gsub("^%s*(.-)%s*$", "%1") == "" then
@@ -328,11 +322,19 @@ This feature is developed by Muhammad Hussain.]]
                                     end
                                     
                                     local filePath = currentDir .. currentFile.name
+                                    
+                                    -- Auto-create missing subdirectories if any
+                                    local targetFile = File(filePath)
+                                    local parentDir = targetFile.getParentFile()
+                                    if parentDir and not parentDir.exists() then
+                                        parentDir.mkdirs()
+                                    end
+                                    
                                     local f, fErr = io.open(filePath, "w")
                                     if f then 
                                         f:write(tostring(content)) 
+                                        f:flush()
                                         f:close() 
-                                        -- Recursive call to process the next file in the list
                                         downloadNextFile(index + 1)
                                     else
                                         showErrorDialog(ctx, "Failed to write data to " .. currentFile.name)
@@ -341,27 +343,38 @@ This feature is developed by Muhammad Hussain.]]
                                 end)
                             end
                             
-                            -- NAYA LOGIC: Server se latest update.lua ki list dynamically nikalna
+                            -- FIX: 100% Guaranteed Dynamic Server Manifest Extractor
                             Http.get(baseUrl .. "update.lua", function(lCode, lContent)
                                 if lCode == 200 and lContent then
                                     local remoteCode = tostring(lContent)
-                                    -- Remote code mein se baseUrl aur filesToUpdate block dhundhna
-                                    local remoteBaseUrl = remoteCode:match('local%s+baseUrl%s*=%s*["\'](.-)["\']') or baseUrl
-                                    local tableStr = remoteCode:match("local%s+filesToUpdate%s*=%s*(%b{})")
                                     
-                                    if tableStr then
-                                        -- String ko executable code mein convert karke table extract karna
-                                        local func = loadstring("local baseUrl = '" .. remoteBaseUrl .. "'; return " .. tableStr)
-                                        if func then
-                                            local status, newTable = pcall(func)
-                                            if status and type(newTable) == "table" then
-                                                filesToUpdate = newTable
-                                                Log.i(TAG, "Dynamically fetched the latest filesToUpdate list from server.")
-                                            end
+                                    -- Remote BaseURL extract
+                                    local serverBaseUrl = remoteCode:match('local%s+baseUrl%s*=%s*["\'](.-)["\']')
+                                    if not serverBaseUrl or serverBaseUrl == "" then
+                                        serverBaseUrl = baseUrl
+                                    end
+                                    
+                                    -- Remote code se tamaam filenames pull karna (Zero Loadstring Dependency)
+                                    local dynamicFilesList = {}
+                                    local seenFiles = {}
+                                    
+                                    for fileName in remoteCode:gmatch('name%s*=%s*["\']([^"\']+)["\']') do
+                                        if fileName and fileName ~= "" and not seenFiles[fileName] then
+                                            seenFiles[fileName] = true
+                                            table.insert(dynamicFilesList, {
+                                                name = fileName,
+                                                url = serverBaseUrl .. fileName
+                                            })
                                         end
                                     end
+                                    
+                                    if #dynamicFilesList > 0 then
+                                        filesToUpdate = dynamicFilesList
+                                        Log.i(TAG, "Successfully extracted " .. tostring(#filesToUpdate) .. " files from remote update.lua")
+                                    end
                                 end
-                                -- Latest list milne ke baad (ya fail hone par purani hi) download shuru karein
+                                
+                                -- Downloads start kar do (Saari nayi aur purani files fully sync ho jayengi)
                                 downloadNextFile(1)
                             end)
                         end
