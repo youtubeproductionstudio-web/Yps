@@ -52,6 +52,7 @@ local filesToUpdate = {
     {name = "NetworkEngine.lua", url = baseUrl .. "NetworkEngine.lua"},
     {name = "join.lua", url = baseUrl .. "join.lua"},
     {name = "GameModule.lua", url = baseUrl .. "GameModule.lua"},
+{name = "event.lua", url = baseUrl .. "event.lua"},
     {name = "GameLogicManager.lua", url = baseUrl .. "GameLogicManager.lua"}
 }
 
@@ -61,7 +62,7 @@ if activity then
 end
 
 local TAG = "LuaUpdater"
-local currentVersion = "3.09"
+local currentVersion = "3.14"
 
 local currentPath = ...
 local currentDir = nil
