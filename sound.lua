@@ -84,7 +84,7 @@ if activity then
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.6"
+local currentVersion = "1.7"
 
 local currentPath = ...
 local currentDir = nil
