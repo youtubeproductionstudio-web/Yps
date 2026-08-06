@@ -13,7 +13,7 @@ user_permission={
   "INTERNET",
   "ACCESS_NETWORK_STATE",
   "ACCESS_WIFI_STATE",
-  "VIBRATE", -- Yahan se 'android.permission.' hata diya gaya hai
+  "VIBRATE",
   "POST_NOTIFICATIONS",
   "WRITE_EXTERNAL_STORAGE",
   "READ_EXTERNAL_STORAGE",
