@@ -5,28 +5,23 @@
     android:versionCode="1"
     android:versionName="3.09">
 
-    <!-- Explicitly declaring Android 16 target to satisfy Play Protect scanner -->
     <uses-sdk android:minSdkVersion="24" android:targetSdkVersion="36" />
 
-    <!-- Network & Connectivity -->
+    <uses-feature android:name="android.hardware.vibrator" android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
-    <!-- Hardware Features - Vibration Fix -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!-- Notifications (Android 13+) -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-    <!-- Full Storage Management -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
 
-    <!-- Legacy Storage (Android 12 and below) -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
 
-    <!-- Modern Media Storage (Android 13+ to Android 16) -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
@@ -41,7 +36,6 @@
         android:theme="@style/Theme.DeviceDefault.Light.NoActionBar"
         tools:targetApi="36">
         
-        <!-- Security configuration property to prevent Play Protect false flags -->
         <meta-data
             android:name="android.app.target_sdk_version"
             android:value="36" />
