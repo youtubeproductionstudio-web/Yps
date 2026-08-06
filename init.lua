@@ -8,12 +8,12 @@ min_sdk="24"
 user_orientation="portrait"
 user_theme="Theme.DeviceDefault.Light.NoActionBar"
 hardwareAccelerated="true"
-debug="false" -- Set to false for production build to clear security flags
+debug="false"
 user_permission={
   "INTERNET",
   "ACCESS_NETWORK_STATE",
   "ACCESS_WIFI_STATE",
-  "android.permission.VIBRATE",
+  "VIBRATE", -- Yahan se 'android.permission.' hata diya gaya hai
   "POST_NOTIFICATIONS",
   "WRITE_EXTERNAL_STORAGE",
   "READ_EXTERNAL_STORAGE",
