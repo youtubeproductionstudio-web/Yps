@@ -3,17 +3,17 @@ appver="3.09"
 appcode="1"
 packagename="com.mm.agh"
 developer="Muzammil Muneer and Muhammad Hussain"
-target_sdk="36" -- Set to Android 16 (No downgrade)
+target_sdk="36"
 min_sdk="24"
 user_orientation="portrait"
 user_theme="Theme.DeviceDefault.Light.NoActionBar"
 hardwareAccelerated="true"
-debug="true"
+debug="false" -- Set to false for production build to clear security flags
 user_permission={
   "INTERNET",
   "ACCESS_NETWORK_STATE",
   "ACCESS_WIFI_STATE",
-  "android.permission.VIBRATE", -- Fixed: Using full path to force the compiler to include it
+  "android.permission.VIBRATE",
   "POST_NOTIFICATIONS",
   "WRITE_EXTERNAL_STORAGE",
   "READ_EXTERNAL_STORAGE",
