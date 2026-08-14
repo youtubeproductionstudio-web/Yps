@@ -116,7 +116,7 @@ if activity then
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.9"
+local currentVersion = "1.10"
 
 local currentPath = ...
 local currentDir = nil
@@ -196,6 +196,7 @@ end
 
 local function checkUpdate()
     Log.i(TAG, "Update checking started. Current local version: [" .. tostring(currentVersion) .. "]")
+    -- Version check ke liye Http.get theek hai kyunki wo text hai
     Http.get(updateURL, function(code, response)
         if code == 200 and response then
             local rawOnlineVersion = tostring(response)
@@ -381,56 +382,35 @@ This feature is developed by Muhammad Hussain.]]
                                 
                                 local currentFile = filesToUpdate[index]
                                 
-                                -- Yahan percentage aur downloaded MBs calculate ho rahay hain
                                 local percentage = math.floor(((index - 1) / #filesToUpdate) * 100)
                                 local mbDownloaded = string.format("%.2f", totalBytesDownloaded / (1024 * 1024))
                                 
-                                -- Percentage UI par update karein
                                 Handler(Looper.getMainLooper()).post(Runnable{run=function()
                                     if btnUpdate then
                                         btnUpdate.setText("Downloading... " .. percentage .. "% (" .. mbDownloaded .. " MB)")
                                     end
                                 end})
                                 
-                                Http.get(currentFile.url, function(c, content)
-                                    -- NEW FIX: Binary audio file ko gsub se empty check karne ki wajah se false retry ho raha tha.
-                                    -- Ab sirf status code aur content length check hogi, jis-se theek internet par faaltu retry nahi hoga.
-                                    if c ~= 200 or content == nil or #tostring(content) == 0 then
+                                local filePath = soundsDir .. currentFile.name
+                                
+                                -- FIX: Audio files ke liye Http.download ka use kiya gaya hai.
+                                -- Yeh corrupt nahi karega aur perfectly disk mein save karega.
+                                Http.download(currentFile.url, filePath, function(c, result)
+                                    local downloadedFile = File(filePath)
+                                    
+                                    -- Check if file downloaded correctly (c==200 or 1 for success) and has size > 0
+                                    if (c == 200 or c == 1 or c == 0) and downloadedFile.exists() and downloadedFile.length() > 0 then
+                                        totalBytesDownloaded = totalBytesDownloaded + downloadedFile.length()
+                                        downloadNextFile(index + 1)
+                                    else
+                                        -- Agar corrupt ho gayi hai ya length 0 hai, tou delete karke retry karein
+                                        if downloadedFile.exists() then downloadedFile.delete() end
+                                        
                                         -- Silent Auto-retry in background (No Toast, No Dialog)
                                         Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
                                             if not isContextValid(ctx) then return end
-                                            -- Sirf background mein dobara call hoga, user ko disturb nahi karega
                                             downloadNextFile(index) 
-                                        end}, 2000) -- 2 seconds delay
-                                        return
-                                    end
-                                    
-                                    local contentStr = tostring(content)
-                                    totalBytesDownloaded = totalBytesDownloaded + #contentStr
-                                    
-                                    local filePath = soundsDir .. currentFile.name
-                                    local f, fErr = io.open(filePath, "w")
-                                    if f then 
-                                        f:write(contentStr) 
-                                        f:close() 
-                                        downloadNextFile(index + 1)
-                                    else
-                                        -- Retry mechanism for storage errors (Storage issues ke liye dialog chhor diya hai)
-                                        Handler(Looper.getMainLooper()).post(Runnable{run=function()
-                                            if not isContextValid(ctx) then return end
-                                            local retryDlg = AlertDialog.Builder(ctx)
-                                            retryDlg.setTitle("Storage Error")
-                                            retryDlg.setMessage("Failed to save " .. currentFile.name .. ".\nDo you want to retry?")
-                                            retryDlg.setPositiveButton("Retry", function()
-                                                downloadNextFile(index) -- Retry same file
-                                            end)
-                                            retryDlg.setNegativeButton("Cancel", function()
-                                                closeToolCompletely(ctx)
-                                            end)
-                                            retryDlg.setCancelable(false)
-                                            retryDlg.show()
-                                        end})
-                                        return
+                                        end}, 2000)
                                     end
                                 end)
                             end
