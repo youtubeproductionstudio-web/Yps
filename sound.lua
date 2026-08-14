@@ -1,4 +1,3 @@
--- sound fixed auto update
 require "import"
 import "com.androlua.Http"
 import "android.widget.Toast"
@@ -50,7 +49,7 @@ local filesToUpdate = {
     {name = "cricket.mp3", url = baseUrl .. "cricket.mp3"},
     {name = "rooster.mp3", url = baseUrl .. "rooster.mp3"},
     {name = "goat.mp3", url = baseUrl .. "goat.mp3"},
-{name = "event.mp3", url = baseUrl .. "event.mp3"},
+    {name = "event.mp3", url = baseUrl .. "event.mp3"},
     {name = "donkey.mp3", url = baseUrl .. "donkey.mp3"},
     {name = "dog.mp3", url = baseUrl .. "dog.mp3"},
     {name = "sheep.mp3", url = baseUrl .. "sheep.mp3"},
@@ -75,7 +74,40 @@ local filesToUpdate = {
     {name = "panda.mp3", url = baseUrl .. "panda.mp3"},
     {name = "rat.mp3", url = baseUrl .. "rat.mp3"},
     {name = "wolf.mp3", url = baseUrl .. "wolf.mp3"},
-    {name = "zebra.mp3", url = baseUrl .. "zebra.mp3"}
+    {name = "zebra.mp3", url = baseUrl .. "zebra.mp3"},
+    {name = "Arctic Ocean .mp3", url = baseUrl .. "Arctic%20Ocean%20.mp3"},
+    {name = "Atlantic Ocean .mp3", url = baseUrl .. "Atlantic%20Ocean%20.mp3"},
+    {name = "Hurricane Storm .mp3", url = baseUrl .. "Hurricane%20Storm%20.mp3"},
+    {name = "Indian Ocean .mp3", url = baseUrl .. "Indian%20Ocean%20.mp3"},
+    {name = "Pacific Ocean .mp3", url = baseUrl .. "Pacific%20Ocean%20.mp3"},
+    {name = "Southern ocean .mp3", url = baseUrl .. "Southern%20ocean%20.mp3"},
+    {name = "advance motor boat .mp3", url = baseUrl .. "advance%20motor%20boat%20.mp3"},
+    {name = "ak47.mp3", url = baseUrl .. "ak47.mp3"},
+    {name = "big board .mp3", url = baseUrl .. "big%20board%20.mp3"},
+    {name = "board game menu .mp3", url = baseUrl .. "board%20game%20menu%20.mp3"},
+    {name = "boat .mp3", url = baseUrl .. "boat%20.mp3"},
+    {name = "boat crash .mp3", url = baseUrl .. "boat%20crash%20.mp3"},
+    {name = "boat horn .mp3", url = baseUrl .. "boat%20horn%20.mp3"},
+    {name = "heavy thunderstorm .mp3", url = baseUrl .. "heavy%20thunderstorm%20.mp3"},
+    {name = "heel.mp3", url = baseUrl .. "heel.mp3"},
+    {name = "hit.mp3", url = baseUrl .. "hit.mp3"},
+    {name = "hit1.mp3", url = baseUrl .. "hit1.mp3"},
+    {name = "kill.mp3", url = baseUrl .. "kill.mp3"},
+    {name = "kill1.mp3", url = baseUrl .. "kill1.mp3"},
+    {name = "machinegun.mp3", url = baseUrl .. "machinegun.mp3"},
+    {name = "market.mp3", url = baseUrl .. "market.mp3"},
+    {name = "pedal boat .mp3", url = baseUrl .. "pedal%20boat%20.mp3"},
+    {name = "personal motor board .mp3", url = baseUrl .. "personal%20motor%20board%20.mp3"},
+    {name = "pistol.mp3", url = baseUrl .. "pistol.mp3"},
+    {name = "reload.mp3", url = baseUrl .. "reload.mp3"},
+    {name = "shotgun.mp3", url = baseUrl .. "shotgun.mp3"},
+    {name = "sinking sound .mp3", url = baseUrl .. "sinking%20sound%20.mp3"},
+    {name = "start countdown .mp3", url = baseUrl .. "start%20countdown%20.mp3"},
+    {name = "thunderstorm .mp3", url = baseUrl .. "thunderstorm%20.mp3"},
+    {name = "tool tax token .mp3", url = baseUrl .. "tool%20tax%20token%20.mp3"},
+    {name = "unloc.mp3", url = baseUrl .. "unloc.mp3"},
+    {name = "walk.mp3", url = baseUrl .. "walk.mp3"},
+    {name = "windy sound .mp3", url = baseUrl .. "windy%20sound%20.mp3"}
 }
 
 -- Screen par message show karega (sighted + TalkBack dono ke liye)
@@ -84,7 +116,7 @@ if activity then
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.7"
+local currentVersion = "1.9"
 
 local currentPath = ...
 local currentDir = nil
@@ -239,12 +271,14 @@ local function checkUpdate()
                         end
 
                         btnUpdate.onClick = function(v)
-                            v.setText("Downloading... 0%")
+                            v.setText("Downloading... 0% (0.00 MB)")
                             v.setEnabled(false)
                             btnLater.setEnabled(false)
                             
                             local dirFile = File(soundsDir)
                             if not dirFile.exists() then dirFile.mkdirs() end
+                            
+                            local totalBytesDownloaded = 0
                             
                             local function downloadNextFile(index)
                                 if index > #filesToUpdate then
@@ -347,30 +381,55 @@ This feature is developed by Muhammad Hussain.]]
                                 
                                 local currentFile = filesToUpdate[index]
                                 
-                                -- Yahan percentage calculate ho rahi hai
-                                local percentage = math.floor((index / #filesToUpdate) * 100)
+                                -- Yahan percentage aur downloaded MBs calculate ho rahay hain
+                                local percentage = math.floor(((index - 1) / #filesToUpdate) * 100)
+                                local mbDownloaded = string.format("%.2f", totalBytesDownloaded / (1024 * 1024))
                                 
                                 -- Percentage UI par update karein
                                 Handler(Looper.getMainLooper()).post(Runnable{run=function()
                                     if btnUpdate then
-                                        btnUpdate.setText("Downloading... " .. percentage .. "%")
+                                        btnUpdate.setText("Downloading... " .. percentage .. "% (" .. mbDownloaded .. " MB)")
                                     end
                                 end})
                                 
                                 Http.get(currentFile.url, function(c, content)
-                                    if c ~= 200 or not content or tostring(content):gsub("^%s*(.-)%s*$", "%1") == "" then
-                                        showErrorDialog(ctx, "Download failed for " .. currentFile.name .. ". Please check internet connection.")
+                                    -- NEW FIX: Binary audio file ko gsub se empty check karne ki wajah se false retry ho raha tha.
+                                    -- Ab sirf status code aur content length check hogi, jis-se theek internet par faaltu retry nahi hoga.
+                                    if c ~= 200 or content == nil or #tostring(content) == 0 then
+                                        -- Silent Auto-retry in background (No Toast, No Dialog)
+                                        Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
+                                            if not isContextValid(ctx) then return end
+                                            -- Sirf background mein dobara call hoga, user ko disturb nahi karega
+                                            downloadNextFile(index) 
+                                        end}, 2000) -- 2 seconds delay
                                         return
                                     end
+                                    
+                                    local contentStr = tostring(content)
+                                    totalBytesDownloaded = totalBytesDownloaded + #contentStr
                                     
                                     local filePath = soundsDir .. currentFile.name
                                     local f, fErr = io.open(filePath, "w")
                                     if f then 
-                                        f:write(tostring(content)) 
+                                        f:write(contentStr) 
                                         f:close() 
                                         downloadNextFile(index + 1)
                                     else
-                                        showErrorDialog(ctx, "Failed to write data to sounds folder for " .. currentFile.name)
+                                        -- Retry mechanism for storage errors (Storage issues ke liye dialog chhor diya hai)
+                                        Handler(Looper.getMainLooper()).post(Runnable{run=function()
+                                            if not isContextValid(ctx) then return end
+                                            local retryDlg = AlertDialog.Builder(ctx)
+                                            retryDlg.setTitle("Storage Error")
+                                            retryDlg.setMessage("Failed to save " .. currentFile.name .. ".\nDo you want to retry?")
+                                            retryDlg.setPositiveButton("Retry", function()
+                                                downloadNextFile(index) -- Retry same file
+                                            end)
+                                            retryDlg.setNegativeButton("Cancel", function()
+                                                closeToolCompletely(ctx)
+                                            end)
+                                            retryDlg.setCancelable(false)
+                                            retryDlg.show()
+                                        end})
                                         return
                                     end
                                 end)
