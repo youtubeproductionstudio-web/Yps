@@ -31,7 +31,6 @@ local filesToUpdate = {
     {name = "sound.lua", url = baseUrl .. "sound.lua"},
     {name = "AndroidManifest.xml", url = baseUrl .. "AndroidManifest.xml"},
     {name = "gamemenu.lua", url = baseUrl .. "gamemenu.lua"},
-    {name = "main.lua", url = baseUrl .. "main.lua"},
     {name = "moreoption.lua", url = baseUrl .. "moreoption.lua"},
     {name = "profile.lua", url = baseUrl .. "profile.lua"},
     {name = "public_chat.lua", url = baseUrl .. "public_chat.lua"},
@@ -52,7 +51,12 @@ local filesToUpdate = {
     {name = "join.lua", url = baseUrl .. "join.lua"},
     {name = "GameModule.lua", url = baseUrl .. "GameModule.lua"},
     {name = "event.lua", url = baseUrl .. "event.lua"},
-    {name = "GameLogicManager.lua", url = baseUrl .. "GameLogicManager.lua"}
+    {name = "GameLogicManager.lua", url = baseUrl .. "GameLogicManager.lua"},
+    {name = "Boat game Sound.lua", url = baseUrl .. "Boat%20game%20Sound.lua"},
+    {name = "Weather.lua", url = baseUrl .. "Weather.lua"},
+    {name = "showroom.lua", url = baseUrl .. "showroom.lua"},
+    {name = "Locations.lua", url = baseUrl .. "Locations.lua"},
+    {name = "Boatgame.lua", url = baseUrl .. "Boatgame.lua"}
 }
 
 -- Screen par message show karega
@@ -61,7 +65,7 @@ if activity then
 end
 
 local TAG = "LuaUpdater"
-local currentVersion = "3.14"
+local currentVersion = "4.03"
 
 local currentPath = ...
 local currentDir = nil
