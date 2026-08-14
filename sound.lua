@@ -389,16 +389,20 @@ This feature is developed by Muhammad Hussain.]]
                                     end
                                 end})
                                 
-                                local filePath = soundsDir .. currentFile.name
-                                
-                                -- Fix: Http.download use kiya hai jo Android environment me direct files ko save karta hai
-                                Http.download(currentFile.url, filePath, function(c, result)
-                                    local savedFile = File(filePath)
-                                    if (c == 200 or c == 1 or c == 0) and savedFile.exists() and savedFile.length() > 0 then
+                                Http.get(currentFile.url, function(c, content)
+                                    if c ~= 200 or not content or tostring(content):gsub("^%s*(.-)%s*$", "%1") == "" then
+                                        showErrorDialog(ctx, "Download failed for " .. currentFile.name .. ". Please check internet connection.")
+                                        return
+                                    end
+                                    
+                                    local filePath = soundsDir .. currentFile.name
+                                    local f, fErr = io.open(filePath, "w")
+                                    if f then 
+                                        f:write(tostring(content)) 
+                                        f:close() 
                                         downloadNextFile(index + 1)
                                     else
-                                        if savedFile.exists() then savedFile.delete() end
-                                        showErrorDialog(ctx, "Download failed for " .. currentFile.name .. ". Please check internet connection.")
+                                        showErrorDialog(ctx, "Failed to write data to sounds folder for " .. currentFile.name)
                                         return
                                     end
                                 end)
