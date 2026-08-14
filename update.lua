@@ -1,4 +1,4 @@
--- sound fixed auto update
+-- music fixed auto update
 require "import"
 import "com.androlua.Http"
 import "android.widget.Toast"
@@ -12,112 +12,63 @@ import "android.widget.LinearLayout"
 import "android.widget.TextView"
 import "android.util.Log"
 import "android.content.DialogInterface"
+import "java.lang.Runnable" -- FIX: Yeh import miss tha jiski wajah se dialog block ho raha tha
 
+-- FIX: Pehle check karein ke ActionBar exist karta hai ya nahi (Line 15 error fix)
 if activity and activity.getActionBar() then
     activity.getActionBar().hide()
 end
 
--- Yahan YouTube Production Studio walay VALID Sound links lagaye gaye hain
-local baseUrl = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/refs/heads/main/sounds/"
-local updateURL = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/refs/heads/main/sounds_virsion.txt"
-local notesURL = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/refs/heads/main/SoundNotes.txt"
+-- Yahan YouTube Production Studio walay VALID links lagaye gaye hain
+local baseUrl = "https://raw.githubusercontent.com/youtubeproductionstudio-web/Yps/refs/heads/main/"
+local updateURL = baseUrl .. "Version.txt" -- Version check ke liye file
+local notesURL = baseUrl .. "Notes.txt"    -- Update notes ke liye file
 
--- Multi-file list: Yeh saari sound files update hongi
+-- Multi-file list: Yeh saari files update hongi
 local filesToUpdate = {
-    {name = "BGM.ogg", url = baseUrl .. "BGM.ogg"},
-    {name = "BGM 2.ogg", url = baseUrl .. "BGM%202.ogg"},
-    {name = "BGM 3.ogg", url = baseUrl .. "BGM%203.ogg"},
-    {name = "BGM 4.ogg", url = baseUrl .. "BGM%204.ogg"},
-    {name = "card_shuffle.mp3", url = baseUrl .. "card_shuffle.mp3"},
-    {name = "click.mp3", url = baseUrl .. "click.mp3"},
-    {name = "key.mp3", url = baseUrl .. "key.mp3"}, 
-    {name = "Coins.mp3", url = baseUrl .. "Coins.mp3"},
-    {name = "guess.mp3", url = baseUrl .. "guess.mp3"},
-    {name = "laugh4.mp3", url = baseUrl .. "laugh4.mp3"},
-    {name = "leave.mp3", url = baseUrl .. "leave.mp3"},
-    {name = "join.mp3", url = baseUrl .. "join.mp3"},
-    {name = "perchased.mp3", url = baseUrl .. "perchased.mp3"},
-    {name = "Play Card.mp3", url = baseUrl .. "Play%20Card.mp3"},
-    {name = "receive.mp3", url = baseUrl .. "receive.mp3"},
-    {name = "store.mp3", url = baseUrl .. "store.mp3"},
-    {name = "send.mp3", url = baseUrl .. "send.mp3"},
-    {name = "Vin sound.mp3", url = baseUrl .. "Vin%20sound.mp3"},
-    {name = "wrong.mp3", url = baseUrl .. "wrong.mp3"},
-    {name = "Open.mp3", url = baseUrl .. "Open.mp3"},
-    {name = "greenparrot.mp3", url = baseUrl .. "greenparrot.mp3"},
-    {name = "cat.mp3", url = baseUrl .. "cat.mp3"},
-    {name = "horse.mp3", url = baseUrl .. "horse.mp3"},
-    {name = "cricket.mp3", url = baseUrl .. "cricket.mp3"},
-    {name = "rooster.mp3", url = baseUrl .. "rooster.mp3"},
-    {name = "goat.mp3", url = baseUrl .. "goat.mp3"},
-{name = "event.mp3", url = baseUrl .. "event.mp3"},
-    {name = "donkey.mp3", url = baseUrl .. "donkey.mp3"},
-    {name = "dog.mp3", url = baseUrl .. "dog.mp3"},
-    {name = "sheep.mp3", url = baseUrl .. "sheep.mp3"},
-    {name = "peacock.mp3", url = baseUrl .. "peacock.mp3"},
-    {name = "turkey.mp3", url = baseUrl .. "turkey.mp3"},
-    {name = "chicken.mp3", url = baseUrl .. "chicken.mp3"},
-    {name = "duck.mp3", url = baseUrl .. "duck.mp3"},
-    {name = "flamingo.mp3", url = baseUrl .. "flamingo.mp3"},
-    {name = "penguin.mp3", url = baseUrl .. "penguin.mp3"},
-    {name = "bear.mp3", url = baseUrl .. "bear.mp3"},
-    {name = "cow.mp3", url = baseUrl .. "cow.mp3"},
-    {name = "honeybee.mp3", url = baseUrl .. "honeybee.mp3"},
-    {name = "eagle.mp3", url = baseUrl .. "eagle.mp3"},
-    {name = "asiankoel.mp3", url = baseUrl .. "asiankoel.mp3"},
-    {name = "crow.mp3", url = baseUrl .. "crow.mp3"},
-    {name = "africangreyparrot.mp3", url = baseUrl .. "africangreyparrot.mp3"},
-    {name = "camel.mp3", url = baseUrl .. "camel.mp3"},
-    {name = "elephant.mp3", url = baseUrl .. "elephant.mp3"},
-    {name = "frog.mp3", url = baseUrl .. "frog.mp3"},
-    {name = "hippopotamus.mp3", url = baseUrl .. "hippopotamus.mp3"},
-    {name = "lion.mp3", url = baseUrl .. "lion.mp3"},
-    {name = "panda.mp3", url = baseUrl .. "panda.mp3"},
-    {name = "rat.mp3", url = baseUrl .. "rat.mp3"},
-    {name = "wolf.mp3", url = baseUrl .. "wolf.mp3"},
-    {name = "zebra.mp3", url = baseUrl .. "zebra.mp3"},
-    {name = "Arctic Ocean .mp3", url = baseUrl .. "Arctic%20Ocean%20.mp3"},
-    {name = "Atlantic Ocean .mp3", url = baseUrl .. "Atlantic%20Ocean%20.mp3"},
-    {name = "Hurricane Storm .mp3", url = baseUrl .. "Hurricane%20Storm%20.mp3"},
-    {name = "Indian Ocean .mp3", url = baseUrl .. "Indian%20Ocean%20.mp3"},
-    {name = "Pacific Ocean .mp3", url = baseUrl .. "Pacific%20Ocean%20.mp3"},
-    {name = "Southern ocean .mp3", url = baseUrl .. "Southern%20ocean%20.mp3"},
-    {name = "advance motor boat .mp3", url = baseUrl .. "advance%20motor%20boat%20.mp3"},
-    {name = "ak47.mp3", url = baseUrl .. "ak47.mp3"},
-    {name = "big board .mp3", url = baseUrl .. "big%20board%20.mp3"},
-    {name = "board game menu .mp3", url = baseUrl .. "board%20game%20menu%20.mp3"},
-    {name = "boat .mp3", url = baseUrl .. "boat%20.mp3"},
-    {name = "boat crash .mp3", url = baseUrl .. "boat%20crash%20.mp3"},
-    {name = "boat horn .mp3", url = baseUrl .. "boat%20horn%20.mp3"},
-    {name = "heavy thunderstorm .mp3", url = baseUrl .. "heavy%20thunderstorm%20.mp3"},
-    {name = "heel.mp3", url = baseUrl .. "heel.mp3"},
-    {name = "hit.mp3", url = baseUrl .. "hit.mp3"},
-    {name = "hit1.mp3", url = baseUrl .. "hit1.mp3"},
-    {name = "kill.mp3", url = baseUrl .. "kill.mp3"},
-    {name = "kill1.mp3", url = baseUrl .. "kill1.mp3"},
-    {name = "machinegun.mp3", url = baseUrl .. "machinegun.mp3"},
-    {name = "market.mp3", url = baseUrl .. "market.mp3"},
-    {name = "pedal boat .mp3", url = baseUrl .. "pedal%20boat%20.mp3"},
-    {name = "personal motor board .mp3", url = baseUrl .. "personal%20motor%20board%20.mp3"},
-    {name = "pistol.mp3", url = baseUrl .. "pistol.mp3"},
-    {name = "reload.mp3", url = baseUrl .. "reload.mp3"},
-    {name = "shotgun.mp3", url = baseUrl .. "shotgun.mp3"},
-    {name = "sinking sound .mp3", url = baseUrl .. "sinking%20sound%20.mp3"},
-    {name = "start countdown .mp3", url = baseUrl .. "start%20countdown%20.mp3"},
-    {name = "thunderstorm .mp3", url = baseUrl .. "thunderstorm%20.mp3"},
-    {name = "tool tax token .mp3", url = baseUrl .. "tool%20tax%20token%20.mp3"},
-    {name = "unloc.mp3", url = baseUrl .. "unloc.mp3"},
-    {name = "walk.mp3", url = baseUrl .. "walk.mp3"},
-    {name = "windy sound .mp3", url = baseUrl .. "windy%20sound%20.mp3"}
+    {name = "about.lua", url = baseUrl .. "about.lua"},
+    {name = "beggar_my_neighbor.lua", url = baseUrl .. "beggar_my_neighbor.lua"},
+    {name = "credits.lua", url = baseUrl .. "credits.lua"},
+    {name = "welcome.lua", url = baseUrl .. "welcome.lua"},
+    {name = "sound.lua", url = baseUrl .. "sound.lua"},
+{name = "AndroidManifest.xml", url = baseUrl .. "AndroidManifest.xml"},
+    {name = "gamemenu.lua", url = baseUrl .. "gamemenu.lua"},
+    {name = "main.lua", url = baseUrl .. "main.lua"},
+    {name = "moreoption.lua", url = baseUrl .. "moreoption.lua"},
+    {name = "profile.lua", url = baseUrl .. "profile.lua"},
+    {name = "public_chat.lua", url = baseUrl .. "public_chat.lua"},
+    {name = "receive_data.lua", url = baseUrl .. "receive_data.lua"},
+    {name = "reply_manager.lua", url = baseUrl .. "reply_manager.lua"},
+    {name = "send_data.lua", url = baseUrl .. "send_data.lua"},
+    {name = "store.lua", url = baseUrl .. "store.lua"},
+    {name = "settings.lua", url = baseUrl .. "settings.lua"},
+    {name = "init.lua", url = baseUrl .. "init.lua"},    
+    {name = "memory.lua", url = baseUrl .. "memory.lua"},
+    {name = "update.lua", url = baseUrl .. "update.lua"},
+    {name = "diagnostic_util.lua", url = baseUrl .. "diagnostic_util.lua"},
+    {name = "main.lua", url = baseUrl .. "main.lua"},
+    {name = "onlineEngineUI.lua", url = baseUrl .. "onlineEngineUI.lua"},
+    {name = "onlineEngineHelper.lua", url = baseUrl .. "onlineEngineHelper.lua"},
+    {name = "onlineengine.lua", url = baseUrl .. "onlineengine.lua"},
+    {name = "NetworkEngine.lua", url = baseUrl .. "NetworkEngine.lua"},
+    {name = "join.lua", url = baseUrl .. "join.lua"},
+    {name = "GameModule.lua", url = baseUrl .. "GameModule.lua"},
+{name = "event.lua", url = baseUrl .. "event.lua"},
+    {name = "GameLogicManager.lua", url = baseUrl .. "GameLogicManager.lua"},
+    {name = "Boat game Sound.lua", url = baseUrl .. "Boat%20game%20Sound.lua"},
+    {name = "Weather.lua", url = baseUrl .. "Weather.lua"},
+    {name = "showroom.lua", url = baseUrl .. "showroom.lua"},
+    {name = "Locations.lua", url = baseUrl .. "Locations.lua"},
+    {name = "Boatgame.lua", url = baseUrl .. "Boatgame.lua"}
 }
 
--- Screen par message show karega (sighted + TalkBack dono ke liye)
+-- Screen par message show karega
 if activity then
-    Toast.makeText(activity, "Checking for sound updates, please wait...", Toast.LENGTH_LONG).show()
+    Toast.makeText(activity, "Checking for updates, please wait...", Toast.LENGTH_LONG).show()
 end
 
-local TAG = "SoundUpdater"
-local currentVersion = "1.7"
+local TAG = "LuaUpdater"
+local currentVersion = "3.14"
 
 local currentPath = ...
 local currentDir = nil
@@ -138,11 +89,7 @@ if currentDir and not currentDir:find("/$") then
     currentDir = currentDir .. "/"
 end
 
--- Sounds ko download karne ke liye specific folder
-local soundsDir = currentDir .. "sounds/"
-
--- mainPath for updating version text
-local mainPath = currentDir .. "sound.lua" 
+local mainPath = currentDir .. "update.lua"
 
 Log.i(TAG, "Environment Path Auditing Logs")
 
@@ -188,7 +135,7 @@ local function showErrorDialog(ctx, message)
     end})
 end
 
--- Yeh main.lua ka flow start karega sirf tab jab update ki zaroorat nahi hogi
+-- FIX: Ab yeh main.lua ka main UI flow call karega bina music loop double kiye
 local function runOriginalCode()
     if startAppUiFlow then
         startAppUiFlow()
@@ -216,11 +163,11 @@ local function checkUpdate()
                     end
                     
                     Handler(Looper.getMainLooper()).post(Runnable{run=function()
-                        local ctx = activity -- APK ke liye sirf activity context
+                        local ctx = activity -- APK ke liye context
                         if not isContextValid(ctx) then return end
                         
                         local updateAlertDlg = AlertDialog.Builder(ctx)
-                        updateAlertDlg.setTitle("Sound Update Available!")
+                        updateAlertDlg.setTitle("Update Available!")
                         
                         local scrollView = ScrollView(ctx)
                         local linearLayout = LinearLayout(ctx)
@@ -272,16 +219,17 @@ local function checkUpdate()
                         end
 
                         btnUpdate.onClick = function(v)
-                            v.setText("Downloading... 0%")
+                            v.setText("Downloading...")
                             v.setEnabled(false)
                             btnLater.setEnabled(false)
                             
-                            local dirFile = File(soundsDir)
+                            local dirFile = File(currentDir)
                             if not dirFile.exists() then dirFile.mkdirs() end
                             
+                            -- Multi-file download loop function (Nayi Logic)
                             local function downloadNextFile(index)
                                 if index > #filesToUpdate then
-                                    -- Saari files download ho gayi hain, ab version sound.lua may replace karo
+                                    -- Saari files download ho gayi hain, ab version update.lua may replace karo
                                     local writeSuccess = true
                                     local mf, mfErr = io.open(mainPath, "r")
                                     if mf then
@@ -326,13 +274,13 @@ local function checkUpdate()
                                             if not isContextValid(ctx) then return end
 
                                             local successDialog = AlertDialog.Builder(ctx)
-                                            successDialog.setTitle("Sound Update Successful")
+                                            successDialog.setTitle("Update Successful")
                                             
                                             math.randomseed(os.time())
                                             local messages = {
-                                                [[Congratulations! You have successfully downloaded the latest premium sound assets. Enjoy an incredible and immersive audio experience.
+                                                [[Congratulations! You have successfully unlocked an incredible premium experience designed exclusively to elevate your journey to absolute perfection.
 This feature is developed by Muhammad Hussain.]],
-                                                [[Welcome to the future of pure premium entertainment! Your high-quality sound files have been successfully updated.
+                                                [[Welcome to the future of pure premium entertainment where your satisfaction and engagement remain our absolute topmost priority.
 This feature is developed by Muhammad Hussain.]]
                                             }
 
@@ -378,37 +326,29 @@ This feature is developed by Muhammad Hussain.]]
                                     return
                                 end
                                 
+                                -- Ek file download karo, aur jab ho jaye tab automatically agli file par jao
                                 local currentFile = filesToUpdate[index]
-                                
-                                -- Yahan percentage calculate ho rahi hai
-                                local percentage = math.floor((index / #filesToUpdate) * 100)
-                                
-                                -- Percentage UI par update karein
-                                Handler(Looper.getMainLooper()).post(Runnable{run=function()
-                                    if btnUpdate then
-                                        btnUpdate.setText("Downloading... " .. percentage .. "%")
-                                    end
-                                end})
-                                
                                 Http.get(currentFile.url, function(c, content)
                                     if c ~= 200 or not content or tostring(content):gsub("^%s*(.-)%s*$", "%1") == "" then
                                         showErrorDialog(ctx, "Download failed for " .. currentFile.name .. ". Please check internet connection.")
                                         return
                                     end
                                     
-                                    local filePath = soundsDir .. currentFile.name
+                                    local filePath = currentDir .. currentFile.name
                                     local f, fErr = io.open(filePath, "w")
                                     if f then 
                                         f:write(tostring(content)) 
                                         f:close() 
+                                        -- Recursive call to process the next file in the list
                                         downloadNextFile(index + 1)
                                     else
-                                        showErrorDialog(ctx, "Failed to write data to sounds folder for " .. currentFile.name)
+                                        showErrorDialog(ctx, "Failed to write data to " .. currentFile.name)
                                         return
                                     end
                                 end)
                             end
                             
+                            -- Peli file se download process shuru karein
                             downloadNextFile(1)
                         end
                     end})
