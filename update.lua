@@ -12,7 +12,7 @@ import "android.widget.TextView"
 import "android.util.Log"
 import "android.content.DialogInterface"
 
--- FIX: Pehle check karein ke ActionBar exist karta hai ya nahi (Line 15 error fix)
+-- FIX: Pehle check karein ke ActionBar exist karta hai ya nahi
 if activity and activity.getActionBar() then
     activity.getActionBar().hide()
 end
@@ -86,6 +86,9 @@ if currentDir and not currentDir:find("/$") then
     currentDir = currentDir .. "/"
 end
 
+-- CRITICAL FIX: package.path ko force karein ke downloaded currentDir ki files ko APK assets se pehle load kare
+package.path = currentDir .. "?.lua;" .. currentDir .. "?/init.lua;" .. tostring(package.path)
+
 local mainPath = currentDir .. "update.lua"
 
 Log.i(TAG, "Environment Path Auditing Logs")
@@ -132,7 +135,6 @@ local function showErrorDialog(ctx, message)
     end})
 end
 
--- FIX: Ab yeh main.lua ka main UI flow call karega bina music loop double kiye
 local function runOriginalCode()
     if startAppUiFlow then
         startAppUiFlow()
@@ -225,10 +227,12 @@ local function checkUpdate()
                             
                             local totalBytesDownloaded = 0
 
-                            -- Multi-file download loop function (New Logic with Progress & Retry)
-                            local function downloadNextFile(index)
+                            -- Multi-file download loop function (Max 3 Retries & Safe Save)
+                            local function downloadNextFile(index, retryCount)
+                                retryCount = retryCount or 0
+                                
                                 if index > #filesToUpdate then
-                                    -- Saari files download ho gayi hain, ab version update.lua may replace karo
+                                    -- Saari files download ho gayi hain, ab update.lua me local version update karo
                                     local writeSuccess = true
                                     local mf, mfErr = io.open(mainPath, "r")
                                     if mf then
@@ -257,7 +261,9 @@ local function checkUpdate()
                                                 writeSuccess = false
                                             end
                                         else
-                                            writeSuccess = false
+                                            -- Match na milne par fallback success rakhain taake system update loop me phans kar crash na ho
+                                            writeSuccess = true
+                                            currentVersion = onlineVersion
                                         end
                                     else
                                         writeSuccess = false
@@ -331,7 +337,7 @@ This feature is developed by Muhammad Hussain.]]
                                 local percentage = math.floor(((index - 1) / #filesToUpdate) * 100)
                                 local mbDownloaded = string.format("%.2f", totalBytesDownloaded / (1024 * 1024))
                                 
-                                -- Button Text pe status show karna
+                                -- Button Text status update
                                 Handler(Looper.getMainLooper()).post(Runnable{run=function()
                                     if btnUpdate then
                                         btnUpdate.setText("Downloading... " .. percentage .. "% (" .. mbDownloaded .. " MB)")
@@ -342,12 +348,16 @@ This feature is developed by Muhammad Hussain.]]
                                 Http.get(currentFile.url, function(c, content)
                                     local contentStr = tostring(content or "")
                                     
-                                    -- Network Retry Logic (Agar download theek se nahi hua tou 2 seconds baad automatically retry karega)
+                                    -- Check download response
                                     if c ~= 200 or content == nil or contentStr:gsub("^%s*(.-)%s*$", "%1") == "" then
-                                        Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
-                                            if not isContextValid(ctx) then return end
-                                            downloadNextFile(index) 
-                                        end}, 2000)
+                                        if retryCount < 3 then
+                                            Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
+                                                if not isContextValid(ctx) then return end
+                                                downloadNextFile(index, retryCount + 1)
+                                            end}, 2000)
+                                        else
+                                            showErrorDialog(ctx, "Download failed for " .. currentFile.name .. " (Error " .. tostring(c) .. "). Please check internet connection or GitHub link.")
+                                        end
                                         return
                                     end
                                     
@@ -358,16 +368,16 @@ This feature is developed by Muhammad Hussain.]]
                                     if f then 
                                         f:write(contentStr) 
                                         f:close() 
-                                        downloadNextFile(index + 1)
+                                        downloadNextFile(index + 1, 0)
                                     else
-                                        -- Storage Error Alert (Kyunke memory full hone par humein user ko alert karna zaruri hai)
+                                        -- Storage Error Alert
                                         Handler(Looper.getMainLooper()).post(Runnable{run=function()
                                             if not isContextValid(ctx) then return end
                                             local retryDlg = AlertDialog.Builder(ctx)
                                             retryDlg.setTitle("Storage Error")
                                             retryDlg.setMessage("Failed to save " .. currentFile.name .. ".\nDo you want to retry?")
                                             retryDlg.setPositiveButton("Retry", function()
-                                                downloadNextFile(index)
+                                                downloadNextFile(index, 0)
                                             end)
                                             retryDlg.setNegativeButton("Cancel", function()
                                                 closeToolCompletely(ctx)
@@ -380,8 +390,8 @@ This feature is developed by Muhammad Hussain.]]
                                 end)
                             end
                             
-                            -- Pehli file se download process shuru karein
-                            downloadNextFile(1)
+                            -- Initial download trigger
+                            downloadNextFile(1, 0)
                         end
                     end})
                 end)
