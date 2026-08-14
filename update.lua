@@ -1,4 +1,3 @@
--- music fixed auto update
 require "import"
 import "com.androlua.Http"
 import "android.widget.Toast"
@@ -30,7 +29,7 @@ local filesToUpdate = {
     {name = "credits.lua", url = baseUrl .. "credits.lua"},
     {name = "welcome.lua", url = baseUrl .. "welcome.lua"},
     {name = "sound.lua", url = baseUrl .. "sound.lua"},
-{name = "AndroidManifest.xml", url = baseUrl .. "AndroidManifest.xml"},
+    {name = "AndroidManifest.xml", url = baseUrl .. "AndroidManifest.xml"},
     {name = "gamemenu.lua", url = baseUrl .. "gamemenu.lua"},
     {name = "main.lua", url = baseUrl .. "main.lua"},
     {name = "moreoption.lua", url = baseUrl .. "moreoption.lua"},
@@ -52,7 +51,7 @@ local filesToUpdate = {
     {name = "NetworkEngine.lua", url = baseUrl .. "NetworkEngine.lua"},
     {name = "join.lua", url = baseUrl .. "join.lua"},
     {name = "GameModule.lua", url = baseUrl .. "GameModule.lua"},
-{name = "event.lua", url = baseUrl .. "event.lua"},
+    {name = "event.lua", url = baseUrl .. "event.lua"},
     {name = "GameLogicManager.lua", url = baseUrl .. "GameLogicManager.lua"}
 }
 
@@ -213,14 +212,16 @@ local function checkUpdate()
                         end
 
                         btnUpdate.onClick = function(v)
-                            v.setText("Downloading...")
+                            v.setText("Downloading... 0% (0.00 MB)")
                             v.setEnabled(false)
                             btnLater.setEnabled(false)
                             
                             local dirFile = File(currentDir)
                             if not dirFile.exists() then dirFile.mkdirs() end
                             
-                            -- Multi-file download loop function (Nayi Logic)
+                            local totalBytesDownloaded = 0
+
+                            -- Multi-file download loop function (New Logic with Progress & Retry)
                             local function downloadNextFile(index)
                                 if index > #filesToUpdate then
                                     -- Saari files download ho gayi hain, ab version update.lua may replace karo
@@ -320,29 +321,62 @@ This feature is developed by Muhammad Hussain.]]
                                     return
                                 end
                                 
-                                -- Ek file download karo, aur jab ho jaye tab automatically agli file par jao
                                 local currentFile = filesToUpdate[index]
+
+                                -- Percentage aur MBs ki calculation
+                                local percentage = math.floor(((index - 1) / #filesToUpdate) * 100)
+                                local mbDownloaded = string.format("%.2f", totalBytesDownloaded / (1024 * 1024))
+                                
+                                -- Button Text pe status show karna
+                                Handler(Looper.getMainLooper()).post(Runnable{run=function()
+                                    if btnUpdate then
+                                        btnUpdate.setText("Downloading... " .. percentage .. "% (" .. mbDownloaded .. " MB)")
+                                    end
+                                end})
+                                
+                                -- File download execute
                                 Http.get(currentFile.url, function(c, content)
-                                    if c ~= 200 or not content or tostring(content):gsub("^%s*(.-)%s*$", "%1") == "" then
-                                        showErrorDialog(ctx, "Download failed for " .. currentFile.name .. ". Please check internet connection.")
+                                    local contentStr = tostring(content or "")
+                                    
+                                    -- Network Retry Logic (Agar download theek se nahi hua tou 2 seconds baad automatically retry karega)
+                                    if c ~= 200 or content == nil or contentStr:gsub("^%s*(.-)%s*$", "%1") == "" then
+                                        Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
+                                            if not isContextValid(ctx) then return end
+                                            downloadNextFile(index) 
+                                        end}, 2000)
                                         return
                                     end
+                                    
+                                    totalBytesDownloaded = totalBytesDownloaded + #contentStr
                                     
                                     local filePath = currentDir .. currentFile.name
                                     local f, fErr = io.open(filePath, "w")
                                     if f then 
-                                        f:write(tostring(content)) 
+                                        f:write(contentStr) 
                                         f:close() 
-                                        -- Recursive call to process the next file in the list
                                         downloadNextFile(index + 1)
                                     else
-                                        showErrorDialog(ctx, "Failed to write data to " .. currentFile.name)
+                                        -- Storage Error Alert (Kyunke memory full hone par humein user ko alert karna zaruri hai)
+                                        Handler(Looper.getMainLooper()).post(Runnable{run=function()
+                                            if not isContextValid(ctx) then return end
+                                            local retryDlg = AlertDialog.Builder(ctx)
+                                            retryDlg.setTitle("Storage Error")
+                                            retryDlg.setMessage("Failed to save " .. currentFile.name .. ".\nDo you want to retry?")
+                                            retryDlg.setPositiveButton("Retry", function()
+                                                downloadNextFile(index)
+                                            end)
+                                            retryDlg.setNegativeButton("Cancel", function()
+                                                closeToolCompletely(ctx)
+                                            end)
+                                            retryDlg.setCancelable(false)
+                                            retryDlg.show()
+                                        end})
                                         return
                                     end
                                 end)
                             end
                             
-                            -- Peli file se download process shuru karein
+                            -- Pehli file se download process shuru karein
                             downloadNextFile(1)
                         end
                     end})
