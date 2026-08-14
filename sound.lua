@@ -116,7 +116,7 @@ if activity then
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.10"
+local currentVersion = "1.7"
 
 local currentPath = ...
 local currentDir = nil
@@ -196,7 +196,6 @@ end
 
 local function checkUpdate()
     Log.i(TAG, "Update checking started. Current local version: [" .. tostring(currentVersion) .. "]")
-    -- Version check ke liye Http.get theek hai kyunki wo text hai
     Http.get(updateURL, function(code, response)
         if code == 200 and response then
             local rawOnlineVersion = tostring(response)
@@ -272,14 +271,12 @@ local function checkUpdate()
                         end
 
                         btnUpdate.onClick = function(v)
-                            v.setText("Downloading... 0% (0.00 MB)")
+                            v.setText("Downloading... 0%")
                             v.setEnabled(false)
                             btnLater.setEnabled(false)
                             
                             local dirFile = File(soundsDir)
                             if not dirFile.exists() then dirFile.mkdirs() end
-                            
-                            local totalBytesDownloaded = 0
                             
                             local function downloadNextFile(index)
                                 if index > #filesToUpdate then
@@ -382,35 +379,27 @@ This feature is developed by Muhammad Hussain.]]
                                 
                                 local currentFile = filesToUpdate[index]
                                 
-                                local percentage = math.floor(((index - 1) / #filesToUpdate) * 100)
-                                local mbDownloaded = string.format("%.2f", totalBytesDownloaded / (1024 * 1024))
+                                -- Yahan percentage calculate ho rahi hai
+                                local percentage = math.floor((index / #filesToUpdate) * 100)
                                 
+                                -- Percentage UI par update karein
                                 Handler(Looper.getMainLooper()).post(Runnable{run=function()
                                     if btnUpdate then
-                                        btnUpdate.setText("Downloading... " .. percentage .. "% (" .. mbDownloaded .. " MB)")
+                                        btnUpdate.setText("Downloading... " .. percentage .. "%")
                                     end
                                 end})
                                 
                                 local filePath = soundsDir .. currentFile.name
                                 
-                                -- FIX: Audio files ke liye Http.download ka use kiya gaya hai.
-                                -- Yeh corrupt nahi karega aur perfectly disk mein save karega.
+                                -- Fix: Http.download use kiya hai jo Android environment me direct files ko save karta hai
                                 Http.download(currentFile.url, filePath, function(c, result)
-                                    local downloadedFile = File(filePath)
-                                    
-                                    -- Check if file downloaded correctly (c==200 or 1 for success) and has size > 0
-                                    if (c == 200 or c == 1 or c == 0) and downloadedFile.exists() and downloadedFile.length() > 0 then
-                                        totalBytesDownloaded = totalBytesDownloaded + downloadedFile.length()
+                                    local savedFile = File(filePath)
+                                    if (c == 200 or c == 1 or c == 0) and savedFile.exists() and savedFile.length() > 0 then
                                         downloadNextFile(index + 1)
                                     else
-                                        -- Agar corrupt ho gayi hai ya length 0 hai, tou delete karke retry karein
-                                        if downloadedFile.exists() then downloadedFile.delete() end
-                                        
-                                        -- Silent Auto-retry in background (No Toast, No Dialog)
-                                        Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
-                                            if not isContextValid(ctx) then return end
-                                            downloadNextFile(index) 
-                                        end}, 2000)
+                                        if savedFile.exists() then savedFile.delete() end
+                                        showErrorDialog(ctx, "Download failed for " .. currentFile.name .. ". Please check internet connection.")
+                                        return
                                     end
                                 end)
                             end
