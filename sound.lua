@@ -50,7 +50,7 @@ local filesToUpdate = {
     {name = "cricket.mp3", url = baseUrl .. "cricket.mp3"},
     {name = "rooster.mp3", url = baseUrl .. "rooster.mp3"},
     {name = "goat.mp3", url = baseUrl .. "goat.mp3"},
-{name = "event.mp3", url = baseUrl .. "event.mp3"},
+    {name = "event.mp3", url = baseUrl .. "event.mp3"},
     {name = "donkey.mp3", url = baseUrl .. "donkey.mp3"},
     {name = "dog.mp3", url = baseUrl .. "dog.mp3"},
     {name = "sheep.mp3", url = baseUrl .. "sheep.mp3"},
@@ -117,20 +117,37 @@ if activity then
 end
 
 local TAG = "SoundUpdater"
-local currentVersion = "1.7"
+local currentVersion = "4.04"
 
 local currentPath = ...
 local currentDir = nil
 
-if currentPath and type(currentPath) == "string" then
+if currentPath and type(currentPath) == "string" and #currentPath > 0 then
     currentDir = currentPath:match("(.*/)")
 end
 
-if not currentDir then
+-- Compiled APK fix: Direct target on App Internal Private Storage
+if not currentDir or currentDir == "" then
     if activity then
-        currentDir = tostring(activity.getLuaDir()) .. "/"
+        local success, internalPath = pcall(function()
+            return activity.getFilesDir().getAbsolutePath()
+        end)
+        
+        if success and internalPath then
+            currentDir = tostring(internalPath) .. "/"
+        else
+            local extSuccess, extPath = pcall(function()
+                return activity.getExternalFilesDir(nil).getAbsolutePath()
+            end)
+            
+            if extSuccess and extPath then
+                currentDir = tostring(extPath) .. "/"
+            else
+                currentDir = tostring(activity.getLuaDir()) .. "/"
+            end
+        end
     else
-        currentDir = "/storage/emulated/0/解说/Tools/Card games version 1.1./"
+        currentDir = "/storage/emulated/0/CardGames/"
     end
 end
 
@@ -144,7 +161,7 @@ local soundsDir = currentDir .. "sounds/"
 -- mainPath for updating version text
 local mainPath = currentDir .. "sound.lua" 
 
-Log.i(TAG, "Environment Path Auditing Logs")
+Log.i(TAG, "Environment Path Auditing Logs: Safe target dir -> " .. tostring(currentDir))
 
 local oldMainDialog = nil
 local currentUpdateDialog = nil
@@ -220,7 +237,7 @@ local function checkUpdate()
                         if not isContextValid(ctx) then return end
                         
                         local updateAlertDlg = AlertDialog.Builder(ctx)
-                        updateAlertDlg.setTitle("Sound Update Available!")
+                        updateAlertDlg.setTitle("🎵 Sound Update Available")
                         
                         local scrollView = ScrollView(ctx)
                         local linearLayout = LinearLayout(ctx)
@@ -229,19 +246,25 @@ local function checkUpdate()
                         scrollView.addView(linearLayout)
                         
                         local tvServer = TextView(ctx)
-                        tvServer.setText("Server Version: " .. onlineVersion)
+                        tvServer.setText("• Server Version: " .. onlineVersion)
                         tvServer.setTextSize(16)
                         linearLayout.addView(tvServer)
                         
                         local tvCurrent = TextView(ctx)
-                        tvCurrent.setText("Your Version: " .. currentVersion .. "\n")
+                        tvCurrent.setText("• Your Version: " .. currentVersion .. "\n")
                         tvCurrent.setTextSize(16)
                         linearLayout.addView(tvCurrent)
                         
                         if notesText ~= "" then
+                            local tvHeader = TextView(ctx)
+                            tvHeader.setText("Release Notes:")
+                            tvHeader.setTextSize(16)
+                            tvHeader.setPadding(0, 10, 0, 10)
+                            linearLayout.addView(tvHeader)
+
                             for line in notesText:gmatch("[^\r\n]+") do
                                 local tvLine = TextView(ctx)
-                                tvLine.setText(line)
+                                tvLine.setText("• " .. line)
                                 tvLine.setTextSize(15)
                                 tvLine.setPadding(0, 0, 0, 10)
                                 linearLayout.addView(tvLine)
@@ -249,7 +272,7 @@ local function checkUpdate()
                         end
                         
                         updateAlertDlg.setView(scrollView)
-                        updateAlertDlg.setPositiveButton("Update", nil)
+                        updateAlertDlg.setPositiveButton("Update Now", nil)
                         updateAlertDlg.setNegativeButton("Later", nil)
                         
                         updateAlertDlg.setOnCancelListener(DialogInterface.OnCancelListener{
@@ -272,12 +295,14 @@ local function checkUpdate()
                         end
 
                         btnUpdate.onClick = function(v)
-                            v.setText("Downloading... 0%")
+                            v.setText("Downloading... 0% (0.00 MB)")
                             v.setEnabled(false)
                             btnLater.setEnabled(false)
                             
                             local dirFile = File(soundsDir)
                             if not dirFile.exists() then dirFile.mkdirs() end
+                            
+                            local totalBytesDownloaded = 0
                             
                             local function downloadNextFile(index)
                                 if index > #filesToUpdate then
@@ -313,7 +338,15 @@ local function checkUpdate()
                                             writeSuccess = false
                                         end
                                     else
-                                        writeSuccess = false
+                                        local mf2, mf2Err = io.open(mainPath, "w")
+                                        if mf2 then
+                                            mf2:write('local currentVersion = "' .. onlineVersion .. '"')
+                                            mf2:flush()
+                                            mf2:close()
+                                            currentVersion = onlineVersion
+                                        else
+                                            writeSuccess = false
+                                        end
                                     end
                                     
                                     if writeSuccess then
@@ -326,13 +359,15 @@ local function checkUpdate()
                                             if not isContextValid(ctx) then return end
 
                                             local successDialog = AlertDialog.Builder(ctx)
-                                            successDialog.setTitle("Sound Update Successful")
+                                            successDialog.setTitle("✅ Sound Update Successful")
                                             
                                             math.randomseed(os.time())
                                             local messages = {
                                                 [[Congratulations! You have successfully downloaded the latest premium sound assets. Enjoy an incredible and immersive audio experience.
+
 This feature is developed by Muhammad Hussain.]],
                                                 [[Welcome to the future of pure premium entertainment! Your high-quality sound files have been successfully updated.
+
 This feature is developed by Muhammad Hussain.]]
                                             }
 
@@ -380,30 +415,48 @@ This feature is developed by Muhammad Hussain.]]
                                 
                                 local currentFile = filesToUpdate[index]
                                 
-                                -- Yahan percentage calculate ho rahi hai
-                                local percentage = math.floor((index / #filesToUpdate) * 100)
+                                local percentage = math.floor(((index - 1) / #filesToUpdate) * 100)
+                                local mbDownloaded = string.format("%.2f", totalBytesDownloaded / (1024 * 1024))
                                 
-                                -- Percentage UI par update karein
                                 Handler(Looper.getMainLooper()).post(Runnable{run=function()
                                     if btnUpdate then
-                                        btnUpdate.setText("Downloading... " .. percentage .. "%")
+                                        btnUpdate.setText("Downloading... " .. percentage .. "% (" .. mbDownloaded .. " MB)")
                                     end
                                 end})
                                 
                                 Http.get(currentFile.url, function(c, content)
-                                    if c ~= 200 or not content or tostring(content):gsub("^%s*(.-)%s*$", "%1") == "" then
-                                        showErrorDialog(ctx, "Download failed for " .. currentFile.name .. ". Please check internet connection.")
+                                    if c ~= 200 or content == nil or #tostring(content) == 0 then
+                                        Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
+                                            if not isContextValid(ctx) then return end
+                                            downloadNextFile(index) 
+                                        end}, 2000)
                                         return
                                     end
+                                    
+                                    local contentStr = tostring(content)
+                                    totalBytesDownloaded = totalBytesDownloaded + #contentStr
                                     
                                     local filePath = soundsDir .. currentFile.name
                                     local f, fErr = io.open(filePath, "w")
                                     if f then 
-                                        f:write(tostring(content)) 
+                                        f:write(contentStr) 
                                         f:close() 
                                         downloadNextFile(index + 1)
                                     else
-                                        showErrorDialog(ctx, "Failed to write data to sounds folder for " .. currentFile.name)
+                                        Handler(Looper.getMainLooper()).post(Runnable{run=function()
+                                            if not isContextValid(ctx) then return end
+                                            local retryDlg = AlertDialog.Builder(ctx)
+                                            retryDlg.setTitle("Storage Error")
+                                            retryDlg.setMessage("Failed to save " .. currentFile.name .. ".\nDo you want to retry?")
+                                            retryDlg.setPositiveButton("Retry", function()
+                                                downloadNextFile(index)
+                                            end)
+                                            retryDlg.setNegativeButton("Cancel", function()
+                                                closeToolCompletely(ctx)
+                                            end)
+                                            retryDlg.setCancelable(false)
+                                            retryDlg.show()
+                                        end})
                                         return
                                     end
                                 end)
