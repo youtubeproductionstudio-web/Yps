@@ -1,4 +1,3 @@
--- sound fixed auto update
 require "import"
 import "com.androlua.Http"
 import "android.widget.Toast"
@@ -122,32 +121,15 @@ local currentVersion = "4.04"
 local currentPath = ...
 local currentDir = nil
 
-if currentPath and type(currentPath) == "string" and #currentPath > 0 then
+if currentPath and type(currentPath) == "string" then
     currentDir = currentPath:match("(.*/)")
 end
 
--- Compiled APK fix: Direct target on App Internal Private Storage
-if not currentDir or currentDir == "" then
+if not currentDir then
     if activity then
-        local success, internalPath = pcall(function()
-            return activity.getFilesDir().getAbsolutePath()
-        end)
-        
-        if success and internalPath then
-            currentDir = tostring(internalPath) .. "/"
-        else
-            local extSuccess, extPath = pcall(function()
-                return activity.getExternalFilesDir(nil).getAbsolutePath()
-            end)
-            
-            if extSuccess and extPath then
-                currentDir = tostring(extPath) .. "/"
-            else
-                currentDir = tostring(activity.getLuaDir()) .. "/"
-            end
-        end
+        currentDir = tostring(activity.getLuaDir()) .. "/"
     else
-        currentDir = "/storage/emulated/0/CardGames/"
+        currentDir = "/storage/emulated/0/解说/Tools/Card games version 1.1./"
     end
 end
 
@@ -161,7 +143,7 @@ local soundsDir = currentDir .. "sounds/"
 -- mainPath for updating version text
 local mainPath = currentDir .. "sound.lua" 
 
-Log.i(TAG, "Environment Path Auditing Logs: Safe target dir -> " .. tostring(currentDir))
+Log.i(TAG, "Environment Path Auditing Logs")
 
 local oldMainDialog = nil
 local currentUpdateDialog = nil
@@ -237,7 +219,7 @@ local function checkUpdate()
                         if not isContextValid(ctx) then return end
                         
                         local updateAlertDlg = AlertDialog.Builder(ctx)
-                        updateAlertDlg.setTitle("🎵 Sound Update Available")
+                        updateAlertDlg.setTitle("Sound Update Available!")
                         
                         local scrollView = ScrollView(ctx)
                         local linearLayout = LinearLayout(ctx)
@@ -246,25 +228,19 @@ local function checkUpdate()
                         scrollView.addView(linearLayout)
                         
                         local tvServer = TextView(ctx)
-                        tvServer.setText("• Server Version: " .. onlineVersion)
+                        tvServer.setText("Server Version: " .. onlineVersion)
                         tvServer.setTextSize(16)
                         linearLayout.addView(tvServer)
                         
                         local tvCurrent = TextView(ctx)
-                        tvCurrent.setText("• Your Version: " .. currentVersion .. "\n")
+                        tvCurrent.setText("Your Version: " .. currentVersion .. "\n")
                         tvCurrent.setTextSize(16)
                         linearLayout.addView(tvCurrent)
                         
                         if notesText ~= "" then
-                            local tvHeader = TextView(ctx)
-                            tvHeader.setText("Release Notes:")
-                            tvHeader.setTextSize(16)
-                            tvHeader.setPadding(0, 10, 0, 10)
-                            linearLayout.addView(tvHeader)
-
                             for line in notesText:gmatch("[^\r\n]+") do
                                 local tvLine = TextView(ctx)
-                                tvLine.setText("• " .. line)
+                                tvLine.setText(line)
                                 tvLine.setTextSize(15)
                                 tvLine.setPadding(0, 0, 0, 10)
                                 linearLayout.addView(tvLine)
@@ -272,7 +248,7 @@ local function checkUpdate()
                         end
                         
                         updateAlertDlg.setView(scrollView)
-                        updateAlertDlg.setPositiveButton("Update Now", nil)
+                        updateAlertDlg.setPositiveButton("Update", nil)
                         updateAlertDlg.setNegativeButton("Later", nil)
                         
                         updateAlertDlg.setOnCancelListener(DialogInterface.OnCancelListener{
@@ -338,15 +314,7 @@ local function checkUpdate()
                                             writeSuccess = false
                                         end
                                     else
-                                        local mf2, mf2Err = io.open(mainPath, "w")
-                                        if mf2 then
-                                            mf2:write('local currentVersion = "' .. onlineVersion .. '"')
-                                            mf2:flush()
-                                            mf2:close()
-                                            currentVersion = onlineVersion
-                                        else
-                                            writeSuccess = false
-                                        end
+                                        writeSuccess = false
                                     end
                                     
                                     if writeSuccess then
@@ -359,15 +327,13 @@ local function checkUpdate()
                                             if not isContextValid(ctx) then return end
 
                                             local successDialog = AlertDialog.Builder(ctx)
-                                            successDialog.setTitle("✅ Sound Update Successful")
+                                            successDialog.setTitle("Sound Update Successful")
                                             
                                             math.randomseed(os.time())
                                             local messages = {
                                                 [[Congratulations! You have successfully downloaded the latest premium sound assets. Enjoy an incredible and immersive audio experience.
-
 This feature is developed by Muhammad Hussain.]],
                                                 [[Welcome to the future of pure premium entertainment! Your high-quality sound files have been successfully updated.
-
 This feature is developed by Muhammad Hussain.]]
                                             }
 
@@ -415,9 +381,11 @@ This feature is developed by Muhammad Hussain.]]
                                 
                                 local currentFile = filesToUpdate[index]
                                 
+                                -- Yahan percentage aur downloaded MBs calculate ho rahay hain
                                 local percentage = math.floor(((index - 1) / #filesToUpdate) * 100)
                                 local mbDownloaded = string.format("%.2f", totalBytesDownloaded / (1024 * 1024))
                                 
+                                -- Percentage UI par update karein
                                 Handler(Looper.getMainLooper()).post(Runnable{run=function()
                                     if btnUpdate then
                                         btnUpdate.setText("Downloading... " .. percentage .. "% (" .. mbDownloaded .. " MB)")
@@ -425,11 +393,15 @@ This feature is developed by Muhammad Hussain.]]
                                 end})
                                 
                                 Http.get(currentFile.url, function(c, content)
+                                    -- NEW FIX: Binary audio file ko gsub se empty check karne ki wajah se false retry ho raha tha.
+                                    -- Ab sirf status code aur content length check hogi, jis-se theek internet par faaltu retry nahi hoga.
                                     if c ~= 200 or content == nil or #tostring(content) == 0 then
+                                        -- Silent Auto-retry in background (No Toast, No Dialog)
                                         Handler(Looper.getMainLooper()).postDelayed(Runnable{run=function()
                                             if not isContextValid(ctx) then return end
+                                            -- Sirf background mein dobara call hoga, user ko disturb nahi karega
                                             downloadNextFile(index) 
-                                        end}, 2000)
+                                        end}, 2000) -- 2 seconds delay
                                         return
                                     end
                                     
@@ -443,13 +415,14 @@ This feature is developed by Muhammad Hussain.]]
                                         f:close() 
                                         downloadNextFile(index + 1)
                                     else
+                                        -- Retry mechanism for storage errors (Storage issues ke liye dialog chhor diya hai)
                                         Handler(Looper.getMainLooper()).post(Runnable{run=function()
                                             if not isContextValid(ctx) then return end
                                             local retryDlg = AlertDialog.Builder(ctx)
                                             retryDlg.setTitle("Storage Error")
                                             retryDlg.setMessage("Failed to save " .. currentFile.name .. ".\nDo you want to retry?")
                                             retryDlg.setPositiveButton("Retry", function()
-                                                downloadNextFile(index)
+                                                downloadNextFile(index) -- Retry same file
                                             end)
                                             retryDlg.setNegativeButton("Cancel", function()
                                                 closeToolCompletely(ctx)
